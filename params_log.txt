@@ -1,0 +1,612 @@
+Original HDR Model
+Total Parameters: 19,304,550
+Trainable Parameters: 19,304,550
+Model Size (FP32): 73.64 MB
+------------------------------------------------------------
+
+Lightweight HDR Model
+Total Parameters: 19,696
+Trainable Parameters: 19,696
+Model Size (FP32): 0.08 MB
+------------------------------------------------------------
+
+Original HDR Model
+Total Parameters: 19,304,550
+Trainable Parameters: 19,304,550
+Model Size (FP32): 73.64 MB
+------------------------------------------------------------
+
+Lightweight HDR Model
+Total Parameters: 19,367,623
+Trainable Parameters: 19,367,623
+Model Size (FP32): 73.88 MB
+------------------------------------------------------------
+
+Original HDR Model
+Total Parameters: 19,304,550
+Trainable Parameters: 19,304,550
+Model Size (FP32): 73.64 MB
+------------------------------------------------------------
+
+Lightweight HDR Model
+Total Parameters: 19,367,623
+Trainable Parameters: 19,367,623
+Model Size (FP32): 73.88 MB
+------------------------------------------------------------
+
+Original HDR Model
+Total Parameters: 19,304,550
+Trainable Parameters: 19,304,550
+Model Size (FP32): 73.64 MB
+------------------------------------------------------------
+
+Lightweight HDR Model
+Total Parameters: 19,367,623
+Trainable Parameters: 19,367,623
+Model Size (FP32): 73.88 MB
+------------------------------------------------------------
+
+Original HDR Model
+Total Parameters: 19,304,550
+Trainable Parameters: 19,304,550
+Model Size (FP32): 73.64 MB
+------------------------------------------------------------
+
+Lightweight HDR Model
+Total Parameters: 533,952
+Trainable Parameters: 533,952
+Model Size (FP32): 2.04 MB
+------------------------------------------------------------
+
+Original HDR Model
+Total Parameters: 19,304,550
+Trainable Parameters: 19,304,550
+Model Size (FP32): 73.64 MB
+------------------------------------------------------------
+
+Lightweight HDR Model
+Total Parameters: 19,367,623
+Trainable Parameters: 19,367,623
+Model Size (FP32): 73.88 MB
+------------------------------------------------------------
+
+Original HDR Model
+Total Parameters: 19,304,550
+Trainable Parameters: 19,304,550
+Model Size (FP32): 73.64 MB
+------------------------------------------------------------
+
+Lightweight HDR Model
+Total Parameters: 19,367,623
+Trainable Parameters: 19,367,623
+Model Size (FP32): 73.88 MB
+------------------------------------------------------------
+
+Original HDR Model
+Total Parameters: 19,304,550
+Trainable Parameters: 19,304,550
+Model Size (FP32): 73.64 MB
+------------------------------------------------------------
+
+Lightweight HDR Model
+Total Parameters: 16,311,506
+Trainable Parameters: 16,311,506
+Model Size (FP32): 62.22 MB
+------------------------------------------------------------
+
+Original HDR Model
+Total Parameters: 19,304,550
+Trainable Parameters: 19,304,550
+Model Size (FP32): 73.64 MB
+------------------------------------------------------------
+
+Lightweight HDR Model
+Total Parameters: 13,511,890
+Trainable Parameters: 13,511,890
+Model Size (FP32): 51.54 MB
+------------------------------------------------------------
+
+Original HDR Model
+Total Parameters: 19,304,550
+Trainable Parameters: 19,304,550
+Model Size (FP32): 73.64 MB
+------------------------------------------------------------
+
+Original HDR Model
+Total Parameters: 19,304,550
+Trainable Parameters: 19,304,550
+Model Size (FP32): 73.64 MB
+------------------------------------------------------------
+
+Lightweight HDR Model
+Total Parameters: 13,688,099
+Trainable Parameters: 13,688,099
+Model Size (FP32): 52.22 MB
+------------------------------------------------------------
+
+Original HDR Model
+Total Parameters: 19,304,550
+Trainable Parameters: 19,304,550
+Model Size (FP32): 73.64 MB
+------------------------------------------------------------
+
+Original HDR Model
+Total Parameters: 19,304,550
+Trainable Parameters: 19,304,550
+Model Size (FP32): 73.64 MB
+------------------------------------------------------------
+
+Lightweight HDR Model
+Total Parameters: 16,311,506
+Trainable Parameters: 16,311,506
+Model Size (FP32): 62.22 MB
+------------------------------------------------------------
+
+Original HDR Model
+Total Parameters: 19,304,550
+Trainable Parameters: 19,304,550
+Model Size (FP32): 73.64 MB
+------------------------------------------------------------
+
+Lightweight HDR Model
+Total Parameters: 13,511,890
+Trainable Parameters: 13,511,890
+Model Size (FP32): 51.54 MB
+------------------------------------------------------------
+
+Original HDR Model
+Total Parameters: 19,304,550
+Trainable Parameters: 19,304,550
+Model Size (FP32): 73.64 MB
+------------------------------------------------------------
+
+Lightweight HDR Model
+Total Parameters: 9,308,370
+Trainable Parameters: 9,308,370
+Model Size (FP32): 35.51 MB
+------------------------------------------------------------
+
+Original HDR Model
+Total Parameters: 19,304,550
+Trainable Parameters: 19,304,550
+Model Size (FP32): 73.64 MB
+------------------------------------------------------------
+
+Lightweight HDR Model
+Total Parameters: 9,308,370
+Trainable Parameters: 9,308,370
+Model Size (FP32): 35.51 MB
+------------------------------------------------------------
+
+Original HDR Model
+Total Parameters: 19,304,550
+Trainable Parameters: 19,304,550
+Model Size (FP32): 73.64 MB
+------------------------------------------------------------
+
+Lightweight HDR Model
+Total Parameters: 9,308,370
+Trainable Parameters: 9,308,370
+Model Size (FP32): 35.51 MB
+------------------------------------------------------------
+
+Original HDR Model
+Total Parameters: 19,304,550
+Trainable Parameters: 19,304,550
+Model Size (FP32): 73.64 MB
+------------------------------------------------------------
+
+Lightweight HDR Model
+Total Parameters: 9,308,370
+Trainable Parameters: 9,308,370
+Model Size (FP32): 35.51 MB
+------------------------------------------------------------
+
+Original HDR Model
+Total Parameters: 19,304,550
+Trainable Parameters: 19,304,550
+Model Size (FP32): 73.64 MB
+------------------------------------------------------------
+
+Lightweight HDR Model
+Total Parameters: 9,308,370
+Trainable Parameters: 9,308,370
+Model Size (FP32): 35.51 MB
+------------------------------------------------------------
+
+Original HDR Model
+Total Parameters: 19,304,550
+Trainable Parameters: 19,304,550
+Model Size (FP32): 73.64 MB
+------------------------------------------------------------
+
+Lightweight HDR Model
+Total Parameters: 9,308,370
+Trainable Parameters: 9,308,370
+Model Size (FP32): 35.51 MB
+------------------------------------------------------------
+
+Original HDR Model
+Total Parameters: 19,304,550
+Trainable Parameters: 19,304,550
+Model Size (FP32): 73.64 MB
+------------------------------------------------------------
+
+Lightweight HDR Model
+Total Parameters: 17,815,442
+Trainable Parameters: 17,815,442
+Model Size (FP32): 67.96 MB
+------------------------------------------------------------
+
+Original HDR Model
+Total Parameters: 19,304,550
+Trainable Parameters: 19,304,550
+Model Size (FP32): 73.64 MB
+------------------------------------------------------------
+
+Lightweight HDR Model
+Total Parameters: 13,611,922
+Trainable Parameters: 13,611,922
+Model Size (FP32): 51.93 MB
+------------------------------------------------------------
+
+Original HDR Model
+Total Parameters: 19,304,550
+Trainable Parameters: 19,304,550
+Model Size (FP32): 73.64 MB
+------------------------------------------------------------
+
+Lightweight HDR Model
+Total Parameters: 9,408,402
+Trainable Parameters: 9,408,402
+Model Size (FP32): 35.89 MB
+------------------------------------------------------------
+
+Original HDR Model
+Total Parameters: 19,304,550
+Trainable Parameters: 19,304,550
+Model Size (FP32): 73.64 MB
+------------------------------------------------------------
+
+Lightweight HDR Model
+Total Parameters: 9,341,714
+Trainable Parameters: 9,341,714
+Model Size (FP32): 35.64 MB
+------------------------------------------------------------
+
+Original HDR Model
+Total Parameters: 19,304,550
+Trainable Parameters: 19,304,550
+Model Size (FP32): 73.64 MB
+------------------------------------------------------------
+
+Lightweight HDR Model
+Total Parameters: 9,408,402
+Trainable Parameters: 9,408,402
+Model Size (FP32): 35.89 MB
+------------------------------------------------------------
+
+Original HDR Model
+Total Parameters: 19,304,550
+Trainable Parameters: 19,304,550
+Model Size (FP32): 73.64 MB
+------------------------------------------------------------
+
+Lightweight HDR Model
+Total Parameters: 9,408,402
+Trainable Parameters: 9,408,402
+Model Size (FP32): 35.89 MB
+------------------------------------------------------------
+
+Original HDR Model
+Total Parameters: 19,304,550
+Trainable Parameters: 19,304,550
+Model Size (FP32): 73.64 MB
+------------------------------------------------------------
+
+Lightweight HDR Model
+Total Parameters: 8,090,770
+Trainable Parameters: 8,090,770
+Model Size (FP32): 30.86 MB
+------------------------------------------------------------
+
+Original HDR Model
+Total Parameters: 19,304,550
+Trainable Parameters: 19,304,550
+Model Size (FP32): 73.64 MB
+------------------------------------------------------------
+
+Lightweight HDR Model
+Total Parameters: 2,409,242
+Trainable Parameters: 2,409,242
+Model Size (FP32): 9.19 MB
+------------------------------------------------------------
+
+Original HDR Model
+Total Parameters: 19,304,550
+Trainable Parameters: 19,304,550
+Model Size (FP32): 73.64 MB
+------------------------------------------------------------
+
+Lightweight HDR Model
+Total Parameters: 3,405,974
+Trainable Parameters: 3,405,974
+Model Size (FP32): 12.99 MB
+------------------------------------------------------------
+
+Original HDR Model
+Total Parameters: 19,304,550
+Trainable Parameters: 19,304,550
+Model Size (FP32): 73.64 MB
+------------------------------------------------------------
+
+Lightweight HDR Model
+Total Parameters: 3,405,974
+Trainable Parameters: 3,405,974
+Model Size (FP32): 12.99 MB
+------------------------------------------------------------
+
+Original HDR Model
+Total Parameters: 19,304,550
+Trainable Parameters: 19,304,550
+Model Size (FP32): 73.64 MB
+------------------------------------------------------------
+
+Lightweight HDR Model
+Total Parameters: 13,611,922
+Trainable Parameters: 13,611,922
+Model Size (FP32): 51.93 MB
+------------------------------------------------------------
+
+Original HDR Model
+Total Parameters: 19,304,550
+Trainable Parameters: 19,304,550
+Model Size (FP32): 73.64 MB
+------------------------------------------------------------
+
+Lightweight HDR Model
+Total Parameters: 2,409,242
+Trainable Parameters: 2,409,242
+Model Size (FP32): 9.19 MB
+------------------------------------------------------------
+
+Original HDR Model
+Total Parameters: 19,304,550
+Trainable Parameters: 19,304,550
+Model Size (FP32): 73.64 MB
+------------------------------------------------------------
+
+Lightweight HDR Model
+Total Parameters: 13,611,922
+Trainable Parameters: 13,611,922
+Model Size (FP32): 51.93 MB
+------------------------------------------------------------
+
+Original HDR Model
+Total Parameters: 19,304,550
+Trainable Parameters: 19,304,550
+Model Size (FP32): 73.64 MB
+------------------------------------------------------------
+
+Lightweight HDR Model
+Total Parameters: 19,529,830
+Trainable Parameters: 19,529,830
+Model Size (FP32): 74.50 MB
+------------------------------------------------------------
+
+Original HDR Model
+Total Parameters: 19,304,550
+Trainable Parameters: 19,304,550
+Model Size (FP32): 73.64 MB
+------------------------------------------------------------
+
+Lightweight HDR Model
+Total Parameters: 13,611,922
+Trainable Parameters: 13,611,922
+Model Size (FP32): 51.93 MB
+------------------------------------------------------------
+
+Original HDR Model
+Total Parameters: 19,304,550
+Trainable Parameters: 19,304,550
+Model Size (FP32): 73.64 MB
+------------------------------------------------------------
+
+Lightweight HDR Model
+Total Parameters: 9,408,402
+Trainable Parameters: 9,408,402
+Model Size (FP32): 35.89 MB
+------------------------------------------------------------
+
+Original HDR Model
+Total Parameters: 19,304,550
+Trainable Parameters: 19,304,550
+Model Size (FP32): 73.64 MB
+------------------------------------------------------------
+
+Lightweight HDR Model
+Total Parameters: 3,462,426
+Trainable Parameters: 3,462,426
+Model Size (FP32): 13.21 MB
+------------------------------------------------------------
+
+Original HDR Model
+Total Parameters: 19,304,550
+Trainable Parameters: 19,304,550
+Model Size (FP32): 73.64 MB
+------------------------------------------------------------
+
+Lightweight HDR Model
+Total Parameters: 7,701,270
+Trainable Parameters: 7,701,270
+Model Size (FP32): 29.38 MB
+------------------------------------------------------------
+
+Original HDR Model
+Total Parameters: 19,304,550
+Trainable Parameters: 19,304,550
+Model Size (FP32): 73.64 MB
+------------------------------------------------------------
+
+Lightweight HDR Model
+Total Parameters: 3,462,426
+Trainable Parameters: 3,462,426
+Model Size (FP32): 13.21 MB
+------------------------------------------------------------
+
+Original HDR Model
+Total Parameters: 19,304,550
+Trainable Parameters: 19,304,550
+Model Size (FP32): 73.64 MB
+------------------------------------------------------------
+
+Lightweight HDR Model
+Total Parameters: 11,086,410
+Trainable Parameters: 11,086,410
+Model Size (FP32): 42.29 MB
+------------------------------------------------------------
+
+Original HDR Model
+Total Parameters: 19,304,550
+Trainable Parameters: 19,304,550
+Model Size (FP32): 73.64 MB
+------------------------------------------------------------
+
+Lightweight HDR Model
+Total Parameters: 7,493,798
+Trainable Parameters: 7,493,798
+Model Size (FP32): 28.59 MB
+------------------------------------------------------------
+
+Original HDR Model
+Total Parameters: 19,304,550
+Trainable Parameters: 19,304,550
+Model Size (FP32): 73.64 MB
+------------------------------------------------------------
+
+Lightweight HDR Model
+Total Parameters: 9,290,104
+Trainable Parameters: 9,290,104
+Model Size (FP32): 35.44 MB
+------------------------------------------------------------
+
+Original HDR Model
+Total Parameters: 19,304,550
+Trainable Parameters: 19,304,550
+Model Size (FP32): 73.64 MB
+------------------------------------------------------------
+
+Lightweight HDR Model
+Total Parameters: 16,350,380
+Trainable Parameters: 16,350,380
+Model Size (FP32): 62.37 MB
+------------------------------------------------------------
+
+Original HDR Model
+Total Parameters: 19,304,550
+Trainable Parameters: 19,304,550
+Model Size (FP32): 73.64 MB
+------------------------------------------------------------
+
+Lightweight HDR Model
+Total Parameters: 9,290,104
+Trainable Parameters: 9,290,104
+Model Size (FP32): 35.44 MB
+------------------------------------------------------------
+
+Original HDR Model
+Total Parameters: 19,304,550
+Trainable Parameters: 19,304,550
+Model Size (FP32): 73.64 MB
+------------------------------------------------------------
+
+Lightweight HDR Model
+Total Parameters: 11,086,410
+Trainable Parameters: 11,086,410
+Model Size (FP32): 42.29 MB
+------------------------------------------------------------
+
+Original HDR Model
+Total Parameters: 19,304,550
+Trainable Parameters: 19,304,550
+Model Size (FP32): 73.64 MB
+------------------------------------------------------------
+
+Lightweight HDR Model
+Total Parameters: 7,755,364
+Trainable Parameters: 7,755,364
+Model Size (FP32): 29.58 MB
+------------------------------------------------------------
+
+Original HDR Model
+Total Parameters: 19,304,550
+Trainable Parameters: 19,304,550
+Model Size (FP32): 73.64 MB
+------------------------------------------------------------
+
+Lightweight HDR Model
+Total Parameters: 7,710,826
+Trainable Parameters: 7,710,826
+Model Size (FP32): 29.41 MB
+------------------------------------------------------------
+
+Original HDR Model
+Total Parameters: 19,304,550
+Trainable Parameters: 19,304,550
+Model Size (FP32): 73.64 MB
+------------------------------------------------------------
+
+Lightweight HDR Model
+Total Parameters: 7,844,440
+Trainable Parameters: 7,844,440
+Model Size (FP32): 29.92 MB
+------------------------------------------------------------
+
+Original HDR Model
+Total Parameters: 19,304,550
+Trainable Parameters: 19,304,550
+Model Size (FP32): 73.64 MB
+------------------------------------------------------------
+
+Lightweight HDR Model
+Total Parameters: 7,755,364
+Trainable Parameters: 7,755,364
+Model Size (FP32): 29.58 MB
+------------------------------------------------------------
+
+Original HDR Model
+Total Parameters: 19,304,550
+Trainable Parameters: 19,304,550
+Model Size (FP32): 73.64 MB
+------------------------------------------------------------
+
+Lightweight HDR Model
+Total Parameters: 5,251,752
+Trainable Parameters: 5,251,752
+Model Size (FP32): 20.03 MB
+------------------------------------------------------------
+
+Original HDR Model
+Total Parameters: 19,304,550
+Trainable Parameters: 19,304,550
+Model Size (FP32): 73.64 MB
+------------------------------------------------------------
+
+Lightweight HDR Model
+Total Parameters: 3,405,974
+Trainable Parameters: 3,405,974
+Model Size (FP32): 12.99 MB
+------------------------------------------------------------
+
+Original HDR Model
+Total Parameters: 19,304,550
+Trainable Parameters: 19,304,550
+Model Size (FP32): 73.64 MB
+------------------------------------------------------------
+
+Lightweight HDR Model
+Total Parameters: 19,529,830
+Trainable Parameters: 19,529,830
+Model Size (FP32): 74.50 MB
+------------------------------------------------------------
+

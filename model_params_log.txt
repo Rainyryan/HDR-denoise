@@ -1,0 +1,30 @@
+
+================================================================================
+MODEL: Original HDR Model
+Timestamp: 2026-02-06 14:49:42
+================================================================================
+Total Parameters:             19,304,550
+Trainable Parameters:        19,304,550
+Non-trainable Params:                 0
+
+Model Size (FP32):                73.64 MB
+Model Size (FP16):                36.82 MB
+
+Layer Statistics:
+--------------------------------------------------------------------------------
+latent                         Layers: 52    Params:      12,616,736
+decoder_level_2                Layers: 52    Params:       3,162,640
+x_expo_2                       Layers: 21    Params:       1,794,641
+encoder_level_2                Layers: 52    Params:         796,688
+latent_fusion                  Layers: 1     Params:         262,144
+decoder_level_1                Layers: 52    Params:         201,736
+decoder_level_0                Layers: 52    Params:         200,836
+x_expo_1                       Layers: 21    Params:         141,521
+encoder_level_1                Layers: 52    Params:          51,716
+reduce_chan_level_2            Layers: 1     Params:          32,768
+refinement_conv                Layers: 4     Params:          25,600
+refinement_trans               Layers: 52    Params:          14,020
+patch_embed                    Layers: 1     Params:           3,456
+reduce_chan_final              Layers: 1     Params:              48
+================================================================================
+
