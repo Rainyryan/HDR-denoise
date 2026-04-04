@@ -151,48 +151,187 @@ class HDR_model(nn.Module):
         else:
             raise ValueError(f"Unsupported block_type: '{self.block_type}'. Choose from 'SwinIR', 'Restormer', 'CODE', 'RepUNet', or 'EfficienT_HDR'.")
 
+    def _run_sequence_and_collect_attn(self, sequence, x, stage_name, t_attn_maps):
+        """
+        Runs a tensor through an nn.Sequential of RestormerBlocks 
+        and collects the attention map from every single block.
+        """
+        for i, block in enumerate(sequence):
+            # Check if the block is a RestormerBlock to safely pass return_attn
+            if self.block_type == 'Restormer':
+                x, attn_map = block(x, return_attn=True)
+                t_attn_maps[f"{stage_name}_block{i}"] = attn_map
+            else:
+                x = block(x) # Fallback if you switch to SwinIR/CODE later
+        return x
 
-    def forward(self, x):
-        # x: B x 1 x H x W
+    def forward(self, x, return_maps=False, return_transposed_attn=False):
+            # x: B x 1 x H x W
+            
+            # Dictionary to store the C x C transposed attention maps
+            t_attn_maps = {}
 
-        # Encoder level 0
-        x_shuffled = self.demosaic_unshuffle(x); 			# B x 12 x H/2 x W/2
-        x_level1 = self.patch_embed(x_shuffled); 			# B x C x H/2 x W/2
+            # ======== Encoder ========
+            x_shuffled = self.demosaic_unshuffle(x) 			
+            x_level1 = self.patch_embed(x_shuffled) 			
+            
+            if return_transposed_attn:
+                x_level1 = self._run_sequence_and_collect_attn(self.encoder_level_1, x_level1, "enc1", t_attn_maps)
+            else:
+                x_level1 = self.encoder_level_1(x_level1)
+                
+            x_level1 = self.x_expo_1(x_level1) 				
 
-        # Encoder level 1
-        x_level1 = self.encoder_level_1(x_level1); 			# B x C x H/2 x W/2
-        x_level1 = self.x_expo_1(x_level1); 				# B x C x H/2 x W/2
+            x_level2 = self.down_unshuffle_1_2(x_level1)		
+            
+            if return_transposed_attn:
+                x_level2 = self._run_sequence_and_collect_attn(self.encoder_level_2, x_level2, "enc2", t_attn_maps)
+            else:
+                x_level2 = self.encoder_level_2(x_level2)
+                
+            x_level2 = self.x_expo_2(x_level2) 				
 
-        # Encoder level 2
-        x_level2 = self.down_unshuffle_1_2(x_level1);		# B x 4C x H/4 x W/4
-        x_level2 = self.encoder_level_2(x_level2); 			# B x 4C x H/4 x W/4
-        x_level2 = self.x_expo_2(x_level2); 				# B x 4C x H/4 x W/4
+            # ======== Latent Stage (Bottleneck) ========
+            x_latent = self.down_unshuffle_2_3(x_level2)
+            
+            if return_transposed_attn:
+                x_latent = self._run_sequence_and_collect_attn(self.latent, x_latent, "latent", t_attn_maps)
+            else:
+                x_latent = self.latent(x_latent)
+                
+            x_latent = self.latent_fusion(x_latent)
+            
+            # ======== Decoder ========
+            w_level2 = self.up_shuffle_3_2(x_latent) 			
+            w_level2 = torch.cat([w_level2, x_level2], dim=1) 	
+            
+            if return_transposed_attn:
+                w_level2 = self._run_sequence_and_collect_attn(self.decoder_level_2, w_level2, "dec2", t_attn_maps)
+            else:
+                w_level2 = self.decoder_level_2(w_level2)
+                
+            w_level2 = self.reduce_chan_level_2(w_level2) 		
 
-        # Encoder level latent
-        x_latent = self.down_unshuffle_2_3(x_level2); 		# B x 8C x H/8 x W/8
-        x_latent = self.latent(x_latent); 					# B x 8C x H/8 x W/8
-        x_latent = self.latent_fusion(x_latent); 			# B x 8C x H/8 x W/8
+            w_level1 = self.up_shuffle_2_1(w_level2) 			
+            w_level1 = torch.cat([w_level1, x_level1], dim=1) 	
+            
+            if return_transposed_attn:
+                w_level1 = self._run_sequence_and_collect_attn(self.decoder_level_1, w_level1, "dec1", t_attn_maps)
+            else:
+                w_level1 = self.decoder_level_1(w_level1) 			
 
-        # Decoder level 2
-        w_level2 = self.up_shuffle_3_2(x_latent); 			# B x 4C x H/4 x W/4
-        w_level2 = torch.cat([w_level2, x_level2], dim=1); 	# B x 8C x H/4 x W/4
-        w_level2 = self.decoder_level_2(w_level2); 			# B x 8C x H/4 x W/4
-        w_level2 = self.reduce_chan_level_2(w_level2); 		# B x 4C x H/4 x W/4
+            w_level0 = self.decoder_level_0(w_level1) 			
+            
+            if return_transposed_attn:
+                w_level0 = self._run_sequence_and_collect_attn(self.decoder_level_0, w_level0, "dec0", t_attn_maps)
+            else:
+                w_level0 = self.decoder_level_0(w_level0)
+                
+            w_level0 = self.up_shuffle_1_0(w_level0) 			
+            
+            # ======== Refinement ========
+            if return_transposed_attn:
+                w_level0 = self._run_sequence_and_collect_attn(self.refinement_trans, w_level0, "refine_trans", t_attn_maps)
+            else:
+                w_level0 = self.refinement_trans(w_level0) 		
+                
+            w_level0 = self.refinement_conv(w_level0) 			
+            w_out = self.reduce_chan_final(w_level0) + x 		
+            
+            output = w_out.clamp(min=1/(2**20-1))
+            
+            if return_maps:
+                return output, {
+                    "x_level1": x_level1,
+                    "x_level2": x_level2,
+                    "x_latent": x_latent,
+                    "w_level2": w_level2,
+                    "w_level1": w_level1,
+                    "w_level0_refined": w_level0
+                }
+                
+            if return_transposed_attn:
+                return output, t_attn_maps
+                
+            return output
 
-        # Decoder level 1.5
-        w_level1 = self.up_shuffle_2_1(w_level2); 			# B x C x H/2 x W/2
-        w_level1 = torch.cat([w_level1, x_level1], dim=1); 	# B x 2C x H/2 x W/2
-        w_level1 = self.decoder_level_1(w_level1); 			# B x 2C x H/2 x W/2
 
-        # Decoder level 0
-        w_level0 = self.decoder_level_0(w_level1); 			# B x 2C x H/2 x W/2
-        w_level0 = self.up_shuffle_1_0(w_level0); 			# B x C/2 x H x W
+    # def forward(self, x, return_maps=False, return_transposed_attn=False):
+    #     # x: B x 1 x H x W
         
-        # Refinement
-        w_level0 = self.refinement_trans(w_level0); 		# B x C/2 x H x W
-        w_level0 = self.refinement_conv(w_level0); 			# B x C/2 x H x W
-        w_out = self.reduce_chan_final(w_level0) + x; 		# B x 3 x H x W
+    #     # Dictionary to store the C x C transposed attention maps
+    #     t_attn_maps = {}
+
+    #     # Encoder level 0
+    #     x_shuffled = self.demosaic_unshuffle(x); 			# B x 12 x H/2 x W/2
+    #     x_level1 = self.patch_embed(x_shuffled); 			# B x C x H/2 x W/2
+
+    #     # Encoder level 1
+    #     x_level1 = self.encoder_level_1(x_level1); 			# B x C x H/2 x W/2
+    #     x_level1 = self.x_expo_1(x_level1); 				# B x C x H/2 x W/2
+
+    #     # Encoder level 2
+    #     x_level2 = self.down_unshuffle_1_2(x_level1);		# B x 4C x H/4 x W/4
+    #     x_level2 = self.encoder_level_2(x_level2); 			# B x 4C x H/4 x W/4
+    #     x_level2 = self.x_expo_2(x_level2); 				# B x 4C x H/4 x W/4
+
+    #     # # Encoder level latent
+    #     # x_latent = self.down_unshuffle_2_3(x_level2); 		# B x 8C x H/8 x W/8
+    #     # x_latent = self.latent(x_latent); 					# B x 8C x H/8 x W/8
+    #     # x_latent = self.latent_fusion(x_latent); 			# B x 8C x H/8 x W/8
         
-        return w_out.clamp(min=1/(2**20-1))
+    #     # ======== Latent Stage (Bottleneck) ========
+    #     x_latent = self.down_unshuffle_2_3(x_level2)
+        
+    #     if return_transposed_attn:
+    #         # Manually run all but the last block
+    #         for i in range(len(self.latent) - 1):
+    #             x_latent = self.latent[i](x_latent)
+    #         # Extract map from the final block in the latent sequence
+    #         x_latent, attn_map = self.latent[-1](x_latent, return_attn=True)
+    #         t_attn_maps["latent"] = attn_map
+    #     else:
+    #         x_latent = self.latent(x_latent)
+            
+    #     x_latent = self.latent_fusion(x_latent)
+        
+        
+        
+
+    #     # Decoder level 2
+    #     w_level2 = self.up_shuffle_3_2(x_latent); 			# B x 4C x H/4 x W/4
+    #     w_level2 = torch.cat([w_level2, x_level2], dim=1); 	# B x 8C x H/4 x W/4
+    #     w_level2 = self.decoder_level_2(w_level2); 			# B x 8C x H/4 x W/4
+    #     w_level2 = self.reduce_chan_level_2(w_level2); 		# B x 4C x H/4 x W/4
+
+    #     # Decoder level 1.5
+    #     w_level1 = self.up_shuffle_2_1(w_level2); 			# B x C x H/2 x W/2
+    #     w_level1 = torch.cat([w_level1, x_level1], dim=1); 	# B x 2C x H/2 x W/2
+    #     w_level1 = self.decoder_level_1(w_level1); 			# B x 2C x H/2 x W/2
+
+    #     # Decoder level 0
+    #     w_level0 = self.decoder_level_0(w_level1); 			# B x 2C x H/2 x W/2
+    #     w_level0 = self.up_shuffle_1_0(w_level0); 			# B x C/2 x H x W
+        
+    #     # Refinement
+    #     w_level0 = self.refinement_trans(w_level0); 		# B x C/2 x H x W
+    #     w_level0 = self.refinement_conv(w_level0); 			# B x C/2 x H x W
+    #     w_out = self.reduce_chan_final(w_level0) + x; 		# B x 3 x H x W
+        
+    #     output = w_out.clamp(min=1/(2**20-1))
+        
+    #     if return_maps:
+    #         return output, {
+    #             "x_level1": x_level1,
+    #             "x_level2": x_level2,
+    #             "x_latent": x_latent,
+    #             "w_level2": w_level2,
+    #             "w_level1": w_level1,
+    #             "w_level0_refined": w_level0
+    #         }
+            
+    #     if return_transposed_attn:
+    #         return output, t_attn_maps
+    #     return output
         
 

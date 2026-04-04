@@ -1,0 +1,8 @@
+
+Test Avg PSNR = 33.9631 dB
+
+Test Avg PSNR = 34.1930 dB
+
+Test Avg PSNR = 34.1930 dB
+
+Test Avg PSNR = 34.2814 dB

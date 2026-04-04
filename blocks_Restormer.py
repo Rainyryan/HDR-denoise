@@ -28,7 +28,7 @@ class MDTA(nn.Module):
         self.qkv_dwconv = nn.Conv2d(dim * 3, dim * 3, kernel_size=3, stride=1, padding=1, groups=dim * 3, bias=bias)
         self.project_out = nn.Conv2d(dim, dim, kernel_size=1, bias=bias)
 
-    def forward(self, x):
+    def forward(self, x, return_attn=False):
         b, c, h, w = x.shape
 
         qkv = self.qkv_dwconv(self.qkv(x))
@@ -42,13 +42,17 @@ class MDTA(nn.Module):
         k = torch.nn.functional.normalize(k, dim=-1)
 
         # Transposed Attention: (C/head x HW) @ (HW x C/head) -> (C/head x C/head)
+        
         attn = (q @ k.transpose(-2, -1)) * self.temperature
-        attn = attn.softmax(dim=-1)
+        attn = attn.softmax(dim=-1) # This is the part that I can use for common space between Teacher and Student
 
         out = (attn @ v)
         out = out.reshape(b, c, h, w)
 
         out = self.project_out(out)
+        
+        if return_attn:
+            return out, attn # Return the [B, Heads, C/head, C/head] map
         return out
 
 class GDFN(nn.Module):
@@ -82,7 +86,16 @@ class RestormerBlock(nn.Module):
         self.norm2 = LayerNorm(dim)
         self.ffn = GDFN(dim, mlp_ratio, bias)
 
-    def forward(self, x):
+    def forward(self, x, return_attn=False):
+        
+        # This part is for attention
+        if return_attn:
+            attn_out, attn_map = self.attn(self.norm1(x), return_attn=True)
+            x = x + attn_out
+            x = x + self.ffn(self.norm2(x))
+            return x, attn_map
+        
+        
         x = x + self.attn(self.norm1(x))
         x = x + self.ffn(self.norm2(x))
         return x

@@ -1,0 +1,2 @@
+
+Test Avg PSNR = inf dB

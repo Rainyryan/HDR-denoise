@@ -1,0 +1,61 @@
+Datetime: 20260404_0707
+
+Teacher: dim=16, num_blocks=[4,4,4,2], Trained for 300 epochs
+Student: dim=8, num_blocks=[2,2,2,1]
+
+Distillation Training: 50 epochs
+
+
+>>> Running Evaluation for Alpha = 1 <<<
+
+==================================================
+Evaluating Teacher (dim=32) | Parameters: 19,529,830
+==================================================
+Results for Teacher (dim=32):
+Avg PSNR:  41.2184 dB
+Avg LPIPS: 0.4765
+Speed:     0.96 FPS (1037.3 ms / image)
+
+==================================================
+Evaluating Student (dim=8) | Parameters: 551,282
+==================================================
+Results for Student (dim=8):
+Avg PSNR:  40.1975 dB
+Avg LPIPS: 0.5703
+Speed:     8.27 FPS (120.9 ms / image)
+
+>>> Running Evaluation for Alpha = 3 <<<
+
+==================================================
+Evaluating Teacher (dim=32) | Parameters: 19,529,830
+==================================================
+Results for Teacher (dim=32):
+Avg PSNR:  35.6655 dB
+Avg LPIPS: 0.3809
+Speed:     1.01 FPS (993.1 ms / image)
+
+==================================================
+Evaluating Student (dim=8) | Parameters: 551,282
+==================================================
+Results for Student (dim=8):
+Avg PSNR:  35.0473 dB
+Avg LPIPS: 0.4653
+Speed:     8.17 FPS (122.4 ms / image)
+
+>>> Running Evaluation for Alpha = full <<<
+
+==================================================
+Evaluating Teacher (dim=32) | Parameters: 19,529,830
+==================================================
+Results for Teacher (dim=32):
+Avg PSNR:  32.4275 dB
+Avg LPIPS: 0.3148
+Speed:     0.98 FPS (1024.2 ms / image)
+
+==================================================
+Evaluating Student (dim=8) | Parameters: 551,282
+==================================================
+Results for Student (dim=8):
+Avg PSNR:  31.9959 dB
+Avg LPIPS: 0.3708
+Speed:     8.77 FPS (114.0 ms / image)

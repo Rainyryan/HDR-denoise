@@ -9,9 +9,7 @@ import sys
 # Add parent directory to path for imports
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from HDR_model import HDR_model
-from HDR_model_switch import HDR_model as HDR_model_lightweight
-from HDR_model import HDR_model
+from HDR_model_switch import HDR_model
 
 
 def count_and_print(model, model_name="Model", log_file=None):
@@ -41,12 +39,12 @@ def count_and_print(model, model_name="Model", log_file=None):
 if __name__ == "__main__":
 	# Count original model
 	print("Counting Original Model...")
-	model_orig = HDR_model()
+	model_orig = HDR_model(dim=32, num_blocks=[4,4,4,4])
 	count_and_print(model_orig, "Original HDR Model", "params_log.txt")
 	
 	# Count lightweight model
 	print("Counting Lightweight Model...")
-	model_light = HDR_model_lightweight()
+	model_light = HDR_model(dim=8, num_blocks=[2,2,2,1])
 	count_and_print(model_light, "Lightweight HDR Model", "params_log.txt")
 	
 	# Calculate reduction

@@ -40,11 +40,11 @@ def write_log(filename, s, newfile=False, end="\n"):
 ##########################################################################
 ## Training util
 ##########################################################################
-def hdr_tonemap(hdr_image, nbits=18):
+def hdr_tonemap(hdr_image, nbits=10):
 	mu = 2**nbits-1
 	return torch.log10(1.0 + mu * hdr_image) / torch.log10(torch.tensor(1.0 + mu))
 
-def hdr_tonemap_np(hdr_image, nbits=18):
+def hdr_tonemap_np(hdr_image, nbits=10):
 	mu = 2**nbits-1
 	return np.log10(1.0 + mu * hdr_image) / np.log10(1.0 + mu)
 
@@ -99,10 +99,10 @@ if __name__ == "__main__":
 	# Phase
 	phase = "test"
 	# Filenames
-	save_folder = "models_rest_300_999_hi_noise_dim32_4444/"
+	save_folder = "./distill_models_4/"
 	create_folder(save_folder)
-	save_path = save_folder + "hdr_best.pth"
-	output_setting = "rest_300_999_hi_noise_dim32_4444"
+	save_path = save_folder + "preexpand_hdr_best.pth"
+	output_setting = "tmp_distill_results_model_4"
 	# Data loading
 	alpha = 1
 	nbits = 10
@@ -116,9 +116,9 @@ if __name__ == "__main__":
 		patch_sz = 512
 
 		# Load model
-		model = HDR_model()
+		model = HDR_model(dim=8, num_blocks=[2,2,2,1]) 
 		checkpoint = torch.load(save_path)
-		model.load_state_dict(checkpoint['model_state_dict'])
+		model.load_state_dict(checkpoint['student_state_dict'])
 		model.eval()
 		model.to(device)
 

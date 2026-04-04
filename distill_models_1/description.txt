@@ -1,0 +1,4 @@
+Teacher: dim=16, num_blocks=[4,4,4,2] 300 epochs
+Student: dim=8, num_blocks=[2,2,2,1]
+
+Distillation Training: 300 epochs

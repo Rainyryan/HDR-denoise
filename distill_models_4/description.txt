@@ -1,0 +1,6 @@
+Datetime: 20260403_171238
+
+Teacher: dim=32, num_blocks=[4,4,4,4], Trained for 300 epochs
+Student: dim=8, num_blocks=[2,2,2,1]
+
+Distillation Training: 300 epoch

@@ -99,10 +99,10 @@ if __name__ == "__main__":
 	# Phase
 	phase = "test"
 	# Filenames
-	save_folder = "models_rest_300_999_hi_noise_dim16_4442/"
+	save_folder = "models_rest_300_999_hi_noise_dim32_4444/"
 	create_folder(save_folder)
 	save_path = save_folder + "preexpand_hdr_best.pth"
-	output_setting = "rest_300_999_hi_noise_dim16_4442"
+	output_setting = "rest_300_999_hi_noise_dim32_4444"
 	# Data loading
 	alpha = 1
 	nbits = 10
@@ -116,7 +116,7 @@ if __name__ == "__main__":
 		patch_sz = 512
 
 		# Load model
-		model = HDR_model()
+		model = HDR_model(dim=32, num_blocks=[4,4,4,4])
 		checkpoint = torch.load(save_path)
 		model.load_state_dict(checkpoint['model_state_dict'])
 		model.eval()
