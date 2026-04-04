@@ -4,7 +4,7 @@ from blocks_SwinIR import SwinTransformerBlock
 from blocks_Restormer import RestormerBlock
 from blocks_RepUNet import RepUNetBlock
 from blocks_EfficienT_HDR import EfficienT_HDRBlock
-from blocks_CoDe import CODEBlock
+from CoDe.CoDe_Container import CODEBlock
 
 def test_shape_consistency():
     # Parameters from your SwinIR implementation
