@@ -1,0 +1,146 @@
+Profiling on: cuda:0
+Successfully loaded checkpoint: ./distill_models_20260417_134836/preexpand_hdr_best.pth
+
+==================================================
+Running FLOP Analysis (fvcore)...
+==================================================
+| module                      | #parameters or shape   | #flops   |
+|:----------------------------|:-----------------------|:---------|
+| model                       | 0.223M                 | 2.11G    |
+| patch_embed                 | 0.872K                 | 56.623M  |
+| patch_embed.weight          | (8, 12, 3, 3)          |          |
+| patch_embed.bias            | (8,)                   |          |
+| encoder_level_1             | 0.8K                   | 52.429M  |
+| encoder_level_1.0           | 0.4K                   | 26.214M  |
+| encoder_level_1.0.pw1       | 0.128K                 | 8.389M   |
+| encoder_level_1.0.dw        | 0.144K                 | 9.437M   |
+| encoder_level_1.0.pw2       | 0.128K                 | 8.389M   |
+| encoder_level_1.1           | 0.4K                   | 26.214M  |
+| encoder_level_1.1.pw1       | 0.128K                 | 8.389M   |
+| encoder_level_1.1.dw        | 0.144K                 | 9.437M   |
+| encoder_level_1.1.pw2       | 0.128K                 | 8.389M   |
+| x_expo_1                    | 0.696K                 | 42.992M  |
+| x_expo_1.dwconv1            | 0.208K                 | 13.107M  |
+| x_expo_1.dwconv1.weight     | (8, 1, 5, 5)           |          |
+| x_expo_1.dwconv1.bias       | (8,)                   |          |
+| x_expo_1.dwconv2            | 0.208K                 | 13.107M  |
+| x_expo_1.dwconv2.weight     | (8, 1, 5, 5)           |          |
+| x_expo_1.dwconv2.bias       | (8,)                   |          |
+| x_expo_1.pw1                | 0.144K                 | 8.389M   |
+| x_expo_1.pw1.weight         | (16, 8, 1, 1)          |          |
+| x_expo_1.pw1.bias           | (16,)                  |          |
+| x_expo_1.pw2                | 0.136K                 | 8.389M   |
+| x_expo_1.pw2.weight         | (8, 16, 1, 1)          |          |
+| x_expo_1.pw2.bias           | (8,)                   |          |
+| encoder_level_2             | 9.344K                 | 0.153G   |
+| encoder_level_2.0           | 4.672K                 | 76.546M  |
+| encoder_level_2.0.pw1       | 2.048K                 | 33.554M  |
+| encoder_level_2.0.dw        | 0.576K                 | 9.437M   |
+| encoder_level_2.0.pw2       | 2.048K                 | 33.554M  |
+| encoder_level_2.1           | 4.672K                 | 76.546M  |
+| encoder_level_2.1.pw1       | 2.048K                 | 33.554M  |
+| encoder_level_2.1.dw        | 0.576K                 | 9.437M   |
+| encoder_level_2.1.pw2       | 2.048K                 | 33.554M  |
+| x_expo_2                    | 5.856K                 | 93.323M  |
+| x_expo_2.dwconv1            | 0.832K                 | 13.107M  |
+| x_expo_2.dwconv1.weight     | (32, 1, 5, 5)          |          |
+| x_expo_2.dwconv1.bias       | (32,)                  |          |
+| x_expo_2.dwconv2            | 0.832K                 | 13.107M  |
+| x_expo_2.dwconv2.weight     | (32, 1, 5, 5)          |          |
+| x_expo_2.dwconv2.bias       | (32,)                  |          |
+| x_expo_2.pw1                | 2.112K                 | 33.554M  |
+| x_expo_2.pw1.weight         | (64, 32, 1, 1)         |          |
+| x_expo_2.pw1.bias           | (64,)                  |          |
+| x_expo_2.pw2                | 2.08K                  | 33.554M  |
+| x_expo_2.pw2.weight         | (32, 64, 1, 1)         |          |
+| x_expo_2.pw2.bias           | (32,)                  |          |
+| latent.0                    | 0.147M                 | 0.616G   |
+| latent.0.norm1              | 0.256K                 | 0        |
+| latent.0.norm1.weight       | (1, 128, 1, 1)         |          |
+| latent.0.norm1.bias         | (1, 128, 1, 1)         |          |
+| latent.0.attn               | 69K                    | 0.299G   |
+| latent.0.attn.temperature   | (8, 1, 1)              |          |
+| latent.0.attn.qkv           | 49.152K                | 0.201G   |
+| latent.0.attn.qkv_dwconv    | 3.456K                 | 14.156M  |
+| latent.0.attn.project_out   | 16.384K                | 67.109M  |
+| latent.0.norm2              | 0.256K                 | 0        |
+| latent.0.norm2.weight       | (1, 128, 1, 1)         |          |
+| latent.0.norm2.bias         | (1, 128, 1, 1)         |          |
+| latent.0.ffn                | 77.184K                | 0.316G   |
+| latent.0.ffn.project_in     | 49.152K                | 0.201G   |
+| latent.0.ffn.dwconv         | 3.456K                 | 14.156M  |
+| latent.0.ffn.project_out    | 24.576K                | 0.101G   |
+| latent_fusion               | 16.512K                | 67.109M  |
+| latent_fusion.weight        | (128, 128, 1, 1)       |          |
+| latent_fusion.bias          | (128,)                 |          |
+| decoder_level_2             | 35.072K                | 0.575G   |
+| decoder_level_2.0           | 17.536K                | 0.287G   |
+| decoder_level_2.0.pw1       | 8.192K                 | 0.134G   |
+| decoder_level_2.0.dw        | 1.152K                 | 18.874M  |
+| decoder_level_2.0.pw2       | 8.192K                 | 0.134G   |
+| decoder_level_2.1           | 17.536K                | 0.287G   |
+| decoder_level_2.1.pw1       | 8.192K                 | 0.134G   |
+| decoder_level_2.1.dw        | 1.152K                 | 18.874M  |
+| decoder_level_2.1.pw2       | 8.192K                 | 0.134G   |
+| reduce_chan_level_2         | 2.08K                  | 33.554M  |
+| reduce_chan_level_2.weight  | (32, 64, 1, 1)         |          |
+| reduce_chan_level_2.bias    | (32,)                  |          |
+| decoder_level_1             | 2.624K                 | 0.172G   |
+| decoder_level_1.0           | 1.312K                 | 85.983M  |
+| decoder_level_1.0.pw1       | 0.512K                 | 33.554M  |
+| decoder_level_1.0.dw        | 0.288K                 | 18.874M  |
+| decoder_level_1.0.pw2       | 0.512K                 | 33.554M  |
+| decoder_level_1.1           | 1.312K                 | 85.983M  |
+| decoder_level_1.1.pw1       | 0.512K                 | 33.554M  |
+| decoder_level_1.1.dw        | 0.288K                 | 18.874M  |
+| decoder_level_1.1.pw2       | 0.512K                 | 33.554M  |
+| decoder_level_0             | 2.624K                 | 0.172G   |
+| decoder_level_0.0           | 1.312K                 | 85.983M  |
+| decoder_level_0.0.pw1       | 0.512K                 | 33.554M  |
+| decoder_level_0.0.dw        | 0.288K                 | 18.874M  |
+| decoder_level_0.0.pw2       | 0.512K                 | 33.554M  |
+| decoder_level_0.1           | 1.312K                 | 85.983M  |
+| decoder_level_0.1.pw1       | 0.512K                 | 33.554M  |
+| decoder_level_0.1.dw        | 0.288K                 | 18.874M  |
+| decoder_level_0.1.pw2       | 0.512K                 | 33.554M  |
+| refinement_trans            | 0.136K                 | 35.652M  |
+| refinement_trans.pw1        | 32                     | 8.389M   |
+| refinement_trans.pw1.weight | (8, 4, 1, 1)           |          |
+| refinement_trans.dw         | 72                     | 18.874M  |
+| refinement_trans.dw.weight  | (8, 1, 3, 3)           |          |
+| refinement_trans.pw2        | 32                     | 8.389M   |
+| refinement_trans.pw2.weight | (4, 8, 1, 1)           |          |
+| refinement_conv             | 0.148K                 | 37.749M  |
+| refinement_conv.weight      | (4, 4, 3, 3)           |          |
+| refinement_conv.bias        | (4,)                   |          |
+| reduce_chan_final           | 15                     | 3.146M   |
+| reduce_chan_final.weight    | (3, 4, 1, 1)           |          |
+| reduce_chan_final.bias      | (3,)                   |          |
+
+==================================================
+Running Latency Trace (torch.profiler)...
+==================================================
+-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  
+                                                   Name    Self CPU %      Self CPU   CPU total %     CPU total  CPU time avg       CPU Mem  Self CPU Mem      CUDA Mem  Self CUDA Mem    # of Calls  
+-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  
+                                student_model_inference        21.64%       2.884ms        99.96%      13.322ms      13.322ms           0 b           0 b           0 b    -540.14 Mb             1  
+                                  aten::pixel_unshuffle         9.73%       1.297ms        39.95%       5.324ms       1.775ms           0 b           0 b       8.00 Mb           0 b             3  
+                                          aten::reshape         0.23%      30.000us         0.31%      41.000us       1.783us           0 b           0 b           0 b           0 b            23  
+                                             aten::view         0.09%      12.000us         0.09%      12.000us       0.429us           0 b           0 b           0 b           0 b            28  
+                                          aten::permute         0.10%      13.000us         0.13%      17.000us       2.833us           0 b           0 b           0 b           0 b             6  
+                                       aten::as_strided         0.05%       6.000us         0.05%       6.000us       0.333us           0 b           0 b           0 b           0 b            18  
+                                            aten::clone         2.93%     390.000us        30.45%       4.058ms     676.333us           0 b           0 b      17.00 Mb           0 b             6  
+                                       aten::empty_like         3.46%     461.000us        26.59%       3.543ms     590.500us           0 b           0 b      17.00 Mb           0 b             6  
+                                            aten::empty        23.31%       3.106ms        23.31%       3.106ms     124.240us           0 b           0 b      17.00 Mb      17.00 Mb            25  
+                                            aten::copy_         0.35%      47.000us         0.94%     125.000us      20.833us           0 b           0 b           0 b           0 b             6  
+                                       cudaLaunchKernel         8.75%       1.166ms         8.75%       1.166ms       8.154us           0 b           0 b           0 b           0 b           143  
+                                           aten::conv2d        -0.27%     -36.000us        25.53%       3.403ms      65.442us           0 b           0 b     252.00 Mb      -6.00 Mb            52  
+                                      aten::convolution         2.10%     280.000us        24.99%       3.330ms      64.038us           0 b           0 b     252.00 Mb      11.00 Mb            52  
+                                     aten::_convolution         6.98%     930.000us        24.26%       3.233ms      62.173us           0 b           0 b     252.00 Mb      12.00 Mb            52  
+                                aten::cudnn_convolution         5.03%     670.000us        11.54%       1.538ms      43.943us           0 b           0 b     155.00 Mb     155.00 Mb            35  
+-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  
+Self CPU time total: 13.327ms
+
+
+Trace saved to student_profile_trace.json
+Open Google Chrome and navigate to: chrome://tracing to view the timeline.

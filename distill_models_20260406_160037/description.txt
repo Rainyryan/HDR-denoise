@@ -4,3 +4,5 @@ Teacher: dim=32, num_blocks=[4,4,4,4], Trained for 200 epochs
 Student: dim=8, num_blocks=[2,2,2,1]
 
 Distillation Training: 300 epoch
+
+Features: ["x_level1", "x_level2", "x_latent", "w_level2", "w_level1", "w_level0_refined"]

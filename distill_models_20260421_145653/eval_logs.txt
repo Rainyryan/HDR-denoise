@@ -1,10 +1,5 @@
-Datetime: 20260403
-
-Teacher: dim=32, num_blocks=[4,4,4,4], Trained for 200 epochs
-Student: dim=8, num_blocks=[2,2,2,1]
-
-Distillation Training: 300 epochs
-
+Setting up [LPIPS] perceptual loss: trunk [vgg], v[0.1], spatial [off]
+Loading model from: /home/ryan/miniconda3/envs/dl/lib/python3.12/site-packages/lpips/weights/v0.1/vgg.pth
 Loading Teacher...
 Loading Student...
 
@@ -14,17 +9,17 @@ Loading Student...
 Evaluating Teacher (dim=32) | Parameters: 19,529,830
 ==================================================
 Results for Teacher (dim=32):
-Avg PSNR:  41.2184 dB
-Avg LPIPS: 0.4765
-Speed:     1.31 FPS (764.3 ms / image)
+Avg PSNR:  41.0484 dB
+Avg LPIPS: 0.4245
+Speed:     1.08 FPS (929.1 ms / image)
 
 ==================================================
-Evaluating Student (dim=8) | Parameters: 551,282
+Evaluating Student (dim=8) | Parameters: 223,475
 ==================================================
 Results for Student (dim=8):
-Avg PSNR:  40.4263 dB
-Avg LPIPS: 0.5217
-Speed:     8.64 FPS (115.7 ms / image)
+Avg PSNR:  37.6441 dB
+Avg LPIPS: 0.5698
+Speed:     25.57 FPS (39.1 ms / image)
 
 >>> Running Evaluation for Alpha = 3 <<<
 
@@ -32,17 +27,17 @@ Speed:     8.64 FPS (115.7 ms / image)
 Evaluating Teacher (dim=32) | Parameters: 19,529,830
 ==================================================
 Results for Teacher (dim=32):
-Avg PSNR:  35.6655 dB
-Avg LPIPS: 0.3809
-Speed:     1.04 FPS (958.4 ms / image)
+Avg PSNR:  35.6705 dB
+Avg LPIPS: 0.3417
+Speed:     1.12 FPS (894.4 ms / image)
 
 ==================================================
-Evaluating Student (dim=8) | Parameters: 551,282
+Evaluating Student (dim=8) | Parameters: 223,475
 ==================================================
 Results for Student (dim=8):
-Avg PSNR:  34.8992 dB
-Avg LPIPS: 0.4236
-Speed:     8.70 FPS (114.9 ms / image)
+Avg PSNR:  32.1220 dB
+Avg LPIPS: 0.4814
+Speed:     26.87 FPS (37.2 ms / image)
 
 >>> Running Evaluation for Alpha = full <<<
 
@@ -50,14 +45,14 @@ Speed:     8.70 FPS (114.9 ms / image)
 Evaluating Teacher (dim=32) | Parameters: 19,529,830
 ==================================================
 Results for Teacher (dim=32):
-Avg PSNR:  32.4275 dB
-Avg LPIPS: 0.3148
-Speed:     1.04 FPS (960.5 ms / image)
+Avg PSNR:  32.5258 dB
+Avg LPIPS: 0.2931
+Speed:     1.05 FPS (951.5 ms / image)
 
 ==================================================
-Evaluating Student (dim=8) | Parameters: 551,282
+Evaluating Student (dim=8) | Parameters: 223,475
 ==================================================
 Results for Student (dim=8):
-Avg PSNR:  31.4866 dB
-Avg LPIPS: 0.3610
-Speed:     8.74 FPS (114.4 ms / image)
+Avg PSNR:  28.6302 dB
+Avg LPIPS: 0.4162
+Speed:     26.72 FPS (37.4 ms / image)

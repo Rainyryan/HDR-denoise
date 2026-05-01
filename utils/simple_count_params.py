@@ -10,6 +10,7 @@ import sys
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from HDR_model_switch import HDR_model
+from HDR_model_hybrid_student import Hybrid_Student_HDR
 
 
 def count_and_print(model, model_name="Model", log_file=None):
@@ -44,7 +45,7 @@ if __name__ == "__main__":
 	
 	# Count lightweight model
 	print("Counting Lightweight Model...")
-	model_light = HDR_model(dim=8, num_blocks=[2,2,2,1])
+	model_light = Hybrid_Student_HDR(dim=8, num_blocks=[2,2,2,1], num_refinement_blocks=2, heads=[1,2,4,8])
 	count_and_print(model_light, "Lightweight HDR Model", "params_log.txt")
 	
 	# Calculate reduction

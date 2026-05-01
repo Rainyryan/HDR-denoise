@@ -68,9 +68,9 @@ def evaluate_model(model, model_name, samples, device, loss_fn_vgg, nbits, patch
         pd1 = 8; pd2 = pd1*2
         ii_idx = 0
         
-        # Start timing the entire image reconstruction using perf_counter
+        # Start timing the entire image reconstruction
         torch.cuda.synchronize()
-        start_time = time.perf_counter()
+        start_time = time.time()
         
         for ii in range(0, H, patch_sz-pd2):
             jj_idx = 0
@@ -93,9 +93,9 @@ def evaluate_model(model, model_name, samples, device, loss_fn_vgg, nbits, patch
                 jj_idx += 1
             ii_idx += 1
 
-        # End timing using perf_counter
+        # End timing
         torch.cuda.synchronize()
-        total_time += (time.perf_counter() - start_time)
+        total_time += (time.time() - start_time)
         
         y_pred = torch.tensor(y_pred[np.newaxis,...], dtype=torch.float).to(device)
         y = torch.tensor(y[np.newaxis,...], dtype=torch.float).to(device)
@@ -117,11 +117,6 @@ def evaluate_model(model, model_name, samples, device, loss_fn_vgg, nbits, patch
             # we scale to 255. Adjust if your 'xm' scale differs.
             noisy_img = np.clip(noisy_img * 255, 0, 255).astype(np.uint8)
             cv2.imwrite(os.path.join(output_dir, f"{i}_noisy_input.png"), noisy_img)
-            
-            # Save Noisy Input
-            noisy_img = np.transpose(x[0].detach().cpu().numpy(), [1, 2, 0])[:, :, ::-1]
-            noisy_img = np.clip(hdr_tonemap_np(noisy_img) * 255, 0, 255).astype(np.uint8)
-            cv2.imwrite(os.path.join(output_dir, f"{i}_tonemap_noisy.png"), noisy_img)
 
             # Save Prediction
             pred_img = np.transpose(y_pred[0].detach().cpu().numpy(), [1, 2, 0])[:, :, ::-1]
@@ -140,9 +135,7 @@ def evaluate_model(model, model_name, samples, device, loss_fn_vgg, nbits, patch
     avg_psnr = running_psnr / num_samples
     avg_lpips = running_lpips / num_samples
     avg_time = total_time / num_samples
-    
-    # Safeguard against division by zero just in case
-    fps = 1.0 / avg_time if avg_time > 0 else 0.0
+    fps = 1.0 / avg_time
 
     print(f"Results for {model_name}:")
     print(f"Avg PSNR:  {avg_psnr:.4f} dB")
@@ -184,7 +177,7 @@ if __name__ == "__main__":
     print("Loading Student...")
     # student_model = HDR_model(dim=student_dim, num_blocks=[2,2,2,1]) 
     student_model = Hybrid_Student_HDR(dim=student_dim, num_blocks=[2,2,2,1], num_refinement_blocks=2, heads=[1,2,4,8])
-    student_ckpt = "./distill_models_20260422_152723/preexpand_hdr_best.pth"
+    student_ckpt = "./distill_models_20260420_173301/preexpand_hdr_best.pth"
     if os.path.exists(student_ckpt):
         student_model.load_state_dict(torch.load(student_ckpt)['student_state_dict'])
     else:
@@ -202,3 +195,4 @@ if __name__ == "__main__":
         alpha_folder = f"eval_results_alpha_{alpha}"
         evaluate_model(teacher_model, f"Teacher (dim={teacher_dim})", samples, device, loss_fn_vgg, nbits, patch_sz, output_dir=alpha_folder)
         evaluate_model(student_model, f"Student (dim={student_dim})", samples, device, loss_fn_vgg, nbits, patch_sz, output_dir=alpha_folder)
+        

@@ -1,0 +1,186 @@
+Profiling on: cuda:0
+Successfully loaded checkpoint: ./distill_models_20260406_160037/preexpand_hdr_best.pth
+
+==================================================
+Running FLOP Analysis (fvcore)...
+==================================================
+| module                          | #parameters or shape   | #flops   |
+|:--------------------------------|:-----------------------|:---------|
+| model                           | 0.551M                 | 8.572G   |
+| patch_embed                     | 0.864K                 | 56.623M  |
+| patch_embed.weight              | (8, 12, 3, 3)          |          |
+| encoder_level_1                 | 2.774K                 | 0.194G   |
+| encoder_level_1.0               | 1.387K                 | 97.124M  |
+| encoder_level_1.0.norm1         | 16                     | 0        |
+| encoder_level_1.0.attn          | 0.473K                 | 39.322M  |
+| encoder_level_1.0.norm2         | 16                     | 0        |
+| encoder_level_1.0.ffn           | 0.882K                 | 57.803M  |
+| encoder_level_1.1               | 1.387K                 | 97.124M  |
+| encoder_level_1.1.norm1         | 16                     | 0        |
+| encoder_level_1.1.attn          | 0.473K                 | 39.322M  |
+| encoder_level_1.1.norm2         | 16                     | 0        |
+| encoder_level_1.1.ffn           | 0.882K                 | 57.803M  |
+| x_expo_1                        | 16.241K                | 0.679G   |
+| x_expo_1.dfconv1                | 3.123K                 | 0.127G   |
+| x_expo_1.dfconv1.offset_conv    | 1.314K                 | 84.935M  |
+| x_expo_1.dfconv1.modulator_conv | 0.657K                 | 42.467M  |
+| x_expo_1.dfconv1.regular_conv   | 1.152K                 |          |
+| x_expo_1.dfconv2                | 6.219K                 | 0.255G   |
+| x_expo_1.dfconv2.offset_conv    | 2.61K                  | 0.17G    |
+| x_expo_1.dfconv2.modulator_conv | 1.305K                 | 84.935M  |
+| x_expo_1.dfconv2.regular_conv   | 2.304K                 |          |
+| x_expo_1.dfconv3                | 6.219K                 | 0.255G   |
+| x_expo_1.dfconv3.offset_conv    | 2.61K                  | 0.17G    |
+| x_expo_1.dfconv3.modulator_conv | 1.305K                 | 84.935M  |
+| x_expo_1.dfconv3.regular_conv   | 2.304K                 |          |
+| x_expo_1.conv1                  | 0.272K                 | 16.777M  |
+| x_expo_1.conv1.weight           | (16, 16, 1, 1)         |          |
+| x_expo_1.conv1.bias             | (16,)                  |          |
+| x_expo_1.conv2                  | 0.272K                 | 16.777M  |
+| x_expo_1.conv2.weight           | (16, 16, 1, 1)         |          |
+| x_expo_1.conv2.bias             | (16,)                  |          |
+| x_expo_1.conv3                  | 0.136K                 | 8.389M   |
+| x_expo_1.conv3.weight           | (8, 16, 1, 1)          |          |
+| x_expo_1.conv3.bias             | (8,)                   |          |
+| encoder_level_2                 | 29.564K                | 0.497G   |
+| encoder_level_2.0               | 14.782K                | 0.248G   |
+| encoder_level_2.0.norm1         | 64                     | 0        |
+| encoder_level_2.0.attn          | 4.964K                 | 89.653M  |
+| encoder_level_2.0.norm2         | 64                     | 0        |
+| encoder_level_2.0.ffn           | 9.69K                  | 0.159G   |
+| encoder_level_2.1               | 14.782K                | 0.248G   |
+| encoder_level_2.1.norm1         | 64                     | 0        |
+| encoder_level_2.1.attn          | 4.964K                 | 89.653M  |
+| encoder_level_2.1.norm2         | 64                     | 0        |
+| encoder_level_2.1.ffn           | 9.69K                  | 0.159G   |
+| x_expo_2                        | 0.142M                 | 0.805G   |
+| x_expo_2.dfconv1                | 26.235K                | 0.127G   |
+| x_expo_2.dfconv1.offset_conv    | 5.202K                 | 84.935M  |
+| x_expo_2.dfconv1.modulator_conv | 2.601K                 | 42.467M  |
+| x_expo_2.dfconv1.regular_conv   | 18.432K                |          |
+| x_expo_2.dfconv2                | 52.443K                | 0.255G   |
+| x_expo_2.dfconv2.offset_conv    | 10.386K                | 0.17G    |
+| x_expo_2.dfconv2.modulator_conv | 5.193K                 | 84.935M  |
+| x_expo_2.dfconv2.regular_conv   | 36.864K                |          |
+| x_expo_2.dfconv3                | 52.443K                | 0.255G   |
+| x_expo_2.dfconv3.offset_conv    | 10.386K                | 0.17G    |
+| x_expo_2.dfconv3.modulator_conv | 5.193K                 | 84.935M  |
+| x_expo_2.dfconv3.regular_conv   | 36.864K                |          |
+| x_expo_2.conv1                  | 4.16K                  | 67.109M  |
+| x_expo_2.conv1.weight           | (64, 64, 1, 1)         |          |
+| x_expo_2.conv1.bias             | (64,)                  |          |
+| x_expo_2.conv2                  | 4.16K                  | 67.109M  |
+| x_expo_2.conv2.weight           | (64, 64, 1, 1)         |          |
+| x_expo_2.conv2.bias             | (64,)                  |          |
+| x_expo_2.conv3                  | 2.08K                  | 33.554M  |
+| x_expo_2.conv3.weight           | (32, 64, 1, 1)         |          |
+| x_expo_2.conv3.bias             | (32,)                  |          |
+| latent.0                        | 0.206M                 | 0.859G   |
+| latent.0.norm1                  | 0.256K                 | 0        |
+| latent.0.norm1.weight           | (1, 128, 1, 1)         |          |
+| latent.0.norm1.bias             | (1, 128, 1, 1)         |          |
+| latent.0.attn                   | 69K                    | 0.299G   |
+| latent.0.attn.temperature       | (8, 1, 1)              |          |
+| latent.0.attn.qkv               | 49.152K                | 0.201G   |
+| latent.0.attn.qkv_dwconv        | 3.456K                 | 14.156M  |
+| latent.0.attn.project_out       | 16.384K                | 67.109M  |
+| latent.0.norm2                  | 0.256K                 | 0        |
+| latent.0.norm2.weight           | (1, 128, 1, 1)         |          |
+| latent.0.norm2.bias             | (1, 128, 1, 1)         |          |
+| latent.0.ffn                    | 0.137M                 | 0.56G    |
+| latent.0.ffn.project_in         | 87.04K                 | 0.357G   |
+| latent.0.ffn.dwconv             | 6.12K                  | 25.068M  |
+| latent.0.ffn.project_out        | 43.52K                 | 0.178G   |
+| latent_fusion                   | 16.384K                | 67.109M  |
+| latent_fusion.weight            | (128, 128, 1, 1)       |          |
+| decoder_level_2                 | 0.108M                 | 1.83G    |
+| decoder_level_2.0               | 54.072K                | 0.915G   |
+| decoder_level_2.0.norm1         | 0.128K                 | 0        |
+| decoder_level_2.0.attn          | 18.116K                | 0.33G    |
+| decoder_level_2.0.norm2         | 0.128K                 | 0        |
+| decoder_level_2.0.ffn           | 35.7K                  | 0.585G   |
+| decoder_level_2.1               | 54.072K                | 0.915G   |
+| decoder_level_2.1.norm1         | 0.128K                 | 0        |
+| decoder_level_2.1.attn          | 18.116K                | 0.33G    |
+| decoder_level_2.1.norm2         | 0.128K                 | 0        |
+| decoder_level_2.1.ffn           | 35.7K                  | 0.585G   |
+| reduce_chan_level_2             | 2.048K                 | 33.554M  |
+| reduce_chan_level_2.weight      | (32, 64, 1, 1)         |          |
+| decoder_level_1                 | 8.588K                 | 0.588G   |
+| decoder_level_1.0               | 4.294K                 | 0.294G   |
+| decoder_level_1.0.norm1         | 32                     | 0        |
+| decoder_level_1.0.attn          | 1.458K                 | 0.112G   |
+| decoder_level_1.0.norm2         | 32                     | 0        |
+| decoder_level_1.0.ffn           | 2.772K                 | 0.182G   |
+| decoder_level_1.1               | 4.294K                 | 0.294G   |
+| decoder_level_1.1.norm1         | 32                     | 0        |
+| decoder_level_1.1.attn          | 1.458K                 | 0.112G   |
+| decoder_level_1.1.norm2         | 32                     | 0        |
+| decoder_level_1.1.ffn           | 2.772K                 | 0.182G   |
+| decoder_level_0                 | 17.172K                | 2.485G   |
+| decoder_level_0.0               | 4.293K                 | 0.621G   |
+| decoder_level_0.0.norm1         | 32                     | 0        |
+| decoder_level_0.0.attn          | 1.457K                 | 0.258G   |
+| decoder_level_0.0.norm2         | 32                     | 0        |
+| decoder_level_0.0.ffn           | 2.772K                 | 0.363G   |
+| decoder_level_0.1               | 4.293K                 | 0.621G   |
+| decoder_level_0.1.norm1         | 32                     | 0        |
+| decoder_level_0.1.attn          | 1.457K                 | 0.258G   |
+| decoder_level_0.1.norm2         | 32                     | 0        |
+| decoder_level_0.1.ffn           | 2.772K                 | 0.363G   |
+| decoder_level_0.2               | 4.293K                 | 0.621G   |
+| decoder_level_0.2.norm1         | 32                     | 0        |
+| decoder_level_0.2.attn          | 1.457K                 | 0.258G   |
+| decoder_level_0.2.norm2         | 32                     | 0        |
+| decoder_level_0.2.ffn           | 2.772K                 | 0.363G   |
+| decoder_level_0.3               | 4.293K                 | 0.621G   |
+| decoder_level_0.3.norm1         | 32                     | 0        |
+| decoder_level_0.3.attn          | 1.457K                 | 0.258G   |
+| decoder_level_0.3.norm2         | 32                     | 0        |
+| decoder_level_0.3.ffn           | 2.772K                 | 0.363G   |
+| refinement_trans                | 0.978K                 | 0.264G   |
+| refinement_trans.0              | 0.489K                 | 0.132G   |
+| refinement_trans.0.norm1        | 8                      | 0        |
+| refinement_trans.0.attn         | 0.173K                 | 53.477M  |
+| refinement_trans.0.norm2        | 8                      | 0        |
+| refinement_trans.0.ffn          | 0.3K                   | 78.643M  |
+| refinement_trans.1              | 0.489K                 | 0.132G   |
+| refinement_trans.1.norm1        | 8                      | 0        |
+| refinement_trans.1.attn         | 0.173K                 | 53.477M  |
+| refinement_trans.1.norm2        | 8                      | 0        |
+| refinement_trans.1.ffn          | 0.3K                   | 78.643M  |
+| refinement_conv                 | 0.8K                   | 0.21G    |
+| refinement_conv.0               | 0.4K                   | 0.105G   |
+| refinement_conv.0.weight        | (4, 4, 5, 5)           |          |
+| refinement_conv.1               | 0.4K                   | 0.105G   |
+| refinement_conv.1.weight        | (4, 4, 5, 5)           |          |
+| reduce_chan_final               | 12                     | 3.146M   |
+| reduce_chan_final.weight        | (3, 4, 1, 1)           |          |
+
+==================================================
+Running Latency Trace (torch.profiler)...
+==================================================
+-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  
+                                                   Name    Self CPU %      Self CPU   CPU total %     CPU total  CPU time avg       CPU Mem  Self CPU Mem      CUDA Mem  Self CUDA Mem    # of Calls  
+-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  
+                                student_model_inference        14.05%       8.274ms        56.60%      33.330ms      33.330ms           0 b          24 b     -64.50 Kb      -2.71 Gb             1  
+                                  aten::pixel_unshuffle         1.59%     938.000us         9.49%       5.589ms       1.863ms           0 b           0 b       7.00 Mb           0 b             3  
+                                          aten::reshape         0.29%     168.000us         0.36%     210.000us       1.193us           0 b           0 b           0 b           0 b           176  
+                                             aten::view         0.08%      46.000us         0.08%      46.000us       0.186us           0 b           0 b           0 b           0 b           247  
+                                          aten::permute         0.02%      13.000us         0.02%      14.000us       2.333us           0 b           0 b           0 b           0 b             6  
+                                       aten::as_strided         0.02%      11.000us         0.02%      11.000us       0.037us           0 b           0 b           0 b           0 b           300  
+                                            aten::clone         0.82%     484.000us         7.97%       4.695ms     782.500us           0 b           0 b      15.00 Mb           0 b             6  
+                                       aten::empty_like         1.01%     595.000us         6.86%       4.042ms     673.667us           0 b           0 b      15.00 Mb           0 b             6  
+                                            aten::empty         6.14%       3.618ms         6.14%       3.618ms      33.500us           0 b           0 b     243.00 Mb     243.00 Mb           108  
+                                            aten::copy_         0.12%      69.000us         0.47%     277.000us      15.389us           0 b           0 b           0 b           0 b            18  
+                                       cudaLaunchKernel        10.58%       6.229ms        10.58%       6.229ms       7.532us           0 b           0 b           0 b           0 b           827  
+                                           aten::conv2d         0.57%     337.000us        12.66%       7.455ms      54.022us           0 b           0 b       1.25 Gb      31.19 Mb           138  
+                                      aten::convolution         0.86%     507.000us        12.21%       7.192ms      52.116us           0 b           0 b       1.25 Gb      85.25 Mb           138  
+                                     aten::_convolution         2.62%       1.541ms        11.71%       6.894ms      49.957us           0 b           0 b       1.25 Gb    -104.00 Mb           138  
+                                aten::cudnn_convolution         3.37%       1.982ms         7.42%       4.370ms      43.700us           0 b           0 b     869.25 Mb     869.25 Mb           100  
+-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  
+Self CPU time total: 58.885ms
+
+
+Trace saved to student_profile_trace.json
+Open Google Chrome and navigate to: chrome://tracing to view the timeline.

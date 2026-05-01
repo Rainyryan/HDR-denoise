@@ -1,0 +1,18 @@
+Datetime: 20260403_171238
+
+Teacher: dim=32, num_blocks=[4,4,4,4], Trained for 200 epochs
+Student: dim=4, num_blocks=[2,2,2,1]
+
+Distillation Training: 300 epochs
+
+
+Distilled with:
+
+aligned_s_maps = {
+    "x_level1": self.align_x_level1(s_maps["x_level1"]),
+    "x_level2": self.align_x_level2(s_maps["x_level2"]),
+    "x_latent": self.align_x_latent(s_maps["x_latent"]),
+    "w_level2": self.align_w_level2(s_maps["w_level2"]),
+    "w_level1": self.align_w_level1(s_maps["w_level1"]),
+    "w_level0_refined": self.align_w_level0_refined(s_maps["w_level0_refined"])
+}

@@ -15,9 +15,20 @@ class RestormerDistiller(nn.Module):
         
         # 2. Alignment layers (Student features -> Teacher dimensions) using 1x1 convolutions
         self.align_x_level1 = nn.Conv2d(student_dim, teacher_dim, kernel_size=1)
-        self.align_x_level2 = nn.Conv2d(student_dim * 4, teacher_dim * 4, kernel_size=1)
-        self.align_x_latent = nn.Conv2d(student_dim * 16, teacher_dim * 16, kernel_size=1)
+        self.align_x_level2 = nn.Conv2d(student_dim*4, teacher_dim*4, kernel_size=1)
+        self.align_x_latent = nn.Conv2d(student_dim*16, teacher_dim*16, kernel_size=1)
+        self.align_w_level2 = nn.Conv2d(student_dim*4, teacher_dim*4, kernel_size=1)
+        self.align_w_level1 = nn.Conv2d(student_dim*2, teacher_dim*2, kernel_size=1)
+        self.align_w_level0_refined = nn.Conv2d(student_dim//2, teacher_dim//2, kernel_size=1)
         
+    def train(self, mode=True):
+        """
+        Override the default train() method to ensure the teacher 
+        ALWAYS remains in eval mode, even when the distiller is set to train.
+        """
+        super().train(mode)
+        self.teacher.eval()   
+ 
     def forward(self, x):
         # Get Teacher features (No gradients needed)
         with torch.no_grad():
@@ -30,7 +41,10 @@ class RestormerDistiller(nn.Module):
         aligned_s_maps = {
             "x_level1": self.align_x_level1(s_maps["x_level1"]),
             "x_level2": self.align_x_level2(s_maps["x_level2"]),
-            "x_latent": self.align_x_latent(s_maps["x_latent"])
+            "x_latent": self.align_x_latent(s_maps["x_latent"]),
+            "w_level2": self.align_w_level2(s_maps["w_level2"]),
+            "w_level1": self.align_w_level1(s_maps["w_level1"]),
+            "w_level0_refined": self.align_w_level0_refined(s_maps["w_level0_refined"])
         }
         
         return s_out, t_out, aligned_s_maps, t_maps

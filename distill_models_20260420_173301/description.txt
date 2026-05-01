@@ -1,0 +1,2 @@
+Teacher: dim=32, num_blocks=[4,4,4,4], num_refinement_blocks=4, Trained for 800 epochs
+Student: dim=8, num_blocks=[2,2,2,1], num_refinement_blocks=2, Trained from 639 to 1000 epochs

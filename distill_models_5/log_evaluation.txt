@@ -1,9 +1,8 @@
-Datetime: 20260403
-
 Teacher: dim=32, num_blocks=[4,4,4,4], Trained for 200 epochs
-Student: dim=8, num_blocks=[2,2,2,1]
+Student: dim=4, num_blocks=[2,2,2,1]
 
 Distillation Training: 300 epochs
+
 
 Loading Teacher...
 Loading Student...
@@ -14,17 +13,17 @@ Loading Student...
 Evaluating Teacher (dim=32) | Parameters: 19,529,830
 ==================================================
 Results for Teacher (dim=32):
-Avg PSNR:  41.2184 dB
+Avg PSNR:  41.2184 dB
 Avg LPIPS: 0.4765
-Speed:     1.31 FPS (764.3 ms / image)
+Speed:     1.23 FPS (815.2 ms / image)
 
 ==================================================
-Evaluating Student (dim=8) | Parameters: 551,282
+Evaluating Student (dim=4) | Parameters: 158,940
 ==================================================
-Results for Student (dim=8):
-Avg PSNR:  40.4263 dB
-Avg LPIPS: 0.5217
-Speed:     8.64 FPS (115.7 ms / image)
+Results for Student (dim=4):
+Avg PSNR:  38.8726 dB
+Avg LPIPS: 0.6154
+Speed:     11.74 FPS (85.2 ms / image)
 
 >>> Running Evaluation for Alpha = 3 <<<
 
@@ -32,17 +31,17 @@ Speed:     8.64 FPS (115.7 ms / image)
 Evaluating Teacher (dim=32) | Parameters: 19,529,830
 ==================================================
 Results for Teacher (dim=32):
-Avg PSNR:  35.6655 dB
+Avg PSNR:  35.6655 dB
 Avg LPIPS: 0.3809
-Speed:     1.04 FPS (958.4 ms / image)
+Speed:     0.98 FPS (1020.5 ms / image)
 
 ==================================================
-Evaluating Student (dim=8) | Parameters: 551,282
+Evaluating Student (dim=4) | Parameters: 158,940
 ==================================================
-Results for Student (dim=8):
-Avg PSNR:  34.8992 dB
-Avg LPIPS: 0.4236
-Speed:     8.70 FPS (114.9 ms / image)
+Results for Student (dim=4):
+Avg PSNR:  34.0373 dB
+Avg LPIPS: 0.5182
+Speed:     12.42 FPS (80.5 ms / image)
 
 >>> Running Evaluation for Alpha = full <<<
 
@@ -50,14 +49,14 @@ Speed:     8.70 FPS (114.9 ms / image)
 Evaluating Teacher (dim=32) | Parameters: 19,529,830
 ==================================================
 Results for Teacher (dim=32):
-Avg PSNR:  32.4275 dB
+Avg PSNR:  32.4275 dB
 Avg LPIPS: 0.3148
-Speed:     1.04 FPS (960.5 ms / image)
+Speed:     0.99 FPS (1007.1 ms / image)
 
 ==================================================
-Evaluating Student (dim=8) | Parameters: 551,282
+Evaluating Student (dim=4) | Parameters: 158,940
 ==================================================
-Results for Student (dim=8):
-Avg PSNR:  31.4866 dB
-Avg LPIPS: 0.3610
-Speed:     8.74 FPS (114.4 ms / image)
+Results for Student (dim=4):
+Avg PSNR:  30.9518 dB
+Avg LPIPS: 0.4387
+Speed:     12.29 FPS (81.4 ms / image)
