@@ -1,0 +1,39 @@
+{
+  "os": "Linux-6.6.114.1-microsoft-standard-WSL2-x86_64-with-glibc2.35",
+  "python": "CPython 3.12.2",
+  "startedAt": "2026-05-18T10:19:10.972912Z",
+  "program": "/mnt/c/Users/rc615/Documents/GitHub/_HDR-denoise/train_HDR_dual_student_wandb.py",
+  "codePath": "train_HDR_dual_student_wandb.py",
+  "codePathLocal": "train_HDR_dual_student_wandb.py",
+  "git": {
+    "remote": "https://github.com/Rainyryan/HDR-denoise.git",
+    "commit": "901bc6415b974aded5362dd24f724d0bdfea3017"
+  },
+  "email": "rc6150@gmail.com",
+  "root": "/mnt/c/Users/rc615/Documents/GitHub/_HDR-denoise",
+  "host": "RyanPC",
+  "executable": "/home/ryan/miniconda3/envs/dl/bin/python",
+  "cpu_count": 12,
+  "cpu_count_logical": 24,
+  "gpu": "NVIDIA GeForce RTX 3080",
+  "gpu_count": 1,
+  "disk": {
+    "/": {
+      "total": "1081101176832",
+      "used": "49386397696"
+    }
+  },
+  "memory": {
+    "total": "16322174976"
+  },
+  "gpu_nvidia": [
+    {
+      "name": "NVIDIA GeForce RTX 3080",
+      "memoryTotal": "10737418240",
+      "architecture": "Ampere",
+      "uuid": "GPU-bc14217f-d09c-14bf-6d31-04b7968b1542"
+    }
+  ],
+  "cudaVersion": "13.2",
+  "writerId": "we6gleybsq3n2s3ezjs8pzo9vo7ol5eo"
+}

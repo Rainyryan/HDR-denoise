@@ -1,0 +1,23 @@
+==========================================================
+               DUAL MOE TRAINING SESSION                  
+==========================================================
+Date/Time: 2026-05-18 06:19:13
+
+--- PATHS ---
+Save Folder:     models_MoE_hybrid_student_20260518_0442/
+Pretrained Path: ./distill_models_20260518_0442/preexpand_hdr_best.pth
+
+--- HYPERPARAMETERS ---
+Model Base:      Hybrid_Student_HDR (dim=8, blocks=[2,2,2,1], refine=2, heads=[1,2,4,8])
+Total Epochs:    500
+Batch Size:      8
+Base LR:         0.0002
+Optimizer:       Adam
+Expand Mode @:   999
+Loss Weights:    L2 Main (1.0), Perceptual (0.01), Aux (0.5)
+
+Total params = 446950
+
+==========================================================
+
+Epoch #11: Loss =       0.0007 		PSNR = 33.55	(Time: 23.858465)Epoch #12: Loss =       0.0007 		PSNR = 33.67	(Time: 20.676393)Epoch #13: Loss =       0.0006 		PSNR = 33.81	(Time: 22.582468)Epoch #14: Loss =       0.0006 		PSNR = 33.91	(Time: 22.512668)Epoch #15: Loss =       0.0006 		PSNR = 33.93	(Time: 21.226230)Epoch #16: Loss =       0.0006 		PSNR = 34.11	(Time: 22.489185)Epoch #17: Loss =       0.0006 		PSNR = 34.13	(Time: 21.485863)Epoch #18: Loss =       0.0006 		PSNR = 34.26	(Time: 21.649654)Epoch #19: Loss =       0.0006 		PSNR = 34.28	(Time: 22.871102)Epoch #20: Loss =       0.0006 		PSNR = 34.35	(Time: 20.651874)Epoch #21: Loss =       0.0006 		PSNR = 34.40	(Time: 25.366617)Epoch #22: Loss =       0.0006 		PSNR = 34.46	(Time: 24.210948)Epoch #23: Loss =       0.0007 		PSNR = 34.38	(Time: 24.994893)Epoch #24: Loss =       0.0007 		PSNR = 34.38	(Time: 25.126947)Epoch #25: Loss =       0.0006 		PSNR = 34.51	(Time: 24.936142)Epoch #26: Loss =       0.0006 		PSNR = 34.57	(Time: 24.135492)Epoch #27: Loss =       0.0006 		PSNR = 34.64	(Time: 22.904544)Epoch #28: Loss =       0.0006 		PSNR = 34.62	(Time: 20.593725)Epoch #29: Loss =       0.0006 		PSNR = 34.70	(Time: 22.102326)Epoch #30: Loss =       0.0006 		PSNR = 34.63	(Time: 21.794011)Epoch #31: Loss =       0.0006 		PSNR = 34.67	(Time: 23.856705)Epoch #32: Loss =       0.0006 		PSNR = 34.69	(Time: 22.096824)Epoch #33: Loss =       0.0006 		PSNR = 34.74	(Time: 20.348462)Epoch #34: Loss =       0.0006 		PSNR = 34.72	(Time: 22.337847)Epoch #35: Loss =       0.0006 		PSNR = 34.67	(Time: 22.841286)

@@ -255,83 +255,29 @@ class HDR_model(nn.Module):
                 
             return output
 
+class DualSNRDenoiser(nn.Module):
+    def __init__(self, **kwargs):
+        super(DualSNRDenoiser, self).__init__()
+        # Expert 1: Specializes in Low SNR (High Noise) regions
+        self.denoiser_low_snr = HDR_model(**kwargs)
+        
+        # Expert 2: Specializes in High SNR (Low Noise) regions
+        self.denoiser_high_snr = HDR_model(**kwargs)
 
-    # def forward(self, x, return_maps=False, return_transposed_attn=False):
-    #     # x: B x 1 x H x W
-        
-    #     # Dictionary to store the C x C transposed attention maps
-    #     t_attn_maps = {}
+    def forward(self, x, snr_map):
+        """
+        x: [B, C, H, W] noisy input
+        snr_map: [B, 1, H, W] normalized between 0 and 1.
+                 0 = extremely noisy (low SNR), 1 = clean (high SNR)
+        """
+        out_low = self.denoiser_low_snr(x)
+        out_high = self.denoiser_high_snr(x)
 
-    #     # Encoder level 0
-    #     x_shuffled = self.demosaic_unshuffle(x); 			# B x 12 x H/2 x W/2
-    #     x_level1 = self.patch_embed(x_shuffled); 			# B x C x H/2 x W/2
-
-    #     # Encoder level 1
-    #     x_level1 = self.encoder_level_1(x_level1); 			# B x C x H/2 x W/2
-    #     x_level1 = self.x_expo_1(x_level1); 				# B x C x H/2 x W/2
-
-    #     # Encoder level 2
-    #     x_level2 = self.down_unshuffle_1_2(x_level1);		# B x 4C x H/4 x W/4
-    #     x_level2 = self.encoder_level_2(x_level2); 			# B x 4C x H/4 x W/4
-    #     x_level2 = self.x_expo_2(x_level2); 				# B x 4C x H/4 x W/4
-
-    #     # # Encoder level latent
-    #     # x_latent = self.down_unshuffle_2_3(x_level2); 		# B x 8C x H/8 x W/8
-    #     # x_latent = self.latent(x_latent); 					# B x 8C x H/8 x W/8
-    #     # x_latent = self.latent_fusion(x_latent); 			# B x 8C x H/8 x W/8
+        # Soft Blend: The SNR map dictates which model's output to trust for each pixel.
+        # If snr_map is near 0, weight leans heavily toward out_low.
+        # If snr_map is near 1, weight leans heavily toward out_high.
+        blended_out = (1.0 - snr_map) * out_low + snr_map * out_high
         
-    #     # ======== Latent Stage (Bottleneck) ========
-    #     x_latent = self.down_unshuffle_2_3(x_level2)
-        
-    #     if return_transposed_attn:
-    #         # Manually run all but the last block
-    #         for i in range(len(self.latent) - 1):
-    #             x_latent = self.latent[i](x_latent)
-    #         # Extract map from the final block in the latent sequence
-    #         x_latent, attn_map = self.latent[-1](x_latent, return_attn=True)
-    #         t_attn_maps["latent"] = attn_map
-    #     else:
-    #         x_latent = self.latent(x_latent)
-            
-    #     x_latent = self.latent_fusion(x_latent)
-        
-        
-        
-
-    #     # Decoder level 2
-    #     w_level2 = self.up_shuffle_3_2(x_latent); 			# B x 4C x H/4 x W/4
-    #     w_level2 = torch.cat([w_level2, x_level2], dim=1); 	# B x 8C x H/4 x W/4
-    #     w_level2 = self.decoder_level_2(w_level2); 			# B x 8C x H/4 x W/4
-    #     w_level2 = self.reduce_chan_level_2(w_level2); 		# B x 4C x H/4 x W/4
-
-    #     # Decoder level 1.5
-    #     w_level1 = self.up_shuffle_2_1(w_level2); 			# B x C x H/2 x W/2
-    #     w_level1 = torch.cat([w_level1, x_level1], dim=1); 	# B x 2C x H/2 x W/2
-    #     w_level1 = self.decoder_level_1(w_level1); 			# B x 2C x H/2 x W/2
-
-    #     # Decoder level 0
-    #     w_level0 = self.decoder_level_0(w_level1); 			# B x 2C x H/2 x W/2
-    #     w_level0 = self.up_shuffle_1_0(w_level0); 			# B x C/2 x H x W
-        
-    #     # Refinement
-    #     w_level0 = self.refinement_trans(w_level0); 		# B x C/2 x H x W
-    #     w_level0 = self.refinement_conv(w_level0); 			# B x C/2 x H x W
-    #     w_out = self.reduce_chan_final(w_level0) + x; 		# B x 3 x H x W
-        
-    #     output = w_out.clamp(min=1/(2**20-1))
-        
-    #     if return_maps:
-    #         return output, {
-    #             "x_level1": x_level1,
-    #             "x_level2": x_level2,
-    #             "x_latent": x_latent,
-    #             "w_level2": w_level2,
-    #             "w_level1": w_level1,
-    #             "w_level0_refined": w_level0
-    #         }
-            
-    #     if return_transposed_attn:
-    #         return output, t_attn_maps
-    #     return output
+        return blended_out, out_low, out_high
         
 
