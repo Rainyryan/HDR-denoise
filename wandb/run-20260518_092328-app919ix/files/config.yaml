@@ -1,0 +1,140 @@
+_wandb:
+    value:
+        cli_version: 0.27.0
+        e:
+            7y2gkhcolabujh7ixhwa2pquufega3e7:
+                codePath: train_A100_MoE.py
+                codePathLocal: train_A100_MoE.py
+                cpu_count: 64
+                cpu_count_logical: 64
+                cudaVersion: "13.1"
+                disk:
+                    /:
+                        total: "270307360768"
+                        used: "18021924864"
+                email: rc6150@gmail.com
+                executable: /home/chen4848/.conda/envs/2025.06-py313/dl/bin/python
+                git:
+                    commit: 149cca777211628bcd28deb71e303aa2dc5bcb29
+                    remote: git@github.com:Rainyryan/HDR-denoise.git
+                gpu: NVIDIA A100 80GB PCIe
+                gpu_count: 1
+                gpu_nvidia:
+                    - architecture: Ampere
+                      cudaCores: 6912
+                      memoryTotal: "85899345920"
+                      name: NVIDIA A100 80GB PCIe
+                      uuid: GPU-e3b6afe0-5bb0-0bed-ffd1-221aaa52f817
+                host: gilbreth-k011.rcac.purdue.edu
+                memory:
+                    total: "540614725632"
+                os: Linux-5.14.0-611.16.1.el9_7.x86_64-x86_64-with-glibc2.34
+                program: /scratch/gilbreth/chen4848/HDR-denoise/train_A100_MoE.py
+                python: CPython 3.12.2
+                root: /scratch/gilbreth/chen4848/HDR-denoise
+                slurm:
+                    cluster_name: gilbreth
+                    conf: /var/spool/slurm/conf-cache/slurm.conf
+                    cpus_on_node: "8"
+                    cpus_per_task: "8"
+                    gpus_on_node: "1"
+                    gtids: "0"
+                    job_account: stanchan
+                    job_cpus_per_node: "8"
+                    job_end_time: "1779139404"
+                    job_gid: "132"
+                    job_gpus: "0"
+                    job_id: "10722087"
+                    job_name: hdr_dual_moe
+                    job_nodelist: gilbreth-k011
+                    job_num_nodes: "1"
+                    job_partition: a100-80gb
+                    job_qos: normal
+                    job_start_time: "1779110604"
+                    job_uid: "977636"
+                    job_user: chen4848
+                    jobid: "10722087"
+                    localid: "0"
+                    mem_per_node: "65536"
+                    mpi_type: pmix
+                    nnodes: "1"
+                    nodeid: "0"
+                    nodelist: gilbreth-k011
+                    nprocs: "1"
+                    ntasks: "1"
+                    ntasks_per_node: "1"
+                    oom_kill_step: "0"
+                    prio_process: "0"
+                    procid: "0"
+                    script_context: prolog_task
+                    submit_dir: /scratch/gilbreth/chen4848/HDR-denoise
+                    submit_host: gilbreth-fe01.rcac.purdue.edu
+                    task_pid: "1705393"
+                    tasks_per_node: "1"
+                    topology_addr: gilbreth-k011
+                    topology_addr_pattern: node
+                    tres_per_task: cpu=8
+                startedAt: "2026-05-18T13:23:28.854781Z"
+                writerId: 7y2gkhcolabujh7ixhwa2pquufega3e7
+        m: []
+        python_version: 3.12.2
+        t:
+            "1":
+                - 1
+                - 41
+            "2":
+                - 1
+                - 41
+            "3":
+                - 13
+                - 16
+            "4": 3.12.2
+            "5": 0.27.0
+            "12": 0.27.0
+            "13": linux-x86_64
+batch_size:
+    value: 64
+dataset_path:
+    value: /scratch/gilbreth/chen4848/dataset/train
+dim:
+    value: 8
+epochs:
+    value: 300
+expand_mode_epoch:
+    value: 999
+heads:
+    value:
+        - 1
+        - 2
+        - 4
+        - 8
+learning_rate:
+    value: 0.0004
+model_architecture:
+    value: Dual_Hybrid_Student_HDR
+nbits:
+    value: 20
+nbits_data:
+    value: 10
+num_blocks:
+    value:
+        - 2
+        - 2
+        - 2
+        - 1
+num_patches_per_image:
+    value: 64
+num_refinement_blocks:
+    value: 2
+optimizer:
+    value: Adam
+patch_size:
+    value: 128
+pretrained_path:
+    value: null
+read_noise:
+    value: 0
+save_folder:
+    value: models_MoE_hybrid_student_20260518_0923/
+seed:
+    value: 21

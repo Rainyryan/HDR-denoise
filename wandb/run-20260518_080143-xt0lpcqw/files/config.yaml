@@ -1,0 +1,114 @@
+_wandb:
+    value:
+        cli_version: 0.27.0
+        e:
+            8epg6kbsqae42xc2280k3j17p6swndbl:
+                codePath: train_HDR_dual_student_wandb.py
+                codePathLocal: train_HDR_dual_student_wandb.py
+                cpu_count: 64
+                cpu_count_logical: 64
+                cudaVersion: "13.1"
+                disk:
+                    /:
+                        total: "270307356672"
+                        used: "18022666240"
+                email: rc6150@gmail.com
+                executable: /home/chen4848/.conda/envs/2025.06-py313/dl/bin/python
+                git:
+                    commit: 149cca777211628bcd28deb71e303aa2dc5bcb29
+                    remote: git@github.com:Rainyryan/HDR-denoise.git
+                gpu: NVIDIA A100 80GB PCIe
+                gpu_count: 1
+                gpu_nvidia:
+                    - architecture: Ampere
+                      cudaCores: 6912
+                      memoryTotal: "85899345920"
+                      name: NVIDIA A100 80GB PCIe
+                      uuid: GPU-72c00d25-5835-a21d-93b8-58715ad30e87
+                host: gilbreth-k027.rcac.purdue.edu
+                memory:
+                    total: "540614713344"
+                os: Linux-5.14.0-611.16.1.el9_7.x86_64-x86_64-with-glibc2.34
+                program: /scratch/gilbreth/chen4848/HDR-denoise/train_HDR_dual_student_wandb.py
+                python: CPython 3.12.2
+                root: /scratch/gilbreth/chen4848/HDR-denoise
+                slurm:
+                    cluster_name: gilbreth
+                    conf: /var/spool/slurm/conf-cache/slurm.conf
+                    cpus_on_node: "4"
+                    cpus_per_task: "4"
+                    gpus_on_node: "1"
+                    gtids: "0"
+                    job_account: stanchan
+                    job_cpus_per_node: "4"
+                    job_end_time: "1779192097"
+                    job_gid: "132"
+                    job_gpus: "1"
+                    job_id: "10721877"
+                    job_name: hdr_dual_moe
+                    job_nodelist: gilbreth-k027
+                    job_num_nodes: "1"
+                    job_partition: a100-80gb
+                    job_qos: normal
+                    job_start_time: "1779105697"
+                    job_uid: "977636"
+                    job_user: chen4848
+                    jobid: "10721877"
+                    localid: "0"
+                    mem_per_node: "32768"
+                    mpi_type: pmix
+                    nnodes: "1"
+                    nodeid: "0"
+                    nodelist: gilbreth-k027
+                    nprocs: "1"
+                    ntasks: "1"
+                    ntasks_per_node: "1"
+                    oom_kill_step: "0"
+                    prio_process: "0"
+                    procid: "0"
+                    script_context: prolog_task
+                    submit_dir: /scratch/gilbreth/chen4848/HDR-denoise
+                    submit_host: gilbreth-fe01.rcac.purdue.edu
+                    task_pid: "2908653"
+                    tasks_per_node: "1"
+                    topology_addr: gilbreth-k027
+                    topology_addr_pattern: node
+                    tres_per_task: cpu=4
+                startedAt: "2026-05-18T12:01:43.020267Z"
+                writerId: 8epg6kbsqae42xc2280k3j17p6swndbl
+        m: []
+        python_version: 3.12.2
+        t:
+            "1":
+                - 1
+                - 41
+            "2":
+                - 1
+                - 41
+            "3":
+                - 13
+                - 16
+            "4": 3.12.2
+            "5": 0.27.0
+            "12": 0.27.0
+            "13": linux-x86_64
+batch_size:
+    value: 8
+epochs:
+    value: 500
+expand_mode_epoch:
+    value: 999
+learning_rate:
+    value: 0.0002
+model_architecture:
+    value: Dual_Hybrid_Student_HDR
+nbits:
+    value: 20
+nbits_data:
+    value: 10
+optimizer:
+    value: Adam
+read_noise:
+    value: 0
+seed:
+    value: 21

@@ -1,0 +1,100 @@
+_wandb:
+    value:
+        cli_version: 0.27.0
+        e:
+            ser882m43qw1g74h4daeuezrfcp6oppv:
+                codePath: train_A100_MoE_Teacher.py
+                codePathLocal: train_A100_MoE_Teacher.py
+                cpu_count: 64
+                cpu_count_logical: 128
+                cudaVersion: "13.1"
+                disk:
+                    /:
+                        total: "270299078656"
+                        used: "35989278720"
+                email: rc6150@gmail.com
+                executable: /home/chen4848/.conda/envs/2025.06-py313/dl/bin/python
+                git:
+                    commit: 149cca777211628bcd28deb71e303aa2dc5bcb29
+                    remote: git@github.com:Rainyryan/HDR-denoise.git
+                gpu: NVIDIA A30
+                gpu_count: 1
+                gpu_nvidia:
+                    - architecture: Ampere
+                      cudaCores: 3584
+                      memoryTotal: "25769803776"
+                      name: NVIDIA A30
+                      uuid: GPU-b0c0de64-6484-6586-9801-12aa5a92600b
+                host: gilbreth-fe01.rcac.purdue.edu
+                memory:
+                    total: "540598161408"
+                os: Linux-5.14.0-611.16.1.el9_7.x86_64-x86_64-with-glibc2.34
+                program: /scratch/gilbreth/chen4848/HDR-denoise/train_A100_MoE_Teacher.py
+                python: CPython 3.12.2
+                root: /scratch/gilbreth/chen4848/HDR-denoise
+                slurm:
+                    mpi_type: pmix
+                startedAt: "2026-05-18T13:48:30.948973Z"
+                writerId: ser882m43qw1g74h4daeuezrfcp6oppv
+        m: []
+        python_version: 3.12.2
+        t:
+            "1":
+                - 1
+                - 41
+            "2":
+                - 1
+                - 41
+            "3":
+                - 13
+                - 16
+            "4": 3.12.2
+            "5": 0.27.0
+            "12": 0.27.0
+            "13": linux-x86_64
+batch_size:
+    value: 64
+dataset_path:
+    value: /scratch/gilbreth/chen4848/dataset/train
+dim:
+    value: 32
+epochs:
+    value: 300
+expand_mode_epoch:
+    value: 999
+heads:
+    value:
+        - 1
+        - 2
+        - 4
+        - 8
+learning_rate:
+    value: 0.0004
+model_architecture:
+    value: Dual_Hybrid_Student_HDR
+nbits:
+    value: 20
+nbits_data:
+    value: 10
+num_blocks:
+    value:
+        - 4
+        - 4
+        - 4
+        - 4
+num_patches_per_image:
+    value: 64
+num_refinement_blocks:
+    value: 4
+optimizer:
+    value: Adam
+patch_size:
+    value: 128
+pretrained_path:
+    value: null
+read_noise:
+    value: 0
+save_folder:
+    value: models_MoE_Teacher_20260518_0948/
+seed:
+    value: 21

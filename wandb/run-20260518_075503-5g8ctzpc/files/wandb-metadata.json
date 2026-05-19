@@ -1,0 +1,83 @@
+{
+  "os": "Linux-5.14.0-611.16.1.el9_7.x86_64-x86_64-with-glibc2.34",
+  "python": "CPython 3.12.2",
+  "startedAt": "2026-05-18T11:55:03.832931Z",
+  "program": "/scratch/gilbreth/chen4848/HDR-denoise/train_HDR_dual_student_wandb.py",
+  "codePath": "train_HDR_dual_student_wandb.py",
+  "codePathLocal": "train_HDR_dual_student_wandb.py",
+  "git": {
+    "remote": "git@github.com:Rainyryan/HDR-denoise.git",
+    "commit": "149cca777211628bcd28deb71e303aa2dc5bcb29"
+  },
+  "email": "rc6150@gmail.com",
+  "root": "/scratch/gilbreth/chen4848/HDR-denoise",
+  "host": "gilbreth-k027.rcac.purdue.edu",
+  "executable": "/home/chen4848/.conda/envs/2025.06-py313/dl/bin/python",
+  "cpu_count": 64,
+  "cpu_count_logical": 64,
+  "gpu": "NVIDIA A100 80GB PCIe",
+  "gpu_count": 1,
+  "disk": {
+    "/": {
+      "total": "270307356672",
+      "used": "18022625280"
+    }
+  },
+  "memory": {
+    "total": "540614713344"
+  },
+  "gpu_nvidia": [
+    {
+      "name": "NVIDIA A100 80GB PCIe",
+      "memoryTotal": "85899345920",
+      "cudaCores": 6912,
+      "architecture": "Ampere",
+      "uuid": "GPU-72c00d25-5835-a21d-93b8-58715ad30e87"
+    }
+  ],
+  "cudaVersion": "13.1",
+  "slurm": {
+    "cluster_name": "gilbreth",
+    "conf": "/var/spool/slurm/conf-cache/slurm.conf",
+    "cpus_on_node": "4",
+    "cpus_per_task": "4",
+    "gpus_on_node": "1",
+    "gtids": "0",
+    "job_account": "stanchan",
+    "job_cpus_per_node": "4",
+    "job_end_time": "1779191696",
+    "job_gid": "132",
+    "job_gpus": "1",
+    "job_id": "10721867",
+    "job_name": "hdr_dual_moe",
+    "job_nodelist": "gilbreth-k027",
+    "job_num_nodes": "1",
+    "job_partition": "a100-80gb",
+    "job_qos": "normal",
+    "job_start_time": "1779105296",
+    "job_uid": "977636",
+    "job_user": "chen4848",
+    "jobid": "10721867",
+    "localid": "0",
+    "mem_per_node": "32768",
+    "mpi_type": "pmix",
+    "nnodes": "1",
+    "nodeid": "0",
+    "nodelist": "gilbreth-k027",
+    "nprocs": "1",
+    "ntasks": "1",
+    "ntasks_per_node": "1",
+    "oom_kill_step": "0",
+    "prio_process": "0",
+    "procid": "0",
+    "script_context": "prolog_task",
+    "submit_dir": "/scratch/gilbreth/chen4848/HDR-denoise",
+    "submit_host": "gilbreth-fe01.rcac.purdue.edu",
+    "task_pid": "2907098",
+    "tasks_per_node": "1",
+    "topology_addr": "gilbreth-k027",
+    "topology_addr_pattern": "node",
+    "tres_per_task": "cpu=4"
+  },
+  "writerId": "rnnnbck6bjoo379m5l0p9h9pmpohd7ac"
+}

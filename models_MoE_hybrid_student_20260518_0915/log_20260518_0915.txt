@@ -1,0 +1,22 @@
+==========================================================
+       DUAL MOE A100-80GB OPTIMIZED TRAINING SESSION      
+==========================================================
+Timestamp:          20260518_0915
+Dataset Path:       /scratch/gilbreth/chen4848/dataset/train
+Pretrained Path:    ./distill_models_20260417_134836/preexpand_hdr_best.pth
+Save Folder:        models_MoE_hybrid_student_20260518_0915/
+----------------------- Hyperparameters ------------------
+Batch Size:         64
+Patch Size:         128 (Patches per img: 64)
+Base LR:            0.0004
+Optimizer:          Adam
+Total Epochs:       300
+Expand Mode Epoch:  999
+N-Bits Configuration: 20 (System) / 10 (Data)
+Read Noise Factor:  0
+Seed Value:         21
+Model Architecture: Dual_Hybrid_Student_HDR {'dim': 8, 'num_blocks': [2, 2, 2, 1], 'num_refinement_blocks': 2, 'heads': [1, 2, 4, 8]}
+==========================================================
+
+
+Epoch #1: Loss =       0.0001 	34.393547831354915	(Time: 54.303789)Epoch #2: Loss =       0.0001 	34.50317351882522	(Time: 54.194011)Epoch #3: Loss =       0.0001 	34.39723329286318	(Time: 54.226410)Epoch #4: Loss =       0.0001 	34.32385753940891	(Time: 53.976864)Epoch #5: Loss =       0.0001 	34.33282481013118	(Time: 54.054862)Epoch #6: Loss =       0.0001 	34.34165846334921	(Time: 54.061203)Epoch #7: Loss =       0.0001 	34.44052758087983	(Time: 54.114707)Epoch #8: Loss =       0.0001 	34.501158018369935	(Time: 54.041366)Epoch #9: Loss =       0.0001 	34.556477881766654	(Time: 54.156165)Epoch #10: Loss =       0.0001 	34.60965553489891	(Time: 54.019165)Epoch #11: Loss =       0.0001 	34.555514361407305	(Time: 54.134800)Epoch #12: Loss =       0.0001 	34.59715477195946	(Time: 54.062889)Epoch #13: Loss =       0.0001 	34.63771361273688	(Time: 54.014095)Epoch #14: Loss =       0.0001 	34.66860528894373	(Time: 54.165877)Epoch #15: Loss =       0.0001 	34.6888589601259	(Time: 54.036866)Epoch #16: Loss =       0.0001 	34.778340107685814	(Time: 54.141034)Epoch #17: Loss =       0.0001 	34.826324978390254	(Time: 54.077950)Epoch #18: Loss =       0.0001 	34.84389423679661	(Time: 54.025842)Epoch #19: Loss =       0.0001 	34.87531646522316	(Time: 54.014470)Epoch #20: Loss =       0.0001 	34.899253226615286	(Time: 54.260301)Epoch #21: Loss =       0.0001 	34.80742083369075	(Time: 54.069967)Epoch #22: Loss =       0.0001 	34.84246357067211	(Time: 54.014069)Epoch #23: Loss =       0.0001 	34.875383531725085	(Time: 54.038911)Epoch #24: Loss =       0.0001 	34.88010891063793	(Time: 54.158220)Epoch #25: Loss =       0.0001 	34.919705777554896	(Time: 54.049808)Epoch #26: Loss =       0.0001 	34.966814401987435	(Time: 54.215845)Epoch #27: Loss =       0.0001 	34.92988122476114	(Time: 53.997252)Epoch #28: Loss =       0.0001 	34.98732752413363	(Time: 54.134525)Epoch #29: Loss =       0.0001 	35.029940373188744	(Time: 54.078475)Epoch #30: Loss =       0.0001 	35.053369934494434	(Time: 54.179293)

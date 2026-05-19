@@ -1,0 +1,21 @@
+==========================================================
+       DUAL MOE A100-80GB OPTIMIZED TRAINING SESSION      
+==========================================================
+Timestamp:          20260518_0921
+Dataset Path:       /scratch/gilbreth/chen4848/dataset/train
+Pretrained Path:    None
+Save Folder:        models_MoE_hybrid_student_20260518_0921/
+----------------------- Hyperparameters ------------------
+Batch Size:         64
+Patch Size:         128 (Patches per img: 64)
+Base LR:            0.0004
+Optimizer:          Adam
+Total Epochs:       300
+Expand Mode Epoch:  999
+N-Bits Configuration: 20 (System) / 10 (Data)
+Read Noise Factor:  0
+Seed Value:         21
+Model Architecture: Dual_Hybrid_Student_HDR {'dim': 8, 'num_blocks': [2, 2, 2, 1], 'num_refinement_blocks': 2, 'heads': [1, 2, 4, 8]}
+==========================================================
+
+

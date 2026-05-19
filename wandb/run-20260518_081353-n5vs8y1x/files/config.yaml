@@ -1,0 +1,74 @@
+_wandb:
+    value:
+        cli_version: 0.27.0
+        e:
+            flb1tvlpsms24r4op88bk570brogg9h5:
+                codePath: train_HDR_dual_student_wandb.py
+                codePathLocal: train_HDR_dual_student_wandb.py
+                cpu_count: 64
+                cpu_count_logical: 128
+                cudaVersion: "13.1"
+                disk:
+                    /:
+                        total: "270299078656"
+                        used: "35978321920"
+                email: rc6150@gmail.com
+                executable: /home/chen4848/.conda/envs/2025.06-py313/dl/bin/python
+                git:
+                    commit: 149cca777211628bcd28deb71e303aa2dc5bcb29
+                    remote: git@github.com:Rainyryan/HDR-denoise.git
+                gpu: NVIDIA A30
+                gpu_count: 1
+                gpu_nvidia:
+                    - architecture: Ampere
+                      cudaCores: 3584
+                      memoryTotal: "25769803776"
+                      name: NVIDIA A30
+                      uuid: GPU-b0c0de64-6484-6586-9801-12aa5a92600b
+                host: gilbreth-fe01.rcac.purdue.edu
+                memory:
+                    total: "540598161408"
+                os: Linux-5.14.0-611.16.1.el9_7.x86_64-x86_64-with-glibc2.34
+                program: /scratch/gilbreth/chen4848/HDR-denoise/train_HDR_dual_student_wandb.py
+                python: CPython 3.12.2
+                root: /scratch/gilbreth/chen4848/HDR-denoise
+                slurm:
+                    mpi_type: pmix
+                startedAt: "2026-05-18T12:13:53.787903Z"
+                writerId: flb1tvlpsms24r4op88bk570brogg9h5
+        m: []
+        python_version: 3.12.2
+        t:
+            "1":
+                - 1
+                - 41
+            "2":
+                - 1
+                - 41
+            "3":
+                - 13
+                - 16
+            "4": 3.12.2
+            "5": 0.27.0
+            "12": 0.27.0
+            "13": linux-x86_64
+batch_size:
+    value: 8
+epochs:
+    value: 500
+expand_mode_epoch:
+    value: 999
+learning_rate:
+    value: 0.0002
+model_architecture:
+    value: Dual_Hybrid_Student_HDR
+nbits:
+    value: 20
+nbits_data:
+    value: 10
+optimizer:
+    value: Adam
+read_noise:
+    value: 0
+seed:
+    value: 21

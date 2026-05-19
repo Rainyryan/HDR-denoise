@@ -1,0 +1,23 @@
+==========================================================
+               DUAL MOE TRAINING SESSION                  
+==========================================================
+Date/Time: 2026-05-18 08:39:29
+
+--- PATHS ---
+Save Folder:     models_MoE_hybrid_student_20260518_0839/
+Pretrained Path: ./models_MoE_hybrid_student_20260518_0442/preexpand_hdr_best.pth
+
+--- HYPERPARAMETERS ---
+Model Base:      Hybrid_Student_HDR (dim=8, blocks=[2,2,2,1], refine=2, heads=[1,2,4,8])
+Total Epochs:    800
+Batch Size:      8
+Base LR:         0.0002
+Optimizer:       Adam
+Expand Mode @:   999
+Loss Weights:    L2 Main (1.0), Perceptual (0.01), Aux (0.5)
+
+Total params = 446950
+
+==========================================================
+
+Epoch #1: Loss =       0.0031 		PSNR = 19.09	(Time: 66.400276)Epoch #1: Loss =       0.0031 		PSNR = 19.09	(Time: 66.401935)

@@ -9,12 +9,11 @@ from datetime import datetime
 import torch
 import torch.nn as nn
 from torch.utils.data import Dataset
-from torchvision.utils import save_image
 
-import wandb  # <-- Added W&B Import
+import wandb  
 
 # Import the base model and the new SNR-aware dataset
-from HDR_model_hybrid_student import Hybrid_Student_HDR
+from HDR_model_switch import HDR_model
 from HDR_dataset_snr_map import HDRDataset
 
 ##########################################################################
@@ -24,27 +23,25 @@ class DualSNRDenoiser(nn.Module):
     def __init__(self, **kwargs):
         super(DualSNRDenoiser, self).__init__()
         # Expert 1: Specializes in Low SNR (High Noise) regions
-        self.denoiser_low_snr = Hybrid_Student_HDR(**kwargs)
+        self.denoiser_low_snr = HDR_model(**kwargs)
         
         # Expert 2: Specializes in High SNR (Low Noise) regions
-        self.denoiser_high_snr = Hybrid_Student_HDR(**kwargs)
+        self.denoiser_high_snr = HDR_model(**kwargs)
 
     def forward(self, x, snr_map):
         """
         x: [B, C, H, W] noisy input
         snr_map: [B, 1, H, W] normalized between 0 and 1.
-                 0 = extremely noisy (low SNR), 1 = clean (high SNR)
         """
         out_low = self.denoiser_low_snr(x)
         out_high = self.denoiser_high_snr(x)
 
-        # Soft Blend: The SNR map dictates which model's output to trust for each pixel.
+        # Soft Blend based on pixel-wise SNR
         blended_out = (1.0 - snr_map) * out_low + snr_map * out_high
-        
         return blended_out, out_low, out_high
 
 ##########################################################################
-## Main function util
+## Main function utils
 ##########################################################################
 def print_running_loss(running_loss, running_psnr, batch_sz, i, print_every_epoch=10):
     psnr_str = "\tPSNR = %.2f" % (running_psnr/(i+1)) if running_psnr else ""
@@ -54,7 +51,7 @@ def print_running_loss(running_loss, running_psnr, batch_sz, i, print_every_epoc
 def print_epoch_loss(epoch_num, avg_loss, avg_psnr, time_spent=None):
     time_spent = "Unknown" if time_spent is None else "%f"%time_spent
     psnr_str = "\tPSNR = %.2f" % avg_psnr if avg_psnr else ""
-    epoch_loss = "\rEpoch #%d: Loss = %12.4f \t%s\t(Time: %s)" % (epoch_num, avg_loss, psnr_str, time_spent)
+    epoch_loss = "\rEpoch #%d: Loss = %12.4f \t%s\t(Time: %s)" % (epoch_num, avg_loss, avg_psnr, time_spent)
     print(epoch_loss)
     return epoch_loss
 
@@ -73,34 +70,21 @@ def create_folder(directory):
         print ('Error: Creating directory. ' +  directory)
 
 ##########################################################################
-## Training util
+## Training GPU utilities (Bypasses NumPy environments completely)
 ##########################################################################
 def hdr_tonemap(hdr_image, nbits=20):
     mu = 2**nbits-1
-    return torch.log10(1.0 + mu * hdr_image) / torch.log10(torch.tensor(1.0 + mu))
+    return torch.log10(1.0 + mu * hdr_image) / torch.log10(torch.tensor(1.0 + mu, device=hdr_image.device))
 
-def hdr_tonemap_np(hdr_image, nbits=20):
-    mu = 2**nbits-1
-    return np.log10(1.0 + mu * hdr_image) / np.log10(1.0 + mu)
-
-def batch_psnr(img, gt, data_range=1.0):
+def batch_psnr_gpu(img, gt, data_range=1.0):
     """
-    Computes PSNR using pure PyTorch tensors to bypass NumPy dependency issues.
+    Computes PSNR entirely inside GPU VRAM tensors to prevent 
+    NumPy host transfer synchronization delays.
     """
-    detach_img = img.detach()
-    detach_gt = gt.detach()
-    
-    # Calculate Mean Squared Error across channels, height, and width
-    mse = torch.mean((detach_img - detach_gt) ** 2, dim=[1, 2, 3])
-    
-    psnr_val = 0.0
-    for i in range(img.shape[0]):
-        if mse[i] == 0:
-            psnr_val += 100.0
-        else:
-            psnr_val += 10 * torch.log10((data_range ** 2) / mse[i])
-            
-    return (psnr_val / img.shape[0]).item()
+    with torch.no_grad():
+        mse = torch.mean((img.detach() - gt.detach()) ** 2, dim=[1, 2, 3])
+        psnrs = torch.where(mse == 0, torch.tensor(100.0, device=img.device), 10.0 * torch.log10((data_range ** 2) / mse))
+        return torch.mean(psnrs).item()
 
 def learning_rate(lr, epoch):
     factor =  [1, 1, 2, 2, 5, 5, 10, 20, 30, 50, \
@@ -116,11 +100,13 @@ if __name__ == "__main__":
     torch.manual_seed(seed)
     np.random.seed(seed)
 
-    # Hyperparameters
+    # Hyperparameters Optimized for A100 80GB Data Center Cards
     phase = "train"
     timestamp_str = datetime.now().strftime("%Y%m%d_%H%M")
-    save_folder = "models_MoE_hybrid_student_%s/" % timestamp_str
-    pretrained_path = "./models_MoE_hybrid_student_20260518_0442/preexpand_hdr_best.pth"
+    save_folder = "models_MoE_Teacher_%s/" % timestamp_str
+    # pretrained_path = "./distill_models_20260417_134836/preexpand_hdr_best.pth"
+    pretrained_path = None
+    dataset_directory = "/scratch/gilbreth/chen4848/dataset/train"
     create_folder(save_folder)
     
     save_path_preexpand = save_folder + "preexpand_hdr.pth"
@@ -129,133 +115,138 @@ if __name__ == "__main__":
     best_save_path = save_folder + "hdr_best.pth"
     last_path = None
     
-    # Data loading
+    # Data loading parameters scaled for larger GPU throughput
     nbits = 20
     nbits_data = 10
-    batch_sz = 8
+    batch_sz = 64                  # <-- SCALED UP from 8 to saturate Tensor Cores
+    patch_sz = 128
+    num_patch = 64
     read_noise = 0
     regen_crops_every_epoch = 10
     regen_noise_every_epoch = 5
     
-    # Optimizing
-    lr = 2e-4
+    # Optimization 
+    lr = 4e-4                      # <-- SCALED UP slightly to balance batch volume shifts
     optimizer_choice = "Adam" 
-    num_epochs = 800
+    num_epochs = 300
     start_epoch = 0 
     epoch_expand_mode = 999
     
     best_running_psnr = 10.0
     last_epoch_psnr, last_epoch_loss = 0.0, 1e6
+    
+    # Model parameters
+    model_kwargs = {
+        "dim": 32,
+        "num_blocks": [4,4,4,4],
+        "num_refinement_blocks": 4,
+        "heads": [1, 2, 4, 8]
+    }
 
     # ------------------ WANDB INITIALIZATION ------------------
     wandb.init(
         project="hdr-dual-moe",
-        name=f"run_{timestamp_str}",
+        name=f"run_{timestamp_str}_a100_Teacher_from_scratch",
         config={
             "learning_rate": lr,
             "epochs": num_epochs,
             "batch_size": batch_sz,
+            "patch_size": patch_sz,
+            "num_patches_per_image": num_patch,
             "optimizer": optimizer_choice,
             "expand_mode_epoch": epoch_expand_mode,
             "nbits": nbits,
             "nbits_data": nbits_data,
             "read_noise": read_noise,
             "seed": seed,
-            "model_architecture": "Dual_Hybrid_Student_HDR"
+            "model_architecture": "Dual_Hybrid_Student_HDR",
+            "dataset_path": dataset_directory,
+            "pretrained_path": pretrained_path,
+            "save_folder": save_folder,
+            **model_kwargs
         }
     )
-    # ------------------------------------------------------------
 
-    ##########################################################################
-    ## Training Setup
-    ##########################################################################
     print("Preparing dual model")
-    # Initialize the Dual Model wrapper
-    model = DualSNRDenoiser(dim=8, num_blocks=[2, 2, 2, 1], num_refinement_blocks=2, heads=[1, 2, 4, 8]).to(device)
+    model = DualSNRDenoiser(**model_kwargs).to(device)
     
+    # Native compilation layer to accelerate runtime execution speed 
+    if hasattr(torch, "compile"):
+        try:
+            print("Compiling model graph via TorchInductor optimization...")
+            model = torch.compile(model)
+        except Exception as e:
+            print(f"Skipping native graph compilation: {e}")
+
     loss_lpips = lpips.LPIPS(net='vgg').to(device)
     scaler = torch.cuda.amp.GradScaler()
 
     logfile = save_folder + "log_%s.txt" % timestamp_str
     
-    # ------------------ DETAILED LOGGING SETUP ------------------
+    # Enhanced local log file header including paths and hyperparameters
     log_header = (
         f"==========================================================\n"
-        f"               DUAL MOE TRAINING SESSION                  \n"
+        f"       DUAL MOE A100-80GB OPTIMIZED TRAINING SESSION      \n"
         f"==========================================================\n"
-        f"Date/Time: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n\n"
-        f"--- PATHS ---\n"
-        f"Save Folder:     {save_folder}\n"
-        f"Pretrained Path: {pretrained_path}\n\n"
-        f"--- HYPERPARAMETERS ---\n"
-        f"Model Base:      Hybrid_Student_HDR (dim=8, blocks=[2,2,2,1], refine=2, heads=[1,2,4,8])\n"
-        f"Total Epochs:    {num_epochs}\n"
-        f"Batch Size:      {batch_sz}\n"
-        f"Base LR:         {lr}\n"
-        f"Optimizer:       {optimizer_choice}\n"
-        f"Expand Mode @:   {epoch_expand_mode}\n"
-        f"Loss Weights:    L2 Main (1.0), Perceptual (0.01), Aux (0.5)\n"
+        f"Timestamp:          {timestamp_str}\n"
+        f"Dataset Path:       {dataset_directory}\n"
+        f"Pretrained Path:    {pretrained_path}\n"
+        f"Save Folder:        {save_folder}\n"
+        f"----------------------- Hyperparameters ------------------\n"
+        f"Batch Size:         {batch_sz}\n"
+        f"Patch Size:         {patch_sz} (Patches per img: {num_patch})\n"
+        f"Base LR:            {lr}\n"
+        f"Optimizer:          {optimizer_choice}\n"
+        f"Total Epochs:       {num_epochs}\n"
+        f"Expand Mode Epoch:  {epoch_expand_mode}\n"
+        f"N-Bits Configuration: {nbits} (System) / {nbits_data} (Data)\n"
+        f"Read Noise Factor:  {read_noise}\n"
+        f"Seed Value:         {seed}\n"
+        f"Model Architecture: Dual_Hybrid_Student_HDR {model_kwargs}\n"
+        f"==========================================================\n\n"
     )
-    
     write_log(logfile, log_header, newfile=True)
     
-    pytorch_total_params = sum(p.numel() for p in model.parameters() if p.requires_grad)
-    write_log(logfile, f"Total params = {pytorch_total_params}\n")
-    write_log(logfile, "==========================================================\n")
-    # ------------------------------------------------------------
-    training_t0 = time.time()
-
     if optimizer_choice == "RMSprop":
         optimizer = torch.optim.RMSprop(model.parameters(), lr=learning_rate(lr, start_epoch))
     else:
         optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate(lr, start_epoch))
         
-    # ------------------------------------------------------------
-    # Model Loading Logic: Check reverse chronological order
-    # ------------------------------------------------------------
+    # Checkpoints
     if os.path.exists(save_path) or os.path.exists(best_save_path):
-        print("Loading expanded mode dual model (resuming later training stage)")
         load_target = save_path if os.path.exists(save_path) else best_save_path
         checkpoint = torch.load(load_target)
-        
         model.load_state_dict(checkpoint['model_state_dict'])
         optimizer.load_state_dict(checkpoint['optimizer_state_dict'])
         start_epoch = checkpoint.get('epoch', 0)
         last_epoch_loss = checkpoint.get('loss', 1e6)
         print(f"Resumed expanded mode from epoch {start_epoch}")
-
     elif os.path.exists(save_path_preexpand) or os.path.exists(best_save_path_preexpand):
-        print("Loading pre-expand dual model (resuming early training stage)")
         load_target = save_path_preexpand if os.path.exists(save_path_preexpand) else best_save_path_preexpand
         checkpoint = torch.load(load_target)
-        
         model.load_state_dict(checkpoint['model_state_dict'])
         optimizer.load_state_dict(checkpoint['optimizer_state_dict'])
         start_epoch = checkpoint.get('epoch', 0)
         last_epoch_loss = checkpoint.get('loss', 1e6)
         print(f"Resumed pre-expand mode from epoch {start_epoch}")
-
-    elif os.path.exists(pretrained_path):
-        print("Loading pretrained single student model into both experts")
+    elif pretrained_path and os.path.exists(pretrained_path):
         checkpoint = torch.load(pretrained_path)
-        
         state_dict_to_load = checkpoint.get('student_state_dict', checkpoint.get('model_state_dict'))
-        
         model.denoiser_low_snr.load_state_dict(state_dict_to_load, strict=False)
         model.denoiser_high_snr.load_state_dict(state_dict_to_load, strict=False)
-        print("Initialized both experts with pretrained distilled weights. Starting from epoch 0.")
-        
+        print("Initialized both experts with pretrained weights.")
     else:
-        print("No prior checkpoints or pretrained weights found. Starting from scratch.")
+        print("Starting from scratch.")
         
     model.train()
 
     print("Creating dataset")
-    directory = "/scratch/gilbreth/chen4848/dataset/train"
-    dataset = HDRDataset(directory, patch_sz=128, num_patch=64, batch_sz=batch_sz, J=1, 
-                        nbits=nbits, nbits_data=nbits_data, read_noise=read_noise, do_expand=False)
+    dataset = HDRDataset(dataset_directory, patch_sz=patch_sz, num_patch=num_patch, batch_sz=batch_sz, J=1, 
+                         nbits=nbits, nbits_data=nbits_data, read_noise=read_noise, do_expand=False)
 
     print("Training started")
+    training_t0 = time.time() # Added tracking variable to patch runtime reference error below
+    
     for epoch in range(start_epoch, num_epochs):
         if epoch >= epoch_expand_mode:
             dataset.do_expand = True
@@ -273,17 +264,16 @@ if __name__ == "__main__":
             for i in range(len(dataset)):
                 sample = dataset[i]
                 
+                # Async data pipelining over system host channels
                 x = sample["x"].to(device, non_blocking=True)
                 y = sample["y"].to(device, non_blocking=True)
                 xm = sample["xm"].to(device, non_blocking=True)
-                
                 snr_map = sample["snr_map"].to(device, non_blocking=True)
 
                 optimizer.zero_grad(set_to_none=True)
                 
                 with torch.cuda.amp.autocast():
                     y_pred, y_low_snr, y_high_snr = model(xm, snr_map)
-                    
                     gt_tm = hdr_tonemap(y, nbits)
                     
                     loss_l2_main = torch.mean((hdr_tonemap(y_pred, nbits) - gt_tm) ** 2)
@@ -302,7 +292,7 @@ if __name__ == "__main__":
                     loss_perceptual = loss_lpips(pred_tm_clamped, gt_tm_clamped).mean()
                     
                     gamma = 0.01      
-                    aux_weight = 0.1  
+                    aux_weight = 1  
                     ttl_loss = loss_l2_main + (gamma * loss_perceptual) + aux_weight * (loss_aux_low + loss_aux_high)
 
                 scaler.scale(ttl_loss).backward()
@@ -310,45 +300,29 @@ if __name__ == "__main__":
                 scaler.update()
                 
                 running_loss += ttl_loss.item()
-                running_psnr += batch_psnr(y_pred, y)
+                running_psnr += batch_psnr_gpu(y_pred, y)  # <-- Runs natively inside GPU tensors
                 print_running_loss(running_loss, running_psnr, batch_sz, i)
-            
-            # Save tmp image - Pure PyTorch Tensor File Saver (Bypasses Torchvision's NumPy bug)
+
             output_dir = "tmp_dual/"
             create_folder(output_dir)
-
+            
             t2 = time.time()
             this_epoch_loss = running_loss/(batch_sz*len(dataset))
             this_epoch_psnr = running_psnr/len(dataset)
             epoch_loss = print_epoch_loss(epoch+1, this_epoch_loss, this_epoch_psnr, t2-t1)
             write_log(logfile, epoch_loss, end="")
 
-            # Log metrics to W&B (skipping image panels for this run to bypass the numpy bug)
-            wandb.log({
-                "epoch": epoch + 1,
-                "train/loss": this_epoch_loss,
-                "train/psnr": this_epoch_psnr,
-                "train/learning_rate": optimizer.param_groups[0]['lr']
-            })
-
-            t2 = time.time()
-            this_epoch_loss = running_loss/(batch_sz*len(dataset))
-            this_epoch_psnr = running_psnr/len(dataset)
-            epoch_loss = print_epoch_loss(epoch+1, this_epoch_loss, this_epoch_psnr, t2-t1)
-            write_log(logfile, epoch_loss, end="")
-
-            # ------------------ WANDB METRIC LOGGING ------------------
+            # W&B metric synchronization
             wandb.log({
                 "epoch": epoch + 1,
                 "train/loss": this_epoch_loss,
                 "train/psnr": this_epoch_psnr,
                 "train/learning_rate": optimizer.param_groups[0]['lr'],
             })
-            # ----------------------------------------------------------
 
             improved = True
             
-            # Rollback logic
+            # Rollback tracking logic
             if ((epoch < epoch_expand_mode or epoch >= epoch_expand_mode + 10) and last_epoch_psnr > 10 and this_epoch_loss > 2 * last_epoch_loss) or \
                 (epoch >= epoch_expand_mode and epoch < epoch_expand_mode + 10 and this_epoch_loss > 1000):
                 print(last_epoch_psnr, this_epoch_psnr, "do not save")
@@ -362,7 +336,7 @@ if __name__ == "__main__":
                 last_epoch_psnr = this_epoch_psnr
                 last_epoch_loss = this_epoch_loss
 
-            # Save model
+            # Checkpoint exports
             if improved:
                 sp = save_path if epoch >= epoch_expand_mode else save_path_preexpand
                 bsp = best_save_path if epoch >= epoch_expand_mode else best_save_path_preexpand
@@ -377,21 +351,16 @@ if __name__ == "__main__":
                 
                 torch.save(save_dict, sp)
                 
-                # Update best model and log artifact to W&B
                 if running_psnr > best_running_psnr:
                     best_running_psnr = running_psnr
                     torch.save(save_dict, bsp)
                     
-                    # ------------------ WANDB ARTIFACT LOGGING ------------------
                     artifact_name = "model_expanded" if epoch >= epoch_expand_mode else "model_preexpand"
                     artifact = wandb.Artifact(f"dual_hdr_{artifact_name}", type="model")
                     artifact.add_file(bsp)
                     wandb.log_artifact(artifact, aliases=[f"epoch_{epoch+1}", "best"])
-                    # ------------------------------------------------------------
 
     training_t1 = time.time()
     write_log(logfile, "\nTotal training time = %.2f" % (training_t1 - training_t0))
     print("Training finished")
-    
-    # Close the W&B run
     wandb.finish()

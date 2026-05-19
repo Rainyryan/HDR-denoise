@@ -1,0 +1,40 @@
+
+A module that was compiled using NumPy 1.x cannot be run in
+NumPy 2.4.5 as it may crash. To support both 1.x and 2.x
+versions of NumPy, modules must be compiled with NumPy 2.0.
+Some module may need to rebuild instead e.g. with 'pybind11>=2.12'.
+
+If you are a user of the module, the easiest solution will be to
+downgrade to 'numpy<2' or try to upgrade the affected module.
+We expect that some modules will need time to support NumPy 2.
+
+Traceback (most recent call last):  File "/scratch/gilbreth/chen4848/HDR-denoise/train_A100_MoE.py", line 6, in <module>
+    import lpips
+  File "/home/chen4848/.conda/envs/2025.06-py313/dl/lib/python3.12/site-packages/lpips/__init__.py", line 7, in <module>
+    import torch
+  File "/home/chen4848/.conda/envs/2025.06-py313/dl/lib/python3.12/site-packages/torch/__init__.py", line 1477, in <module>
+    from .functional import *  # noqa: F403
+  File "/home/chen4848/.conda/envs/2025.06-py313/dl/lib/python3.12/site-packages/torch/functional.py", line 9, in <module>
+    import torch.nn.functional as F
+  File "/home/chen4848/.conda/envs/2025.06-py313/dl/lib/python3.12/site-packages/torch/nn/__init__.py", line 1, in <module>
+    from .modules import *  # noqa: F403
+  File "/home/chen4848/.conda/envs/2025.06-py313/dl/lib/python3.12/site-packages/torch/nn/modules/__init__.py", line 35, in <module>
+    from .transformer import TransformerEncoder, TransformerDecoder, \
+  File "/home/chen4848/.conda/envs/2025.06-py313/dl/lib/python3.12/site-packages/torch/nn/modules/transformer.py", line 20, in <module>
+    device: torch.device = torch.device(torch._C._get_default_device()),  # torch.device('cpu'),
+/home/chen4848/.conda/envs/2025.06-py313/dl/lib/python3.12/site-packages/torch/nn/modules/transformer.py:20: UserWarning: Failed to initialize NumPy: _ARRAY_API not found (Triggered internally at /opt/conda/conda-bld/pytorch_1711403463728/work/torch/csrc/utils/tensor_numpy.cpp:84.)
+  device: torch.device = torch.device(torch._C._get_default_device()),  # torch.device('cpu'),
+wandb: [wandb.login()] Loaded credentials for https://api.wandb.ai from WANDB_API_KEY.
+wandb: Currently logged in as: ryanhana (ryanhana-wandb) to https://api.wandb.ai. Use `wandb login --relogin` to force relogin
+wandb: setting up run mjo92y8e
+wandb: Tracking run with wandb version 0.27.0
+wandb: Run data is saved locally in /scratch/gilbreth/chen4848/HDR-denoise/wandb/run-20260518_093811-mjo92y8e
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run run_20260518_0938_a100_from_scratch_aux1
+wandb: ⭐️ View project at https://wandb.ai/ryanhana-wandb/hdr-dual-moe
+wandb: 🚀 View run at https://wandb.ai/ryanhana-wandb/hdr-dual-moe/runs/mjo92y8e
+/home/chen4848/.conda/envs/2025.06-py313/dl/lib/python3.12/site-packages/torchvision/models/_utils.py:208: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
+  warnings.warn(
+/home/chen4848/.conda/envs/2025.06-py313/dl/lib/python3.12/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=VGG16_Weights.IMAGENET1K_V1`. You can also use `weights=VGG16_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings.warn(msg)
+[2026-05-18T09:38:46.896] error: *** JOB 10722110 ON gilbreth-i000 CANCELLED AT 2026-05-18T09:38:46 DUE to SIGNAL Terminated ***
