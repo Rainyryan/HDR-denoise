@@ -251,7 +251,7 @@ if __name__ == "__main__":
     model.train()
 
     print("Creating dataset")
-    directory = "/scratch/gilbreth/chen4848/dataset/train"
+    directory = "/scratch/gilbreth/chen4848/datasets/kalantari/train"
     dataset = HDRDataset(directory, patch_sz=128, num_patch=64, batch_sz=batch_sz, J=1, 
                         nbits=nbits, nbits_data=nbits_data, read_noise=read_noise, do_expand=False)
 
