@@ -9,7 +9,7 @@
 #SBATCH --gres=gpu:1
 #SBATCH --cpus-per-task=8      # <-- Increased from 4 to feed the bigger batches fast
 #SBATCH --mem=64G              # <-- Scaled up memory headroom for batch data expansion
-#SBATCH --time=5:00:00
+#SBATCH --time=6:00:00
 
 # 1. Ensure directory structures exist
 mkdir -p logs

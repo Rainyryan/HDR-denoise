@@ -1,20 +1,20 @@
 import os
-import glob
 import numpy as np
 import time
-import cv2
 import lpips
 from datetime import datetime
 
 import torch
 import torch.nn as nn
 from torch.utils.data import Dataset
-
+import torchvision.transforms.functional as TF
+import random
 import wandb  
 
 # Import the base model and the new SNR-aware dataset
-from HDR_model_switch import HDR_model
-from HDR_dataset_snr_map import HDRDataset
+from HDR_model_hybrid_Teacher import TransUNet_Teacher_HDR as HDR_model
+# from HDR_dataset_snr_map import HDRDataset
+from HDR_Mobile_dataset import HDRMobileDataset
 
 ##########################################################################
 ## Dual SNR Denoiser Wrapper
@@ -93,6 +93,38 @@ def learning_rate(lr, epoch):
                10, 20, 50, 70, 100, 120, 150, 170, 200, 300]
     return lr / factor[epoch//10] if epoch//10 < len(factor) else lr / 400
 
+def estimate_local_snr_map(x, window_size=5, eps=1e-5):
+    """
+    Dynamically estimates a [0, 1] normalized SNR map from a noisy image batch.
+    Expected input shape: (B, C, H, W)
+    """
+    pad = window_size // 2
+    
+    # 1. Calculate Local Mean: E[X]
+    local_mean = F.avg_pool2d(x, kernel_size=window_size, stride=1, padding=pad)
+    
+    # 2. Calculate Local Mean of Squares: E[X^2]
+    local_sq_mean = F.avg_pool2d(x ** 2, kernel_size=window_size, stride=1, padding=pad)
+    
+    # 3. Calculate Variance: Var(X) = E[X^2] - (E[X])^2
+    # Clamp at 0 to prevent NaN from floating point precision errors
+    local_var = torch.clamp(local_sq_mean - (local_mean ** 2), min=0.0)
+    
+    # 4. Calculate Standard Deviation (Noise Estimate)
+    local_std = torch.sqrt(local_var + eps)
+    
+    # 5. Compute raw SNR (Signal / Noise)
+    raw_snr = local_mean / local_std
+    
+    # 6. Average across the 3 RGB channels to get a 1-channel spatial mask (B, 1, H, W)
+    spatial_snr = raw_snr.mean(dim=1, keepdim=True)
+    
+    # 7. Normalize to [0, 1] per image in the batch so the 0.5 threshold is stable
+    batch_max = spatial_snr.amax(dim=(2, 3), keepdim=True)
+    snr_normalized = spatial_snr / (batch_max + eps)
+    
+    return snr_normalized
+
 if __name__ == "__main__":
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
@@ -103,10 +135,10 @@ if __name__ == "__main__":
     # Hyperparameters Optimized for A100 80GB Data Center Cards
     phase = "train"
     timestamp_str = datetime.now().strftime("%Y%m%d_%H%M")
-    save_folder = "models_MoE_Teacher_%s/" % timestamp_str
+    save_folder = "models_MoE_Teacher_MobileHDR_%s/" % timestamp_str
     # pretrained_path = "./distill_models_20260417_134836/preexpand_hdr_best.pth"
     pretrained_path = None
-    dataset_directory = "/scratch/gilbreth/chen4848/dataset/train"
+    dataset_directory = "/scratch/gilbreth/chen4848/datasets/Mobile-HDR"
     create_folder(save_folder)
     
     save_path_preexpand = save_folder + "preexpand_hdr.pth"
@@ -146,7 +178,7 @@ if __name__ == "__main__":
     # ------------------ WANDB INITIALIZATION ------------------
     wandb.init(
         project="hdr-dual-moe",
-        name=f"run_{timestamp_str}_a100_Teacher_from_scratch",
+        name=f"run_{timestamp_str}_a100_hybrid_Teacher_from_scratch",
         config={
             "learning_rate": lr,
             "epochs": num_epochs,
@@ -241,9 +273,44 @@ if __name__ == "__main__":
     model.train()
 
     print("Creating dataset")
-    dataset = HDRDataset(dataset_directory, patch_sz=patch_sz, num_patch=num_patch, batch_sz=batch_sz, J=1, 
-                         nbits=nbits, nbits_data=nbits_data, read_noise=read_noise, do_expand=False)
+    # dataset = HDRDataset(dataset_directory, patch_sz=patch_sz, num_patch=num_patch, batch_sz=batch_sz, J=1, 
+    #                      nbits=nbits, nbits_data=nbits_data, read_noise=read_noise, do_expand=False)
 
+    # 1. Define a quick custom transform to handle the patch cropping
+    def train_transforms(noisy, clean):
+        # 'noisy' and 'clean' are [C, H, W] tensors here
+        _, h, w = noisy.shape
+        patch_sz = 256 # Or whatever your patch_sz variable is set to
+        
+        if h > patch_sz and w > patch_sz:
+            top = random.randint(0, h - patch_sz)
+            left = random.randint(0, w - patch_sz)
+            noisy = TF.crop(noisy, top, left, patch_sz, patch_sz)
+            clean = TF.crop(clean, top, left, patch_sz, patch_sz)
+            
+        # Optional: Add Random Horizontal Flip
+        if random.random() > 0.5:
+            noisy = TF.hflip(noisy)
+            clean = TF.hflip(clean)
+            
+        return noisy, clean
+
+    # 2. Initialize the new dataset!
+    dataset = MobileHDRDataset(
+        base_dir=dataset_directory, 
+        split="train", 
+        transform=train_transforms
+    )
+
+    # 3. Let PyTorch's DataLoader handle the batch_sz instead of the Dataset class
+    dataloader = torch.utils.data.DataLoader(
+        dataset, 
+        batch_size=batch_sz,   # Pass your batch_sz here instead!
+        shuffle=True, 
+        num_workers=4,
+        pin_memory=True
+    )
+    
     print("Training started")
     training_t0 = time.time() # Added tracking variable to patch runtime reference error below
     
@@ -268,8 +335,12 @@ if __name__ == "__main__":
                 x = sample["x"].to(device, non_blocking=True)
                 y = sample["y"].to(device, non_blocking=True)
                 xm = sample["xm"].to(device, non_blocking=True)
-                snr_map = sample["snr_map"].to(device, non_blocking=True)
-
+                
+                
+                # snr_map = sample["snr_map"].to(device, non_blocking=True)
+                with torch.no_grad():
+                    snr_map = estimate_local_snr_map(xm, window_size=5).to(device, non_blocking=True)
+                
                 optimizer.zero_grad(set_to_none=True)
                 
                 with torch.cuda.amp.autocast():
