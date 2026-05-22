@@ -1,0 +1,17 @@
+==========================================================
+  DUAL MOE TEACHER — A100 TRAINING
+==========================================================
+Timestamp:       20260522_0832
+Dataset:         /scratch/gilbreth/chen4848/datasets/Mobile-HDR
+Save folder:     models_MoE_Teacher_MobileHDR_20260522_0832/
+Batch size:      32
+Patch size:      256  (×32 per image)
+LR:              0.0002  (CosineAnnealingLR → η_min=1e-6)
+Epochs:          100
+Loss weights:    γ_percep=0.05, aux=0.5
+nbits:           20 / 10
+Model:           {'dim': 32, 'num_blocks': [4, 4, 4, 4], 'num_refinement_blocks': 4, 'heads': [1, 2, 4, 8]}
+==========================================================
+
+
+Epoch #1: Loss =       0.4480 		PSNR = 20.33	(Time: 259.510292)Epoch #2: Loss =       0.3629 		PSNR = 27.66	(Time: 206.288563)Epoch #3: Loss =       0.3949 		PSNR = 18.32	(Time: 203.104177)Epoch #4: Loss =       0.3933 		PSNR = 15.20	(Time: 205.270044)Epoch #5: Loss =       0.3837 		PSNR = 15.20	(Time: 199.234939)Epoch #6: Loss =       0.3790 		PSNR = 15.23	(Time: 200.528836)Epoch #7: Loss =       0.3753 		PSNR = 15.17	(Time: 204.659386)Epoch #8: Loss =       0.3727 		PSNR = 15.12	(Time: 203.630575)Epoch #9: Loss =       0.3721 		PSNR = 15.08	(Time: 202.726823)Epoch #10: Loss =       0.3782 		PSNR = 15.29	(Time: 198.728570)

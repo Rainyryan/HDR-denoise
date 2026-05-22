@@ -1,0 +1,8 @@
+Preparing dual model
+Compiling model graph via TorchInductor optimization...
+Skipping native graph compilation: Dynamo is not supported on Python 3.12+
+Setting up [LPIPS] perceptual loss: trunk [vgg], v[0.1], spatial [off]
+Loading model from: /home/chen4848/.conda/envs/2025.06-py313/dl/lib/python3.12/site-packages/lpips/weights/v0.1/vgg.pth
+[1;34mwandb[0m: 
+[1;34mwandb[0m: 🚀 View run [33mrun_20260521_1619_MobileHDR_hybrid_Teacher[0m at: [34mhttps://wandb.ai/ryanhana-wandb/hdr-dual-moe/runs/sle4nxho[0m
+[1;34mwandb[0m: Find logs at: [1;35mwandb/run-20260521_161916-sle4nxho/logs[0m

@@ -1,0 +1,31 @@
+wandb: [wandb.login()] Loaded credentials for https://api.wandb.ai from WANDB_API_KEY.
+wandb: Currently logged in as: ryanhana (ryanhana-wandb) to https://api.wandb.ai. Use `wandb login --relogin` to force relogin
+wandb: Tracking run with wandb version 0.27.0
+wandb: Run data is saved locally in /scratch/gilbreth/chen4848/projects/HDR-denoise/wandb/run-20260521_182918-y079pkcv
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run run_20260521_1829_MobileHDR_hybrid_Teacher
+wandb: ⭐️ View project at https://wandb.ai/ryanhana-wandb/hdr-dual-moe
+wandb: 🚀 View run at https://wandb.ai/ryanhana-wandb/hdr-dual-moe/runs/y079pkcv
+/home/chen4848/.conda/envs/2025.06-py313/dl/lib/python3.12/site-packages/torchvision/models/_utils.py:208: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
+  warnings.warn(
+/home/chen4848/.conda/envs/2025.06-py313/dl/lib/python3.12/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=VGG16_Weights.IMAGENET1K_V1`. You can also use `weights=VGG16_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings.warn(msg)
+/scratch/gilbreth/chen4848/projects/HDR-denoise/train_A100_MoE_Teacher.py:337: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with torch.cuda.amp.autocast():
+Traceback (most recent call last):
+  File "/scratch/gilbreth/chen4848/projects/HDR-denoise/train_A100_MoE_Teacher.py", line 366, in <module>
+    loss_perceptual = loss_lpips(pred_tm_clamped, gt_tm_clamped).mean()
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/chen4848/.conda/envs/2025.06-py313/dl/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1739, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/chen4848/.conda/envs/2025.06-py313/dl/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1750, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/chen4848/.conda/envs/2025.06-py313/dl/lib/python3.12/site-packages/lpips/lpips.py", line 124, in forward
+    diffs[kk] = (feats0[kk]-feats1[kk])**2
+                ~~~~~~~~~~~~~~~~~~~~~~~^^~
+  File "/home/chen4848/.conda/envs/2025.06-py313/dl/lib/python3.12/site-packages/torch/_tensor.py", line 39, in wrapped
+    return f(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 4.00 GiB. GPU 0 has a total capacity of 79.25 GiB of which 2.56 GiB is free. Including non-PyTorch memory, this process has 76.69 GiB memory in use. Of the allocated memory 71.17 GiB is allocated by PyTorch, and 5.02 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)

@@ -1,0 +1,3 @@
+
+Total params = 19529830
+Epoch #1: Loss =       0.0004 		PSNR = 28.21	(Time: 60.382035)Epoch #2: Loss =       0.0003 		PSNR = 29.17	(Time: 59.833109)

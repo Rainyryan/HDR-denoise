@@ -1,0 +1,140 @@
+_wandb:
+    value:
+        cli_version: 0.27.0
+        e:
+            eyq3g88zbtc0llcjw4jj81qkqawpu02j:
+                codePath: train_A100_MoE_Teacher.py
+                codePathLocal: train_A100_MoE_Teacher.py
+                cpu_count: 64
+                cpu_count_logical: 64
+                cudaVersion: "13.1"
+                disk:
+                    /:
+                        total: "270307360768"
+                        used: "18055979008"
+                email: rc6150@gmail.com
+                executable: /home/chen4848/.conda/envs/2025.06-py313/dl/bin/python
+                git:
+                    commit: ea02d7a2f203eada0feb8a527382ba8c2325e153
+                    remote: git@github.com:Rainyryan/HDR-denoise.git
+                gpu: NVIDIA A100 80GB PCIe
+                gpu_count: 1
+                gpu_nvidia:
+                    - architecture: Ampere
+                      cudaCores: 6912
+                      memoryTotal: "85899345920"
+                      name: NVIDIA A100 80GB PCIe
+                      uuid: GPU-55ab976e-f500-e18a-e7c8-ce34b26ab6c2
+                host: gilbreth-k035.rcac.purdue.edu
+                memory:
+                    total: "540614725632"
+                os: Linux-5.14.0-611.16.1.el9_7.x86_64-x86_64-with-glibc2.34
+                program: /scratch/gilbreth/chen4848/projects/HDR-denoise/train_A100_MoE_Teacher.py
+                python: CPython 3.12.2
+                root: /scratch/gilbreth/chen4848/projects/HDR-denoise
+                slurm:
+                    cluster_name: gilbreth
+                    conf: /var/spool/slurm/conf-cache/slurm.conf
+                    cpus_on_node: "8"
+                    cpus_per_task: "8"
+                    gpus_on_node: "1"
+                    gtids: "0"
+                    job_account: stanchan
+                    job_cpus_per_node: "8"
+                    job_end_time: "1779416344"
+                    job_gid: "132"
+                    job_gpus: "0"
+                    job_id: "10753567"
+                    job_name: teacher_train
+                    job_nodelist: gilbreth-k035
+                    job_num_nodes: "1"
+                    job_partition: a100-80gb
+                    job_qos: normal
+                    job_start_time: "1779394744"
+                    job_uid: "977636"
+                    job_user: chen4848
+                    jobid: "10753567"
+                    localid: "0"
+                    mem_per_node: "65536"
+                    mpi_type: pmix
+                    nnodes: "1"
+                    nodeid: "0"
+                    nodelist: gilbreth-k035
+                    nprocs: "1"
+                    ntasks: "1"
+                    ntasks_per_node: "1"
+                    oom_kill_step: "0"
+                    prio_process: "0"
+                    procid: "0"
+                    script_context: prolog_task
+                    submit_dir: /scratch/gilbreth/chen4848/projects/HDR-denoise
+                    submit_host: gilbreth-fe02.rcac.purdue.edu
+                    task_pid: "2975510"
+                    tasks_per_node: "1"
+                    topology_addr: gilbreth-k035
+                    topology_addr_pattern: node
+                    tres_per_task: cpu=8
+                startedAt: "2026-05-21T20:19:16.179668Z"
+                writerId: eyq3g88zbtc0llcjw4jj81qkqawpu02j
+        m: []
+        python_version: 3.12.2
+        t:
+            "1":
+                - 1
+                - 41
+            "2":
+                - 1
+                - 41
+            "3":
+                - 13
+                - 16
+            "4": 3.12.2
+            "5": 0.27.0
+            "12": 0.27.0
+            "13": linux-x86_64
+batch_size:
+    value: 64
+dataset_path:
+    value: /scratch/gilbreth/chen4848/datasets/Mobile-HDR
+dim:
+    value: 32
+epochs:
+    value: 600
+expand_mode_epoch:
+    value: 999
+heads:
+    value:
+        - 1
+        - 2
+        - 4
+        - 8
+learning_rate:
+    value: 0.0004
+model_architecture:
+    value: Dual_Hybrid_Student_HDR
+nbits:
+    value: 20
+nbits_data:
+    value: 10
+num_blocks:
+    value:
+        - 4
+        - 4
+        - 4
+        - 4
+num_patches_per_image:
+    value: 64
+num_refinement_blocks:
+    value: 4
+optimizer:
+    value: Adam
+patch_size:
+    value: 256
+pretrained_path:
+    value: null
+read_noise:
+    value: 0
+save_folder:
+    value: models_MoE_Teacher_MobileHDR_20260521_1619/
+seed:
+    value: 21

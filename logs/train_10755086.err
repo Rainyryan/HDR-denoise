@@ -1,0 +1,42 @@
+wandb: [wandb.login()] Loaded credentials for https://api.wandb.ai from WANDB_API_KEY.
+wandb: Currently logged in as: ryanhana (ryanhana-wandb) to https://api.wandb.ai. Use `wandb login --relogin` to force relogin
+wandb: setting up run hwk2rhoe
+wandb: Tracking run with wandb version 0.27.0
+wandb: Run data is saved locally in /scratch/gilbreth/chen4848/projects/HDR-denoise/wandb/run-20260521_183424-hwk2rhoe
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run run_20260521_1834_MobileHDR_hybrid_Teacher
+wandb: ⭐️ View project at https://wandb.ai/ryanhana-wandb/hdr-dual-moe
+wandb: 🚀 View run at https://wandb.ai/ryanhana-wandb/hdr-dual-moe/runs/hwk2rhoe
+/home/chen4848/.conda/envs/2025.06-py313/dl/lib/python3.12/site-packages/torchvision/models/_utils.py:208: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
+  warnings.warn(
+/home/chen4848/.conda/envs/2025.06-py313/dl/lib/python3.12/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=VGG16_Weights.IMAGENET1K_V1`. You can also use `weights=VGG16_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings.warn(msg)
+/scratch/gilbreth/chen4848/projects/HDR-denoise/train_A100_MoE_Teacher.py:337: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with torch.cuda.amp.autocast():
+/scratch/gilbreth/chen4848/projects/HDR-denoise/train_A100_MoE_Teacher.py:337: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with torch.cuda.amp.autocast():
+/scratch/gilbreth/chen4848/projects/HDR-denoise/train_A100_MoE_Teacher.py:337: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  # with torch.cuda.amp.autocast():
+Traceback (most recent call last):
+  File "/scratch/gilbreth/chen4848/projects/HDR-denoise/train_A100_MoE_Teacher.py", line 435, in <module>
+    artifact = wandb.Artifact(f"dual_hdr_{artifact_name}", type="model")
+    ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/chen4848/.conda/envs/2025.06-py313/dl/lib/python3.12/site-packages/wandb/sdk/artifacts/_validators.py", line 273, in wrapper
+    return method(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/chen4848/.conda/envs/2025.06-py313/dl/lib/python3.12/site-packages/wandb/sdk/artifacts/artifact.py", line 1543, in add_file
+    return self._add_local_file(
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/chen4848/.conda/envs/2025.06-py313/dl/lib/python3.12/site-packages/wandb/sdk/artifacts/artifact.py", line 1822, in _add_local_file
+    with tempfile.NamedTemporaryFile(dir=get_staging_dir(), delete=False) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/chen4848/.conda/envs/2025.06-py313/dl/lib/python3.12/tempfile.py", line 582, in NamedTemporaryFile
+    file = _io.open(dir, mode, buffering=buffering,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/chen4848/.conda/envs/2025.06-py313/dl/lib/python3.12/tempfile.py", line 579, in opener
+    fd, name = _mkstemp_inner(dir, prefix, suffix, flags, output_type)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/chen4848/.conda/envs/2025.06-py313/dl/lib/python3.12/tempfile.py", line 256, in _mkstemp_inner
+    fd = _os.open(file, flags, 0o600)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+OSError: [Errno 122] Disk quota exceeded: '/home/chen4848/.local/share/wandb/artifacts/staging/tmpturlaaeg'

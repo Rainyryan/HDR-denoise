@@ -1,0 +1,339 @@
+Preparing model
+Setting up [LPIPS] perceptual loss: trunk [vgg], v[0.1], spatial [off]
+Loading model from: /home/chen4848/.conda/envs/2025.06-py313/dl/lib/python3.12/site-packages/lpips/weights/v0.1/vgg.pth
+Creating dataset
+[Dataset preparation]: Loaded 4736 crops
+Training started
+	Loss =          0.0002		PSNR = 25.30	Loss =          0.0001		PSNR = 26.26	Loss =          0.0001		PSNR = 26.71Epoch #1: Loss =       0.0157 		PSNR = 27.05	(Time: 57.749522)
+	Loss =          0.0001		PSNR = 29.00	Loss =          0.0001		PSNR = 29.01	Loss =          0.0001		PSNR = 28.98Epoch #2: Loss =       0.0107 		PSNR = 29.06	(Time: 55.645407)
+	Loss =          0.0001		PSNR = 28.90	Loss =          0.0001		PSNR = 28.92	Loss =          0.0001		PSNR = 29.02Epoch #3: Loss =       0.0102 		PSNR = 29.10	(Time: 55.673062)
+	Loss =          0.0001		PSNR = 29.07	Loss =          0.0001		PSNR = 29.12	Loss =          0.0001		PSNR = 29.16Epoch #4: Loss =       0.0099 		PSNR = 29.21	(Time: 55.661485)
+	Loss =          0.0001		PSNR = 28.85	Loss =          0.0001		PSNR = 28.91	Loss =          0.0001		PSNR = 28.99Epoch #5: Loss =       0.0093 		PSNR = 28.94	(Time: 55.667936)
+	Loss =          0.0001		PSNR = 28.78	Loss =          0.0001		PSNR = 28.86	Loss =          0.0001		PSNR = 28.91Epoch #6: Loss =       0.0093 		PSNR = 28.87	(Time: 55.520938)
+	Loss =          0.0001		PSNR = 28.66	Loss =          0.0001		PSNR = 28.73	Loss =          0.0001		PSNR = 28.80Epoch #7: Loss =       0.0091 		PSNR = 28.76	(Time: 55.788753)
+	Loss =          0.0001		PSNR = 28.66	Loss =          0.0001		PSNR = 28.75	Loss =          0.0001		PSNR = 28.70Epoch #8: Loss =       0.0090 		PSNR = 28.72	(Time: 55.787104)
+	Loss =          0.0001		PSNR = 28.92	Loss =          0.0001		PSNR = 28.89	Loss =          0.0001		PSNR = 28.84Epoch #9: Loss =       0.0090 		PSNR = 28.77	(Time: 55.993888)
+	Loss =          0.0001		PSNR = 28.63	Loss =          0.0001		PSNR = 28.63	Loss =          0.0001		PSNR = 28.63Epoch #10: Loss =       0.0089 		PSNR = 28.64	(Time: 55.947301)
+[Dataset preparation]: Loaded 4736 crops
+	Loss =          0.0001		PSNR = 28.69	Loss =          0.0001		PSNR = 28.61	Loss =          0.0001		PSNR = 28.55Epoch #11: Loss =       0.0088 		PSNR = 28.55	(Time: 55.470379)
+	Loss =          0.0001		PSNR = 28.50	Loss =          0.0001		PSNR = 28.73	Loss =          0.0001		PSNR = 28.69Epoch #12: Loss =       0.0090 		PSNR = 28.67	(Time: 55.687357)
+	Loss =          0.0001		PSNR = 28.53	Loss =          0.0001		PSNR = 28.53	Loss =          0.0001		PSNR = 28.62Epoch #13: Loss =       0.0088 		PSNR = 28.54	(Time: 55.786785)
+	Loss =          0.0001		PSNR = 28.46	Loss =          0.0001		PSNR = 28.45	Loss =          0.0001		PSNR = 28.49Epoch #14: Loss =       0.0087 		PSNR = 28.46	(Time: 56.010826)
+	Loss =          0.0001		PSNR = 28.47	Loss =          0.0001		PSNR = 28.58	Loss =          0.0001		PSNR = 28.67Epoch #15: Loss =       0.0089 		PSNR = 28.62	(Time: 55.879048)
+	Loss =          0.0001		PSNR = 28.64	Loss =          0.0001		PSNR = 28.55	Loss =          0.0001		PSNR = 28.55Epoch #16: Loss =       0.0087 		PSNR = 28.52	(Time: 55.613194)
+	Loss =          0.0001		PSNR = 28.45	Loss =          0.0001		PSNR = 28.47	Loss =          0.0001		PSNR = 28.53Epoch #17: Loss =       0.0087 		PSNR = 28.53	(Time: 55.808051)
+	Loss =          0.0001		PSNR = 28.47	Loss =          0.0001		PSNR = 28.50	Loss =          0.0001		PSNR = 28.48Epoch #18: Loss =       0.0086 		PSNR = 28.49	(Time: 55.856015)
+	Loss =          0.0001		PSNR = 28.33	Loss =          0.0001		PSNR = 28.48	Loss =          0.0001		PSNR = 28.55Epoch #19: Loss =       0.0086 		PSNR = 28.52	(Time: 55.735607)
+	Loss =          0.0001		PSNR = 28.60	Loss =          0.0001		PSNR = 28.67	Loss =          0.0001		PSNR = 28.64Epoch #20: Loss =       0.0086 		PSNR = 28.67	(Time: 55.962362)
+[Dataset preparation]: Loaded 4736 crops
+	Loss =          0.0001		PSNR = 28.72	Loss =          0.0001		PSNR = 28.65	Loss =          0.0001		PSNR = 28.60Epoch #21: Loss =       0.0085 		PSNR = 28.57	(Time: 55.355804)
+	Loss =          0.0001		PSNR = 28.71	Loss =          0.0001		PSNR = 28.72	Loss =          0.0001		PSNR = 28.68Epoch #22: Loss =       0.0085 		PSNR = 28.67	(Time: 55.889718)
+	Loss =          0.0001		PSNR = 28.65	Loss =          0.0001		PSNR = 28.64	Loss =          0.0001		PSNR = 28.70Epoch #23: Loss =       0.0084 		PSNR = 28.74	(Time: 55.676473)
+	Loss =          0.0001		PSNR = 28.68	Loss =          0.0001		PSNR = 28.74	Loss =          0.0001		PSNR = 28.84Epoch #24: Loss =       0.0083 		PSNR = 28.81	(Time: 55.781123)
+	Loss =          0.0001		PSNR = 28.83	Loss =          0.0001		PSNR = 28.85	Loss =          0.0001		PSNR = 28.90Epoch #25: Loss =       0.0083 		PSNR = 28.96	(Time: 55.788433)
+	Loss =          0.0001		PSNR = 29.20	Loss =          0.0001		PSNR = 29.06	Loss =          0.0001		PSNR = 29.09Epoch #26: Loss =       0.0083 		PSNR = 29.12	(Time: 55.735627)
+	Loss =          0.0001		PSNR = 29.10	Loss =          0.0001		PSNR = 29.23	Loss =          0.0001		PSNR = 29.26Epoch #27: Loss =       0.0082 		PSNR = 29.24	(Time: 55.823174)
+	Loss =          0.0001		PSNR = 29.46	Loss =          0.0001		PSNR = 29.36	Loss =          0.0001		PSNR = 29.38Epoch #28: Loss =       0.0082 		PSNR = 29.37	(Time: 55.746891)
+	Loss =          0.0001		PSNR = 29.38	Loss =          0.0001		PSNR = 29.61	Loss =          0.0001		PSNR = 29.65Epoch #29: Loss =       0.0082 		PSNR = 29.68	(Time: 55.758221)
+	Loss =          0.0001		PSNR = 29.76	Loss =          0.0001		PSNR = 29.74	Loss =          0.0001		PSNR = 29.73Epoch #30: Loss =       0.0081 		PSNR = 29.81	(Time: 55.961493)
+[Dataset preparation]: Loaded 4736 crops
+	Loss =          0.0001		PSNR = 29.92	Loss =          0.0001		PSNR = 29.79	Loss =          0.0001		PSNR = 29.82Epoch #31: Loss =       0.0078 		PSNR = 29.84	(Time: 55.359599)
+	Loss =          0.0001		PSNR = 30.04	Loss =          0.0001		PSNR = 29.97	Loss =          0.0001		PSNR = 30.03Epoch #32: Loss =       0.0078 		PSNR = 30.01	(Time: 55.611250)
+	Loss =          0.0001		PSNR = 30.37	Loss =          0.0001		PSNR = 30.34	Loss =          0.0001		PSNR = 30.37Epoch #33: Loss =       0.0077 		PSNR = 30.28	(Time: 55.747183)
+	Loss =          0.0001		PSNR = 30.27	Loss =          0.0001		PSNR = 30.50	Loss =          0.0001		PSNR = 30.52Epoch #34: Loss =       0.0076 		PSNR = 30.58	(Time: 55.780936)
+	Loss =          0.0001		PSNR = 30.57	Loss =          0.0001		PSNR = 30.67	Loss =          0.0001		PSNR = 30.78Epoch #35: Loss =       0.0075 		PSNR = 30.82	(Time: 55.667318)
+	Loss =          0.0001		PSNR = 31.20	Loss =          0.0001		PSNR = 31.23	Loss =          0.0001		PSNR = 31.17Epoch #36: Loss =       0.0073 		PSNR = 31.20	(Time: 55.567094)
+	Loss =          0.0001		PSNR = 31.41	Loss =          0.0001		PSNR = 31.48	Loss =          0.0001		PSNR = 31.44Epoch #37: Loss =       0.0072 		PSNR = 31.46	(Time: 55.616148)
+	Loss =          0.0001		PSNR = 31.55	Loss =          0.0001		PSNR = 31.67	Loss =          0.0001		PSNR = 31.77Epoch #38: Loss =       0.0070 		PSNR = 31.74	(Time: 55.844786)
+	Loss =          0.0001		PSNR = 31.95	Loss =          0.0001		PSNR = 32.06	Loss =          0.0001		PSNR = 31.98Epoch #39: Loss =       0.0068 		PSNR = 32.00	(Time: 55.794279)
+	Loss =          0.0001		PSNR = 32.30	Loss =          0.0001		PSNR = 32.23	Loss =          0.0001		PSNR = 32.22Epoch #40: Loss =       0.0067 		PSNR = 32.28	(Time: 55.962015)
+[Dataset preparation]: Loaded 4736 crops
+	Loss =          0.0001		PSNR = 32.66	Loss =          0.0001		PSNR = 32.56	Loss =          0.0001		PSNR = 32.61Epoch #41: Loss =       0.0067 		PSNR = 32.63	(Time: 55.547949)
+	Loss =          0.0001		PSNR = 32.78	Loss =          0.0001		PSNR = 32.70	Loss =          0.0001		PSNR = 32.72Epoch #42: Loss =       0.0066 		PSNR = 32.74	(Time: 56.325791)
+	Loss =          0.0000		PSNR = 32.92	Loss =          0.0001		PSNR = 32.89	Loss =          0.0001		PSNR = 32.93Epoch #43: Loss =       0.0065 		PSNR = 32.86	(Time: 60.805781)
+	Loss =          0.0001		PSNR = 33.04	Loss =          0.0001		PSNR = 32.95	Loss =          0.0001		PSNR = 32.98Epoch #44: Loss =       0.0064 		PSNR = 32.90	(Time: 55.676800)
+	Loss =          0.0000		PSNR = 32.66	Loss =          0.0000		PSNR = 32.85	Loss =          0.0000		PSNR = 32.99Epoch #45: Loss =       0.0064 		PSNR = 32.99	(Time: 56.040350)
+	Loss =          0.0000		PSNR = 33.11	Loss =          0.0000		PSNR = 33.10	Loss =          0.0000		PSNR = 33.11Epoch #46: Loss =       0.0063 		PSNR = 33.09	(Time: 55.974894)
+	Loss =          0.0000		PSNR = 33.09	Loss =          0.0000		PSNR = 33.08	Loss =          0.0000		PSNR = 33.14Epoch #47: Loss =       0.0063 		PSNR = 33.19	(Time: 55.874714)
+	Loss =          0.0000		PSNR = 33.36	Loss =          0.0000		PSNR = 33.30	Loss =          0.0000		PSNR = 33.29Epoch #48: Loss =       0.0062 		PSNR = 33.26	(Time: 55.816769)
+	Loss =          0.0000		PSNR = 33.29	Loss =          0.0000		PSNR = 33.29	Loss =          0.0000		PSNR = 33.37Epoch #49: Loss =       0.0062 		PSNR = 33.37	(Time: 55.774491)
+	Loss =          0.0000		PSNR = 33.44	Loss =          0.0000		PSNR = 33.34	Loss =          0.0000		PSNR = 33.35Epoch #50: Loss =       0.0061 		PSNR = 33.39	(Time: 55.795404)
+[Dataset preparation]: Loaded 4736 crops
+	Loss =          0.0000		PSNR = 33.74	Loss =          0.0000		PSNR = 33.45	Loss =          0.0000		PSNR = 33.43Epoch #51: Loss =       0.0062 		PSNR = 33.40	(Time: 55.341418)
+	Loss =          0.0000		PSNR = 33.40	Loss =          0.0000		PSNR = 33.44	Loss =          0.0000		PSNR = 33.41Epoch #52: Loss =       0.0062 		PSNR = 33.46	(Time: 55.900361)
+	Loss =          0.0000		PSNR = 33.52	Loss =          0.0000		PSNR = 33.57	Loss =          0.0000		PSNR = 33.53Epoch #53: Loss =       0.0060 		PSNR = 33.54	(Time: 55.792921)
+	Loss =          0.0000		PSNR = 33.60	Loss =          0.0000		PSNR = 33.61	Loss =          0.0000		PSNR = 33.59Epoch #54: Loss =       0.0060 		PSNR = 33.59	(Time: 55.829782)
+	Loss =          0.0000		PSNR = 33.85	Loss =          0.0000		PSNR = 33.68	Loss =          0.0000		PSNR = 33.66Epoch #55: Loss =       0.0060 		PSNR = 33.61	(Time: 55.792828)
+	Loss =          0.0000		PSNR = 33.65	Loss =          0.0000		PSNR = 33.61	Loss =          0.0000		PSNR = 33.69Epoch #56: Loss =       0.0059 		PSNR = 33.68	(Time: 55.790425)
+	Loss =          0.0000		PSNR = 33.72	Loss =          0.0000		PSNR = 33.71	Loss =          0.0000		PSNR = 33.73Epoch #57: Loss =       0.0059 		PSNR = 33.78	(Time: 55.773761)
+	Loss =          0.0000		PSNR = 33.65	Loss =          0.0000		PSNR = 33.76	Loss =          0.0000		PSNR = 33.77Epoch #58: Loss =       0.0058 		PSNR = 33.82	(Time: 55.699393)
+	Loss =          0.0000		PSNR = 33.73	Loss =          0.0000		PSNR = 33.81	Loss =          0.0000		PSNR = 33.81Epoch #59: Loss =       0.0058 		PSNR = 33.83	(Time: 55.962664)
+	Loss =          0.0000		PSNR = 33.79	Loss =          0.0000		PSNR = 33.81	Loss =          0.0000		PSNR = 33.89Epoch #60: Loss =       0.0057 		PSNR = 33.90	(Time: 55.706115)
+[Dataset preparation]: Loaded 4736 crops
+	Loss =          0.0000		PSNR = 34.05	Loss =          0.0000		PSNR = 33.93	Loss =          0.0000		PSNR = 33.91Epoch #61: Loss =       0.0057 		PSNR = 33.91	(Time: 55.428597)
+	Loss =          0.0000		PSNR = 33.81	Loss =          0.0000		PSNR = 33.90	Loss =          0.0000		PSNR = 33.94Epoch #62: Loss =       0.0057 		PSNR = 33.93	(Time: 55.667140)
+	Loss =          0.0000		PSNR = 33.76	Loss =          0.0000		PSNR = 33.85	Loss =          0.0000		PSNR = 33.94Epoch #63: Loss =       0.0057 		PSNR = 33.93	(Time: 55.656743)
+	Loss =          0.0000		PSNR = 33.91	Loss =          0.0000		PSNR = 34.05	Loss =          0.0000		PSNR = 33.96Epoch #64: Loss =       0.0056 		PSNR = 33.96	(Time: 55.665554)
+	Loss =          0.0000		PSNR = 34.12	Loss =          0.0000		PSNR = 33.99	Loss =          0.0000		PSNR = 33.98Epoch #65: Loss =       0.0056 		PSNR = 33.98	(Time: 55.651090)
+	Loss =          0.0000		PSNR = 34.25	Loss =          0.0000		PSNR = 34.18	Loss =          0.0000		PSNR = 34.12Epoch #66: Loss =       0.0057 		PSNR = 34.09	(Time: 55.569286)
+	Loss =          0.0000		PSNR = 33.93	Loss =          0.0000		PSNR = 34.09	Loss =          0.0000		PSNR = 34.09Epoch #67: Loss =       0.0056 		PSNR = 34.09	(Time: 55.626619)
+	Loss =          0.0000		PSNR = 34.08	Loss =          0.0000		PSNR = 34.06	Loss =          0.0000		PSNR = 34.02Epoch #68: Loss =       0.0056 		PSNR = 34.09	(Time: 55.739307)
+	Loss =          0.0000		PSNR = 34.11	Loss =          0.0000		PSNR = 34.19	Loss =          0.0000		PSNR = 34.18Epoch #69: Loss =       0.0056 		PSNR = 34.13	(Time: 55.756203)
+	Loss =          0.0000		PSNR = 34.13	Loss =          0.0000		PSNR = 34.15	Loss =          0.0000		PSNR = 34.10Epoch #70: Loss =       0.0056 		PSNR = 34.15	(Time: 55.962734)
+[Dataset preparation]: Loaded 4736 crops
+	Loss =          0.0000		PSNR = 33.91	Loss =          0.0000		PSNR = 34.10	Loss =          0.0000		PSNR = 34.06Epoch #71: Loss =       0.0055 		PSNR = 34.09	(Time: 55.470320)
+	Loss =          0.0000		PSNR = 34.19	Loss =          0.0000		PSNR = 34.15	Loss =          0.0000		PSNR = 34.11Epoch #72: Loss =       0.0055 		PSNR = 34.12	(Time: 55.563963)
+	Loss =          0.0000		PSNR = 34.22	Loss =          0.0000		PSNR = 34.09	Loss =          0.0000		PSNR = 34.08Epoch #73: Loss =       0.0055 		PSNR = 34.10	(Time: 55.711179)
+	Loss =          0.0000		PSNR = 33.99	Loss =          0.0000		PSNR = 34.12	Loss =          0.0000		PSNR = 34.09Epoch #74: Loss =       0.0055 		PSNR = 34.11	(Time: 55.668061)
+	Loss =          0.0000		PSNR = 34.08	Loss =          0.0000		PSNR = 34.10	Loss =          0.0000		PSNR = 34.13Epoch #75: Loss =       0.0055 		PSNR = 34.11	(Time: 55.831502)
+	Loss =          0.0000		PSNR = 34.23	Loss =          0.0000		PSNR = 34.11	Loss =          0.0000		PSNR = 34.21Epoch #76: Loss =       0.0055 		PSNR = 34.20	(Time: 55.647819)
+	Loss =          0.0000		PSNR = 34.20	Loss =          0.0000		PSNR = 34.21	Loss =          0.0000		PSNR = 34.22Epoch #77: Loss =       0.0055 		PSNR = 34.18	(Time: 55.769431)
+	Loss =          0.0000		PSNR = 34.21	Loss =          0.0000		PSNR = 34.26	Loss =          0.0000		PSNR = 34.26Epoch #78: Loss =       0.0055 		PSNR = 34.21	(Time: 55.913618)
+	Loss =          0.0000		PSNR = 34.52	Loss =          0.0000		PSNR = 34.27	Loss =          0.0000		PSNR = 34.27Epoch #79: Loss =       0.0054 		PSNR = 34.23	(Time: 55.750129)
+	Loss =          0.0000		PSNR = 34.24	Loss =          0.0000		PSNR = 34.26	Loss =          0.0000		PSNR = 34.22Epoch #80: Loss =       0.0054 		PSNR = 34.25	(Time: 55.774279)
+[Dataset preparation]: Loaded 4736 crops
+	Loss =          0.0000		PSNR = 34.21	Loss =          0.0000		PSNR = 34.16	Loss =          0.0000		PSNR = 34.22Epoch #81: Loss =       0.0054 		PSNR = 34.19	(Time: 55.384238)
+	Loss =          0.0000		PSNR = 34.19	Loss =          0.0000		PSNR = 34.21	Loss =          0.0000		PSNR = 34.20Epoch #82: Loss =       0.0054 		PSNR = 34.18	(Time: 55.835155)
+	Loss =          0.0000		PSNR = 34.16	Loss =          0.0000		PSNR = 34.23	Loss =          0.0000		PSNR = 34.23Epoch #83: Loss =       0.0054 		PSNR = 34.19	(Time: 55.723487)
+	Loss =          0.0000		PSNR = 34.16	Loss =          0.0000		PSNR = 34.30	Loss =          0.0000		PSNR = 34.18Epoch #84: Loss =       0.0054 		PSNR = 34.20	(Time: 55.721458)
+	Loss =          0.0000		PSNR = 34.16	Loss =          0.0000		PSNR = 34.13	Loss =          0.0000		PSNR = 34.20Epoch #85: Loss =       0.0054 		PSNR = 34.21	(Time: 55.822594)
+	Loss =          0.0000		PSNR = 34.24	Loss =          0.0000		PSNR = 34.17	Loss =          0.0000		PSNR = 34.12Epoch #86: Loss =       0.0054 		PSNR = 34.13	(Time: 55.568572)
+	Loss =          0.0000		PSNR = 34.21	Loss =          0.0000		PSNR = 34.19	Loss =          0.0000		PSNR = 34.13Epoch #87: Loss =       0.0054 		PSNR = 34.16	(Time: 55.767740)
+	Loss =          0.0000		PSNR = 34.14	Loss =          0.0000		PSNR = 34.20	Loss =          0.0000		PSNR = 34.10Epoch #88: Loss =       0.0054 		PSNR = 34.14	(Time: 55.864894)
+	Loss =          0.0000		PSNR = 34.04	Loss =          0.0000		PSNR = 34.13	Loss =          0.0000		PSNR = 34.13Epoch #89: Loss =       0.0053 		PSNR = 34.17	(Time: 55.733037)
+	Loss =          0.0000		PSNR = 34.19	Loss =          0.0000		PSNR = 34.14	Loss =          0.0000		PSNR = 34.18Epoch #90: Loss =       0.0053 		PSNR = 34.18	(Time: 55.957540)
+[Dataset preparation]: Loaded 4736 crops
+	Loss =          0.0000		PSNR = 34.08	Loss =          0.0000		PSNR = 34.19	Loss =          0.0000		PSNR = 34.25Epoch #91: Loss =       0.0054 		PSNR = 34.31	(Time: 55.469013)
+	Loss =          0.0000		PSNR = 34.30	Loss =          0.0000		PSNR = 34.39	Loss =          0.0000		PSNR = 34.37Epoch #92: Loss =       0.0054 		PSNR = 34.31	(Time: 55.884690)
+	Loss =          0.0000		PSNR = 34.30	Loss =          0.0000		PSNR = 34.29	Loss =          0.0000		PSNR = 34.35Epoch #93: Loss =       0.0054 		PSNR = 34.30	(Time: 55.705839)
+	Loss =          0.0000		PSNR = 34.20	Loss =          0.0000		PSNR = 34.26	Loss =          0.0000		PSNR = 34.32Epoch #94: Loss =       0.0054 		PSNR = 34.31	(Time: 55.865278)
+	Loss =          0.0000		PSNR = 34.34	Loss =          0.0000		PSNR = 34.30	Loss =          0.0000		PSNR = 34.31Epoch #95: Loss =       0.0054 		PSNR = 34.32	(Time: 55.904719)
+	Loss =          0.0000		PSNR = 34.29	Loss =          0.0000		PSNR = 34.19	Loss =          0.0000		PSNR = 34.23Epoch #96: Loss =       0.0054 		PSNR = 34.27	(Time: 55.563859)
+	Loss =          0.0000		PSNR = 34.42	Loss =          0.0000		PSNR = 34.27	Loss =          0.0000		PSNR = 34.30Epoch #97: Loss =       0.0054 		PSNR = 34.29	(Time: 55.781867)
+	Loss =          0.0000		PSNR = 34.54	Loss =          0.0000		PSNR = 34.41	Loss =          0.0000		PSNR = 34.32Epoch #98: Loss =       0.0054 		PSNR = 34.28	(Time: 55.792209)
+	Loss =          0.0000		PSNR = 34.09	Loss =          0.0000		PSNR = 34.21	Loss =          0.0000		PSNR = 34.28Epoch #99: Loss =       0.0054 		PSNR = 34.29	(Time: 55.753501)
+	Loss =          0.0000		PSNR = 34.54	Loss =          0.0000		PSNR = 34.29	Loss =          0.0000		PSNR = 34.31Epoch #100: Loss =       0.0054 		PSNR = 34.29	(Time: 55.733173)
+[Dataset preparation]: Loaded 4736 crops
+	Loss =          0.0001		PSNR = 29.54	Loss =          0.0001		PSNR = 27.78	Loss =          0.0001		PSNR = 27.66Epoch #101: Loss =       0.0152 		PSNR = 27.90	(Time: 55.370194)
+34.2928328642974 27.900460062800228 do not save
+[Dataset preparation]: Loaded 4736 crops
+	Loss =          0.0001		PSNR = 31.99	Loss =          0.0001		PSNR = 31.81	Loss =          0.0001		PSNR = 32.25Epoch #101: Loss =       0.0090 		PSNR = 32.48	(Time: 55.517147)
+	Loss =          0.0001		PSNR = 33.57	Loss =          0.0001		PSNR = 33.71	Loss =          0.0001		PSNR = 33.68Epoch #102: Loss =       0.0066 		PSNR = 33.66	(Time: 55.693991)
+	Loss =          0.0000		PSNR = 33.92	Loss =          0.0000		PSNR = 33.91	Loss =          0.0000		PSNR = 34.04Epoch #103: Loss =       0.0061 		PSNR = 34.01	(Time: 55.778028)
+	Loss =          0.0000		PSNR = 34.00	Loss =          0.0000		PSNR = 34.12	Loss =          0.0000		PSNR = 34.16Epoch #104: Loss =       0.0059 		PSNR = 34.14	(Time: 55.967703)
+	Loss =          0.0000		PSNR = 34.48	Loss =          0.0000		PSNR = 34.33	Loss =          0.0000		PSNR = 34.25Epoch #105: Loss =       0.0057 		PSNR = 34.26	(Time: 55.836426)
+	Loss =          0.0000		PSNR = 34.39	Loss =          0.0000		PSNR = 34.35	Loss =          0.0000		PSNR = 34.37Epoch #106: Loss =       0.0057 		PSNR = 34.37	(Time: 55.671401)
+	Loss =          0.0000		PSNR = 34.35	Loss =          0.0000		PSNR = 34.40	Loss =          0.0000		PSNR = 34.43Epoch #107: Loss =       0.0057 		PSNR = 34.44	(Time: 55.727359)
+	Loss =          0.0000		PSNR = 34.51	Loss =          0.0000		PSNR = 34.40	Loss =          0.0000		PSNR = 34.40Epoch #108: Loss =       0.0057 		PSNR = 34.36	(Time: 55.871139)
+	Loss =          0.0000		PSNR = 34.49	Loss =          0.0000		PSNR = 34.47	Loss =          0.0000		PSNR = 34.41Epoch #109: Loss =       0.0056 		PSNR = 34.42	(Time: 55.929128)
+	Loss =          0.0000		PSNR = 34.61	Loss =          0.0000		PSNR = 34.64	Loss =          0.0000		PSNR = 34.52Epoch #110: Loss =       0.0055 		PSNR = 34.50	(Time: 55.884632)
+[Dataset preparation]: Loaded 4736 crops
+	Loss =          0.0000		PSNR = 34.40	Loss =          0.0000		PSNR = 34.41	Loss =          0.0000		PSNR = 34.52Epoch #111: Loss =       0.0055 		PSNR = 34.57	(Time: 55.443561)
+	Loss =          0.0000		PSNR = 34.75	Loss =          0.0000		PSNR = 34.63	Loss =          0.0000		PSNR = 34.61Epoch #112: Loss =       0.0054 		PSNR = 34.61	(Time: 55.865675)
+	Loss =          0.0000		PSNR = 34.66	Loss =          0.0000		PSNR = 34.65	Loss =          0.0000		PSNR = 34.58Epoch #113: Loss =       0.0054 		PSNR = 34.61	(Time: 55.762175)
+	Loss =          0.0000		PSNR = 34.69	Loss =          0.0000		PSNR = 34.71	Loss =          0.0000		PSNR = 34.66Epoch #114: Loss =       0.0053 		PSNR = 34.69	(Time: 55.801846)
+	Loss =          0.0000		PSNR = 34.82	Loss =          0.0000		PSNR = 34.78	Loss =          0.0000		PSNR = 34.73Epoch #115: Loss =       0.0053 		PSNR = 34.72	(Time: 55.866954)
+	Loss =          0.0000		PSNR = 34.61	Loss =          0.0000		PSNR = 34.78	Loss =          0.0000		PSNR = 34.70Epoch #116: Loss =       0.0053 		PSNR = 34.79	(Time: 55.656991)
+	Loss =          0.0000		PSNR = 34.68	Loss =          0.0000		PSNR = 34.80	Loss =          0.0000		PSNR = 34.77Epoch #117: Loss =       0.0052 		PSNR = 34.79	(Time: 55.674970)
+	Loss =          0.0000		PSNR = 34.80	Loss =          0.0000		PSNR = 34.86	Loss =          0.0000		PSNR = 34.80Epoch #118: Loss =       0.0053 		PSNR = 34.82	(Time: 55.977598)
+	Loss =          0.0000		PSNR = 34.75	Loss =          0.0000		PSNR = 34.81	Loss =          0.0000		PSNR = 34.86Epoch #119: Loss =       0.0052 		PSNR = 34.83	(Time: 55.856342)
+	Loss =          0.0000		PSNR = 34.78	Loss =          0.0000		PSNR = 34.80	Loss =          0.0000		PSNR = 34.81Epoch #120: Loss =       0.0051 		PSNR = 34.85	(Time: 55.793029)
+[Dataset preparation]: Loaded 4736 crops
+	Loss =          0.0000		PSNR = 34.80	Loss =          0.0000		PSNR = 34.88	Loss =          0.0000		PSNR = 34.78Epoch #121: Loss =       0.0050 		PSNR = 34.80	(Time: 55.437534)
+	Loss =          0.0000		PSNR = 34.71	Loss =          0.0000		PSNR = 34.84	Loss =          0.0000		PSNR = 34.78Epoch #122: Loss =       0.0050 		PSNR = 34.79	(Time: 55.805863)
+	Loss =          0.0000		PSNR = 34.75	Loss =          0.0000		PSNR = 34.80	Loss =          0.0000		PSNR = 34.79Epoch #123: Loss =       0.0050 		PSNR = 34.79	(Time: 55.957757)
+	Loss =          0.0000		PSNR = 34.75	Loss =          0.0000		PSNR = 34.81	Loss =          0.0000		PSNR = 34.82Epoch #124: Loss =       0.0049 		PSNR = 34.82	(Time: 56.164781)
+	Loss =          0.0000		PSNR = 34.77	Loss =          0.0000		PSNR = 34.78	Loss =          0.0000		PSNR = 34.83Epoch #125: Loss =       0.0049 		PSNR = 34.83	(Time: 56.405437)
+	Loss =          0.0000		PSNR = 34.85	Loss =          0.0000		PSNR = 34.94	Loss =          0.0000		PSNR = 34.94Epoch #126: Loss =       0.0050 		PSNR = 34.90	(Time: 56.286439)
+	Loss =          0.0000		PSNR = 34.97	Loss =          0.0000		PSNR = 34.99	Loss =          0.0000		PSNR = 34.93Epoch #127: Loss =       0.0050 		PSNR = 34.92	(Time: 56.210717)
+	Loss =          0.0000		PSNR = 35.11	Loss =          0.0000		PSNR = 34.94	Loss =          0.0000		PSNR = 34.94Epoch #128: Loss =       0.0049 		PSNR = 34.94	(Time: 56.162688)
+	Loss =          0.0000		PSNR = 34.94	Loss =          0.0000		PSNR = 35.05	Loss =          0.0000		PSNR = 35.01Epoch #129: Loss =       0.0049 		PSNR = 34.96	(Time: 56.181290)
+	Loss =          0.0000		PSNR = 34.79	Loss =          0.0000		PSNR = 35.03	Loss =          0.0000		PSNR = 34.96Epoch #130: Loss =       0.0049 		PSNR = 34.96	(Time: 56.062153)
+[Dataset preparation]: Loaded 4736 crops
+	Loss =          0.0000		PSNR = 35.03	Loss =          0.0000		PSNR = 34.96	Loss =          0.0000		PSNR = 35.00Epoch #131: Loss =       0.0049 		PSNR = 35.04	(Time: 55.770109)
+	Loss =          0.0000		PSNR = 35.09	Loss =          0.0000		PSNR = 35.02	Loss =          0.0000		PSNR = 35.08Epoch #132: Loss =       0.0049 		PSNR = 35.03	(Time: 56.097170)
+	Loss =          0.0000		PSNR = 34.98	Loss =          0.0000		PSNR = 35.02	Loss =          0.0000		PSNR = 35.00Epoch #133: Loss =       0.0049 		PSNR = 35.04	(Time: 56.247849)
+	Loss =          0.0000		PSNR = 35.05	Loss =          0.0000		PSNR = 35.08	Loss =          0.0000		PSNR = 35.02Epoch #134: Loss =       0.0049 		PSNR = 35.04	(Time: 56.141933)
+	Loss =          0.0000		PSNR = 34.99	Loss =          0.0000		PSNR = 34.86	Loss =          0.0000		PSNR = 35.00Epoch #135: Loss =       0.0049 		PSNR = 35.05	(Time: 56.111254)
+	Loss =          0.0000		PSNR = 34.85	Loss =          0.0000		PSNR = 34.98	Loss =          0.0000		PSNR = 35.02Epoch #136: Loss =       0.0049 		PSNR = 35.09	(Time: 55.930606)
+	Loss =          0.0000		PSNR = 35.01	Loss =          0.0000		PSNR = 35.02	Loss =          0.0000		PSNR = 35.07Epoch #137: Loss =       0.0049 		PSNR = 35.09	(Time: 55.820419)
+	Loss =          0.0000		PSNR = 35.08	Loss =          0.0000		PSNR = 35.09	Loss =          0.0000		PSNR = 35.10Epoch #138: Loss =       0.0049 		PSNR = 35.09	(Time: 56.110809)
+	Loss =          0.0000		PSNR = 35.04	Loss =          0.0000		PSNR = 35.06	Loss =          0.0000		PSNR = 35.08Epoch #139: Loss =       0.0049 		PSNR = 35.07	(Time: 56.209792)
+	Loss =          0.0000		PSNR = 35.24	Loss =          0.0000		PSNR = 35.20	Loss =          0.0000		PSNR = 35.10Epoch #140: Loss =       0.0048 		PSNR = 35.09	(Time: 56.180964)
+[Dataset preparation]: Loaded 4736 crops
+	Loss =          0.0000		PSNR = 35.10	Loss =          0.0000		PSNR = 35.09	Loss =          0.0000		PSNR = 35.08Epoch #141: Loss =       0.0047 		PSNR = 35.05	(Time: 55.897718)
+	Loss =          0.0000		PSNR = 34.86	Loss =          0.0000		PSNR = 34.98	Loss =          0.0000		PSNR = 35.05Epoch #142: Loss =       0.0047 		PSNR = 35.05	(Time: 56.152144)
+	Loss =          0.0000		PSNR = 35.02	Loss =          0.0000		PSNR = 35.04	Loss =          0.0000		PSNR = 35.07Epoch #143: Loss =       0.0047 		PSNR = 35.05	(Time: 56.297045)
+	Loss =          0.0000		PSNR = 35.12	Loss =          0.0000		PSNR = 34.95	Loss =          0.0000		PSNR = 35.03Epoch #144: Loss =       0.0047 		PSNR = 35.03	(Time: 56.125572)
+	Loss =          0.0000		PSNR = 34.92	Loss =          0.0000		PSNR = 34.96	Loss =          0.0000		PSNR = 35.07Epoch #145: Loss =       0.0047 		PSNR = 35.03	(Time: 56.207350)
+	Loss =          0.0000		PSNR = 35.15	Loss =          0.0000		PSNR = 35.09	Loss =          0.0000		PSNR = 35.11Epoch #146: Loss =       0.0047 		PSNR = 35.09	(Time: 56.051626)
+	Loss =          0.0000		PSNR = 35.00	Loss =          0.0000		PSNR = 35.00	Loss =          0.0000		PSNR = 35.04Epoch #147: Loss =       0.0047 		PSNR = 35.09	(Time: 56.244915)
+	Loss =          0.0000		PSNR = 35.10	Loss =          0.0000		PSNR = 35.04	Loss =          0.0000		PSNR = 35.02Epoch #148: Loss =       0.0047 		PSNR = 35.08	(Time: 56.244978)
+	Loss =          0.0000		PSNR = 35.05	Loss =          0.0000		PSNR = 35.05	Loss =          0.0000		PSNR = 35.02Epoch #149: Loss =       0.0047 		PSNR = 35.07	(Time: 56.169840)
+	Loss =          0.0000		PSNR = 35.01	Loss =          0.0000		PSNR = 35.06	Loss =          0.0000		PSNR = 35.06Epoch #150: Loss =       0.0047 		PSNR = 35.07	(Time: 56.145883)
+[Dataset preparation]: Loaded 4736 crops
+	Loss =          0.0000		PSNR = 35.04	Loss =          0.0000		PSNR = 35.14	Loss =          0.0000		PSNR = 35.05Epoch #151: Loss =       0.0047 		PSNR = 35.07	(Time: 55.673363)
+	Loss =          0.0000		PSNR = 34.98	Loss =          0.0000		PSNR = 34.96	Loss =          0.0000		PSNR = 35.02Epoch #152: Loss =       0.0046 		PSNR = 35.07	(Time: 56.151436)
+	Loss =          0.0000		PSNR = 34.97	Loss =          0.0000		PSNR = 35.07	Loss =          0.0000		PSNR = 35.08Epoch #153: Loss =       0.0046 		PSNR = 35.07	(Time: 56.215417)
+	Loss =          0.0000		PSNR = 34.99	Loss =          0.0000		PSNR = 35.17	Loss =          0.0000		PSNR = 35.11Epoch #154: Loss =       0.0046 		PSNR = 35.08	(Time: 56.314696)
+	Loss =          0.0000		PSNR = 35.10	Loss =          0.0000		PSNR = 35.13	Loss =          0.0000		PSNR = 35.15Epoch #155: Loss =       0.0046 		PSNR = 35.06	(Time: 56.153355)
+	Loss =          0.0000		PSNR = 35.29	Loss =          0.0000		PSNR = 35.10	Loss =          0.0000		PSNR = 35.09Epoch #156: Loss =       0.0047 		PSNR = 35.08	(Time: 55.947494)
+	Loss =          0.0000		PSNR = 35.15	Loss =          0.0000		PSNR = 35.19	Loss =          0.0000		PSNR = 35.11Epoch #157: Loss =       0.0046 		PSNR = 35.08	(Time: 56.063225)
+	Loss =          0.0000		PSNR = 35.19	Loss =          0.0000		PSNR = 35.08	Loss =          0.0000		PSNR = 35.12Epoch #158: Loss =       0.0046 		PSNR = 35.09	(Time: 56.084347)
+	Loss =          0.0000		PSNR = 34.95	Loss =          0.0000		PSNR = 35.05	Loss =          0.0000		PSNR = 35.04Epoch #159: Loss =       0.0046 		PSNR = 35.08	(Time: 56.129509)
+	Loss =          0.0000		PSNR = 35.12	Loss =          0.0000		PSNR = 35.14	Loss =          0.0000		PSNR = 35.11Epoch #160: Loss =       0.0046 		PSNR = 35.08	(Time: 56.432180)
+[Dataset preparation]: Loaded 4736 crops
+	Loss =          0.0000		PSNR = 35.07	Loss =          0.0000		PSNR = 35.09	Loss =          0.0000		PSNR = 35.16Epoch #161: Loss =       0.0048 		PSNR = 35.11	(Time: 55.755187)
+	Loss =          0.0000		PSNR = 35.10	Loss =          0.0000		PSNR = 35.14	Loss =          0.0000		PSNR = 35.08Epoch #162: Loss =       0.0047 		PSNR = 35.13	(Time: 56.135113)
+	Loss =          0.0000		PSNR = 35.03	Loss =          0.0000		PSNR = 35.11	Loss =          0.0000		PSNR = 35.12Epoch #163: Loss =       0.0047 		PSNR = 35.11	(Time: 56.165800)
+	Loss =          0.0000		PSNR = 35.07	Loss =          0.0000		PSNR = 35.08	Loss =          0.0000		PSNR = 35.09Epoch #164: Loss =       0.0047 		PSNR = 35.12	(Time: 56.181178)
+	Loss =          0.0000		PSNR = 35.11	Loss =          0.0000		PSNR = 35.17	Loss =          0.0000		PSNR = 35.10Epoch #165: Loss =       0.0047 		PSNR = 35.12	(Time: 56.175945)
+	Loss =          0.0000		PSNR = 35.23	Loss =          0.0000		PSNR = 35.17	Loss =          0.0000		PSNR = 35.18Epoch #166: Loss =       0.0048 		PSNR = 35.20	(Time: 55.928607)
+	Loss =          0.0000		PSNR = 35.20	Loss =          0.0000		PSNR = 35.15	Loss =          0.0000		PSNR = 35.21Epoch #167: Loss =       0.0047 		PSNR = 35.21	(Time: 55.929455)
+	Loss =          0.0000		PSNR = 35.17	Loss =          0.0000		PSNR = 35.18	Loss =          0.0000		PSNR = 35.14Epoch #168: Loss =       0.0047 		PSNR = 35.20	(Time: 56.219853)
+	Loss =          0.0000		PSNR = 35.16	Loss =          0.0000		PSNR = 35.26	Loss =          0.0000		PSNR = 35.18Epoch #169: Loss =       0.0047 		PSNR = 35.19	(Time: 56.058421)
+	Loss =          0.0000		PSNR = 35.46	Loss =          0.0000		PSNR = 35.29	Loss =          0.0000		PSNR = 35.25Epoch #170: Loss =       0.0047 		PSNR = 35.21	(Time: 56.128302)
+[Dataset preparation]: Loaded 4736 crops
+	Loss =          0.0000		PSNR = 35.21	Loss =          0.0000		PSNR = 35.07	Loss =          0.0000		PSNR = 35.05Epoch #171: Loss =       0.0046 		PSNR = 35.02	(Time: 55.883654)
+	Loss =          0.0000		PSNR = 34.96	Loss =          0.0000		PSNR = 34.97	Loss =          0.0000		PSNR = 34.99Epoch #172: Loss =       0.0046 		PSNR = 35.02	(Time: 56.441638)
+	Loss =          0.0000		PSNR = 34.86	Loss =          0.0000		PSNR = 35.00	Loss =          0.0000		PSNR = 35.00Epoch #173: Loss =       0.0046 		PSNR = 35.01	(Time: 56.311530)
+	Loss =          0.0000		PSNR = 35.00	Loss =          0.0000		PSNR = 34.97	Loss =          0.0000		PSNR = 35.02Epoch #174: Loss =       0.0046 		PSNR = 35.02	(Time: 56.362324)
+	Loss =          0.0000		PSNR = 35.12	Loss =          0.0000		PSNR = 34.91	Loss =          0.0000		PSNR = 35.01Epoch #175: Loss =       0.0046 		PSNR = 35.03	(Time: 56.223418)
+	Loss =          0.0000		PSNR = 35.08	Loss =          0.0000		PSNR = 34.99	Loss =          0.0000		PSNR = 35.02Epoch #176: Loss =       0.0046 		PSNR = 34.99	(Time: 55.916544)
+	Loss =          0.0000		PSNR = 35.15	Loss =          0.0000		PSNR = 35.02	Loss =          0.0000		PSNR = 34.95Epoch #177: Loss =       0.0046 		PSNR = 34.99	(Time: 56.161436)
+	Loss =          0.0000		PSNR = 34.83	Loss =          0.0000		PSNR = 34.90	Loss =          0.0000		PSNR = 34.96Epoch #178: Loss =       0.0046 		PSNR = 35.00	(Time: 56.113752)
+	Loss =          0.0000		PSNR = 34.97	Loss =          0.0000		PSNR = 34.93	Loss =          0.0000		PSNR = 34.97Epoch #179: Loss =       0.0046 		PSNR = 35.01	(Time: 56.063618)
+	Loss =          0.0000		PSNR = 35.03	Loss =          0.0000		PSNR = 35.05	Loss =          0.0000		PSNR = 35.05Epoch #180: Loss =       0.0046 		PSNR = 34.99	(Time: 56.037156)
+[Dataset preparation]: Loaded 4736 crops
+	Loss =          0.0000		PSNR = 34.84	Loss =          0.0000		PSNR = 34.91	Loss =          0.0000		PSNR = 34.95Epoch #181: Loss =       0.0046 		PSNR = 34.95	(Time: 55.838103)
+	Loss =          0.0000		PSNR = 34.90	Loss =          0.0000		PSNR = 34.97	Loss =          0.0000		PSNR = 34.99Epoch #182: Loss =       0.0046 		PSNR = 34.95	(Time: 56.180671)
+	Loss =          0.0000		PSNR = 34.96	Loss =          0.0000		PSNR = 34.97	Loss =          0.0000		PSNR = 34.96Epoch #183: Loss =       0.0046 		PSNR = 34.96	(Time: 56.160496)
+	Loss =          0.0000		PSNR = 35.19	Loss =          0.0000		PSNR = 35.01	Loss =          0.0000		PSNR = 34.98Epoch #184: Loss =       0.0046 		PSNR = 34.96	(Time: 56.245618)
+	Loss =          0.0000		PSNR = 34.94	Loss =          0.0000		PSNR = 35.00	Loss =          0.0000		PSNR = 34.94Epoch #185: Loss =       0.0046 		PSNR = 34.97	(Time: 56.155797)
+	Loss =          0.0000		PSNR = 34.95	Loss =          0.0000		PSNR = 35.00	Loss =          0.0000		PSNR = 34.96Epoch #186: Loss =       0.0046 		PSNR = 34.93	(Time: 55.959310)
+	Loss =          0.0000		PSNR = 35.03	Loss =          0.0000		PSNR = 34.96	Loss =          0.0000		PSNR = 34.97Epoch #187: Loss =       0.0046 		PSNR = 34.93	(Time: 56.185418)
+	Loss =          0.0000		PSNR = 35.11	Loss =          0.0000		PSNR = 35.01	Loss =          0.0000		PSNR = 34.95Epoch #188: Loss =       0.0046 		PSNR = 34.93	(Time: 56.162704)
+	Loss =          0.0000		PSNR = 35.02	Loss =          0.0000		PSNR = 34.94	Loss =          0.0000		PSNR = 34.94Epoch #189: Loss =       0.0045 		PSNR = 34.93	(Time: 56.296797)
+	Loss =          0.0000		PSNR = 35.07	Loss =          0.0000		PSNR = 34.99	Loss =          0.0000		PSNR = 34.94Epoch #190: Loss =       0.0045 		PSNR = 34.93	(Time: 56.033138)
+[Dataset preparation]: Loaded 4736 crops
+	Loss =          0.0000		PSNR = 35.14	Loss =          0.0000		PSNR = 35.07	Loss =          0.0000		PSNR = 35.08Epoch #191: Loss =       0.0046 		PSNR = 35.06	(Time: 55.670736)
+	Loss =          0.0000		PSNR = 35.26	Loss =          0.0000		PSNR = 35.11	Loss =          0.0000		PSNR = 35.11Epoch #192: Loss =       0.0046 		PSNR = 35.06	(Time: 56.090706)
+	Loss =          0.0000		PSNR = 34.95	Loss =          0.0000		PSNR = 35.02	Loss =          0.0000		PSNR = 35.07Epoch #193: Loss =       0.0046 		PSNR = 35.07	(Time: 56.131387)
+	Loss =          0.0000		PSNR = 35.21	Loss =          0.0000		PSNR = 35.09	Loss =          0.0000		PSNR = 35.08Epoch #194: Loss =       0.0046 		PSNR = 35.07	(Time: 56.241604)
+	Loss =          0.0000		PSNR = 34.93	Loss =          0.0000		PSNR = 35.00	Loss =          0.0000		PSNR = 35.07Epoch #195: Loss =       0.0046 		PSNR = 35.08	(Time: 56.190960)
+	Loss =          0.0000		PSNR = 35.24	Loss =          0.0000		PSNR = 35.20	Loss =          0.0000		PSNR = 35.12Epoch #196: Loss =       0.0046 		PSNR = 35.12	(Time: 55.814487)
+	Loss =          0.0000		PSNR = 35.00	Loss =          0.0000		PSNR = 34.98	Loss =          0.0000		PSNR = 35.09Epoch #197: Loss =       0.0046 		PSNR = 35.12	(Time: 56.023966)
+	Loss =          0.0000		PSNR = 35.26	Loss =          0.0000		PSNR = 35.14	Loss =          0.0000		PSNR = 35.11Epoch #198: Loss =       0.0046 		PSNR = 35.12	(Time: 56.212427)
+	Loss =          0.0000		PSNR = 35.02	Loss =          0.0000		PSNR = 35.07	Loss =          0.0000		PSNR = 35.13Epoch #199: Loss =       0.0046 		PSNR = 35.13	(Time: 55.986218)
+	Loss =          0.0000		PSNR = 35.10	Loss =          0.0000		PSNR = 35.11	Loss =          0.0000		PSNR = 35.13Epoch #200: Loss =       0.0046 		PSNR = 35.13	(Time: 56.042423)
+[Dataset preparation]: Loaded 4736 crops
+	Loss =          0.0000		PSNR = 34.68	Loss =          0.0000		PSNR = 34.94	Loss =          0.0000		PSNR = 35.02Epoch #201: Loss =       0.0055 		PSNR = 35.08	(Time: 55.730024)
+	Loss =          0.0000		PSNR = 35.42	Loss =          0.0000		PSNR = 35.31	Loss =          0.0000		PSNR = 35.23Epoch #202: Loss =       0.0048 		PSNR = 35.22	(Time: 56.229489)
+	Loss =          0.0000		PSNR = 35.27	Loss =          0.0000		PSNR = 35.25	Loss =          0.0000		PSNR = 35.19Epoch #203: Loss =       0.0047 		PSNR = 35.16	(Time: 56.376533)
+	Loss =          0.0000		PSNR = 35.19	Loss =          0.0000		PSNR = 35.14	Loss =          0.0000		PSNR = 35.23Epoch #204: Loss =       0.0046 		PSNR = 35.21	(Time: 56.360447)
+	Loss =          0.0000		PSNR = 35.28	Loss =          0.0000		PSNR = 35.21	Loss =          0.0000		PSNR = 35.21Epoch #205: Loss =       0.0046 		PSNR = 35.20	(Time: 56.201264)
+	Loss =          0.0000		PSNR = 35.12	Loss =          0.0000		PSNR = 35.14	Loss =          0.0000		PSNR = 35.16Epoch #206: Loss =       0.0046 		PSNR = 35.16	(Time: 55.744867)
+	Loss =          0.0000		PSNR = 35.27	Loss =          0.0000		PSNR = 35.21	Loss =          0.0000		PSNR = 35.15Epoch #207: Loss =       0.0046 		PSNR = 35.19	(Time: 56.156113)
+	Loss =          0.0000		PSNR = 35.20	Loss =          0.0000		PSNR = 35.19	Loss =          0.0000		PSNR = 35.20Epoch #208: Loss =       0.0046 		PSNR = 35.18	(Time: 56.135335)
+	Loss =          0.0000		PSNR = 35.19	Loss =          0.0000		PSNR = 35.17	Loss =          0.0000		PSNR = 35.19Epoch #209: Loss =       0.0045 		PSNR = 35.19	(Time: 56.132780)
+	Loss =          0.0000		PSNR = 35.25	Loss =          0.0000		PSNR = 35.24	Loss =          0.0000		PSNR = 35.20Epoch #210: Loss =       0.0045 		PSNR = 35.22	(Time: 55.987427)
+[Dataset preparation]: Loaded 4736 crops
+	Loss =          0.0000		PSNR = 35.31	Loss =          0.0000		PSNR = 35.43	Loss =          0.0000		PSNR = 35.34Epoch #211: Loss =       0.0046 		PSNR = 35.31	(Time: 55.748151)
+	Loss =          0.0000		PSNR = 35.36	Loss =          0.0000		PSNR = 35.31	Loss =          0.0000		PSNR = 35.32Epoch #212: Loss =       0.0046 		PSNR = 35.29	(Time: 56.034563)
+	Loss =          0.0000		PSNR = 35.25	Loss =          0.0000		PSNR = 35.30	Loss =          0.0000		PSNR = 35.36Epoch #213: Loss =       0.0046 		PSNR = 35.32	(Time: 56.152666)
+	Loss =          0.0000		PSNR = 35.32	Loss =          0.0000		PSNR = 35.28	Loss =          0.0000		PSNR = 35.27Epoch #214: Loss =       0.0045 		PSNR = 35.29	(Time: 56.520696)
+	Loss =          0.0000		PSNR = 35.16	Loss =          0.0000		PSNR = 35.31	Loss =          0.0000		PSNR = 35.31Epoch #215: Loss =       0.0045 		PSNR = 35.29	(Time: 56.178156)
+	Loss =          0.0000		PSNR = 35.30	Loss =          0.0000		PSNR = 35.25	Loss =          0.0000		PSNR = 35.27Epoch #216: Loss =       0.0046 		PSNR = 35.28	(Time: 55.919820)
+	Loss =          0.0000		PSNR = 35.27	Loss =          0.0000		PSNR = 35.35	Loss =          0.0000		PSNR = 35.32Epoch #217: Loss =       0.0045 		PSNR = 35.35	(Time: 55.971826)
+	Loss =          0.0000		PSNR = 35.42	Loss =          0.0000		PSNR = 35.35	Loss =          0.0000		PSNR = 35.32Epoch #218: Loss =       0.0045 		PSNR = 35.38	(Time: 55.962421)
+	Loss =          0.0000		PSNR = 35.29	Loss =          0.0000		PSNR = 35.37	Loss =          0.0000		PSNR = 35.42Epoch #219: Loss =       0.0045 		PSNR = 35.41	(Time: 56.205504)
+	Loss =          0.0000		PSNR = 35.37	Loss =          0.0000		PSNR = 35.36	Loss =          0.0000		PSNR = 35.41Epoch #220: Loss =       0.0045 		PSNR = 35.38	(Time: 56.009526)
+[Dataset preparation]: Loaded 4736 crops
+	Loss =          0.0000		PSNR = 35.28	Loss =          0.0000		PSNR = 35.25	Loss =          0.0000		PSNR = 35.30Epoch #221: Loss =       0.0045 		PSNR = 35.28	(Time: 55.713128)
+	Loss =          0.0000		PSNR = 35.17	Loss =          0.0000		PSNR = 35.25	Loss =          0.0000		PSNR = 35.26Epoch #222: Loss =       0.0045 		PSNR = 35.28	(Time: 56.234819)
+	Loss =          0.0000		PSNR = 35.40	Loss =          0.0000		PSNR = 35.41	Loss =          0.0000		PSNR = 35.36Epoch #223: Loss =       0.0044 		PSNR = 35.30	(Time: 56.136421)
+	Loss =          0.0000		PSNR = 35.03	Loss =          0.0000		PSNR = 35.24	Loss =          0.0000		PSNR = 35.24Epoch #224: Loss =       0.0045 		PSNR = 35.26	(Time: 56.195440)
+	Loss =          0.0000		PSNR = 35.26	Loss =          0.0000		PSNR = 35.34	Loss =          0.0000		PSNR = 35.24Epoch #225: Loss =       0.0044 		PSNR = 35.28	(Time: 56.039566)
+	Loss =          0.0000		PSNR = 35.31	Loss =          0.0000		PSNR = 35.32	Loss =          0.0000		PSNR = 35.34Epoch #226: Loss =       0.0044 		PSNR = 35.32	(Time: 56.050301)
+	Loss =          0.0000		PSNR = 35.37	Loss =          0.0000		PSNR = 35.35	Loss =          0.0000		PSNR = 35.30Epoch #227: Loss =       0.0044 		PSNR = 35.29	(Time: 55.924070)
+	Loss =          0.0000		PSNR = 35.21	Loss =          0.0000		PSNR = 35.17	Loss =          0.0000		PSNR = 35.26Epoch #228: Loss =       0.0044 		PSNR = 35.26	(Time: 56.134595)
+	Loss =          0.0000		PSNR = 35.42	Loss =          0.0000		PSNR = 35.33	Loss =          0.0000		PSNR = 35.32Epoch #229: Loss =       0.0044 		PSNR = 35.30	(Time: 56.164259)
+	Loss =          0.0000		PSNR = 35.28	Loss =          0.0000		PSNR = 35.25	Loss =          0.0000		PSNR = 35.34Epoch #230: Loss =       0.0044 		PSNR = 35.32	(Time: 56.114319)
+[Dataset preparation]: Loaded 4736 crops
+	Loss =          0.0000		PSNR = 35.43	Loss =          0.0000		PSNR = 35.35	Loss =          0.0000		PSNR = 35.35Epoch #231: Loss =       0.0044 		PSNR = 35.33	(Time: 55.757493)
+	Loss =          0.0000		PSNR = 35.34	Loss =          0.0000		PSNR = 35.21	Loss =          0.0000		PSNR = 35.33Epoch #232: Loss =       0.0044 		PSNR = 35.33	(Time: 56.150709)
+	Loss =          0.0000		PSNR = 35.12	Loss =          0.0000		PSNR = 35.25	Loss =          0.0000		PSNR = 35.32Epoch #233: Loss =       0.0043 		PSNR = 35.33	(Time: 56.071058)
+	Loss =          0.0000		PSNR = 35.33	Loss =          0.0000		PSNR = 35.29	Loss =          0.0000		PSNR = 35.33Epoch #234: Loss =       0.0043 		PSNR = 35.35	(Time: 56.146443)
+	Loss =          0.0000		PSNR = 35.29	Loss =          0.0000		PSNR = 35.35	Loss =          0.0000		PSNR = 35.34Epoch #235: Loss =       0.0043 		PSNR = 35.34	(Time: 56.146642)
+	Loss =          0.0000		PSNR = 35.45	Loss =          0.0000		PSNR = 35.23	Loss =          0.0000		PSNR = 35.28Epoch #236: Loss =       0.0043 		PSNR = 35.29	(Time: 55.910630)
+	Loss =          0.0000		PSNR = 35.22	Loss =          0.0000		PSNR = 35.32	Loss =          0.0000		PSNR = 35.27Epoch #237: Loss =       0.0043 		PSNR = 35.30	(Time: 55.959030)
+	Loss =          0.0000		PSNR = 35.17	Loss =          0.0000		PSNR = 35.26	Loss =          0.0000		PSNR = 35.28Epoch #238: Loss =       0.0043 		PSNR = 35.29	(Time: 56.080842)
+	Loss =          0.0000		PSNR = 35.16	Loss =          0.0000		PSNR = 35.27	Loss =          0.0000		PSNR = 35.31Epoch #239: Loss =       0.0043 		PSNR = 35.30	(Time: 56.015831)
+	Loss =          0.0000		PSNR = 35.33	Loss =          0.0000		PSNR = 35.24	Loss =          0.0000		PSNR = 35.27Epoch #240: Loss =       0.0043 		PSNR = 35.30	(Time: 56.035465)
+[Dataset preparation]: Loaded 4736 crops
+	Loss =          0.0000		PSNR = 35.46	Loss =          0.0000		PSNR = 35.26	Loss =          0.0000		PSNR = 35.36Epoch #241: Loss =       0.0044 		PSNR = 35.41	(Time: 55.735244)
+	Loss =          0.0000		PSNR = 35.48	Loss =          0.0000		PSNR = 35.41	Loss =          0.0000		PSNR = 35.41Epoch #242: Loss =       0.0044 		PSNR = 35.41	(Time: 56.045146)
+	Loss =          0.0000		PSNR = 35.56	Loss =          0.0000		PSNR = 35.40	Loss =          0.0000		PSNR = 35.39Epoch #243: Loss =       0.0044 		PSNR = 35.42	(Time: 56.166260)
+	Loss =          0.0000		PSNR = 35.44	Loss =          0.0000		PSNR = 35.34	Loss =          0.0000		PSNR = 35.39Epoch #244: Loss =       0.0044 		PSNR = 35.40	(Time: 56.062060)
+	Loss =          0.0000		PSNR = 35.41	Loss =          0.0000		PSNR = 35.43	Loss =          0.0000		PSNR = 35.46Epoch #245: Loss =       0.0043 		PSNR = 35.41	(Time: 56.192315)
+	Loss =          0.0000		PSNR = 35.35	Loss =          0.0000		PSNR = 35.45	Loss =          0.0000		PSNR = 35.39Epoch #246: Loss =       0.0043 		PSNR = 35.38	(Time: 55.812740)
+	Loss =          0.0000		PSNR = 35.62	Loss =          0.0000		PSNR = 35.42	Loss =          0.0000		PSNR = 35.41Epoch #247: Loss =       0.0043 		PSNR = 35.39	(Time: 56.062801)
+	Loss =          0.0000		PSNR = 35.34	Loss =          0.0000		PSNR = 35.41	Loss =          0.0000		PSNR = 35.37Epoch #248: Loss =       0.0043 		PSNR = 35.39	(Time: 56.154057)
+	Loss =          0.0000		PSNR = 35.44	Loss =          0.0000		PSNR = 35.42	Loss =          0.0000		PSNR = 35.36Epoch #249: Loss =       0.0043 		PSNR = 35.40	(Time: 56.052326)
+	Loss =          0.0000		PSNR = 35.42	Loss =          0.0000		PSNR = 35.38	Loss =          0.0000		PSNR = 35.39Epoch #250: Loss =       0.0043 		PSNR = 35.40	(Time: 56.112566)
+[Dataset preparation]: Loaded 4736 crops
+	Loss =          0.0000		PSNR = 35.60	Loss =          0.0000		PSNR = 35.50	Loss =          0.0000		PSNR = 35.47Epoch #251: Loss =       0.0043 		PSNR = 35.45	(Time: 55.750067)
+	Loss =          0.0000		PSNR = 35.49	Loss =          0.0000		PSNR = 35.37	Loss =          0.0000		PSNR = 35.44Epoch #252: Loss =       0.0043 		PSNR = 35.45	(Time: 56.279243)
+	Loss =          0.0000		PSNR = 35.46	Loss =          0.0000		PSNR = 35.54	Loss =          0.0000		PSNR = 35.48Epoch #253: Loss =       0.0043 		PSNR = 35.46	(Time: 56.183884)
+	Loss =          0.0000		PSNR = 35.39	Loss =          0.0000		PSNR = 35.41	Loss =          0.0000		PSNR = 35.47Epoch #254: Loss =       0.0043 		PSNR = 35.46	(Time: 56.073220)
+	Loss =          0.0000		PSNR = 35.53	Loss =          0.0000		PSNR = 35.53	Loss =          0.0000		PSNR = 35.49Epoch #255: Loss =       0.0043 		PSNR = 35.47	(Time: 55.928688)
+	Loss =          0.0000		PSNR = 35.69	Loss =          0.0000		PSNR = 35.57	Loss =          0.0000		PSNR = 35.55Epoch #256: Loss =       0.0043 		PSNR = 35.50	(Time: 55.903475)
+	Loss =          0.0000		PSNR = 35.50	Loss =          0.0000		PSNR = 35.54	Loss =          0.0000		PSNR = 35.48Epoch #257: Loss =       0.0043 		PSNR = 35.51	(Time: 55.987510)
+	Loss =          0.0000		PSNR = 35.41	Loss =          0.0000		PSNR = 35.40	Loss =          0.0000		PSNR = 35.46Epoch #258: Loss =       0.0043 		PSNR = 35.50	(Time: 55.996501)
+	Loss =          0.0000		PSNR = 35.51	Loss =          0.0000		PSNR = 35.49	Loss =          0.0000		PSNR = 35.50Epoch #259: Loss =       0.0043 		PSNR = 35.51	(Time: 56.006298)
+	Loss =          0.0000		PSNR = 35.44	Loss =          0.0000		PSNR = 35.56	Loss =          0.0000		PSNR = 35.54Epoch #260: Loss =       0.0043 		PSNR = 35.51	(Time: 55.977071)
+[Dataset preparation]: Loaded 4736 crops
+	Loss =          0.0000		PSNR = 35.50	Loss =          0.0000		PSNR = 35.47	Loss =          0.0000		PSNR = 35.52Epoch #261: Loss =       0.0042 		PSNR = 35.46	(Time: 55.803926)
+	Loss =          0.0000		PSNR = 35.57	Loss =          0.0000		PSNR = 35.53	Loss =          0.0000		PSNR = 35.50Epoch #262: Loss =       0.0042 		PSNR = 35.47	(Time: 56.137902)
+	Loss =          0.0000		PSNR = 35.55	Loss =          0.0000		PSNR = 35.48	Loss =          0.0000		PSNR = 35.44Epoch #263: Loss =       0.0042 		PSNR = 35.46	(Time: 56.246195)
+	Loss =          0.0000		PSNR = 35.51	Loss =          0.0000		PSNR = 35.56	Loss =          0.0000		PSNR = 35.51Epoch #264: Loss =       0.0042 		PSNR = 35.47	(Time: 56.419479)
+	Loss =          0.0000		PSNR = 35.68	Loss =          0.0000		PSNR = 35.56	Loss =          0.0000		PSNR = 35.49Epoch #265: Loss =       0.0042 		PSNR = 35.49	(Time: 56.106795)
+	Loss =          0.0000		PSNR = 35.43	Loss =          0.0000		PSNR = 35.44	Loss =          0.0000		PSNR = 35.43Epoch #266: Loss =       0.0042 		PSNR = 35.44	(Time: 55.779269)
+	Loss =          0.0000		PSNR = 35.27	Loss =          0.0000		PSNR = 35.41	Loss =          0.0000		PSNR = 35.49Epoch #267: Loss =       0.0042 		PSNR = 35.44	(Time: 55.893599)
+	Loss =          0.0000		PSNR = 35.55	Loss =          0.0000		PSNR = 35.46	Loss =          0.0000		PSNR = 35.42Epoch #268: Loss =       0.0042 		PSNR = 35.43	(Time: 56.014982)
+	Loss =          0.0000		PSNR = 35.31	Loss =          0.0000		PSNR = 35.51	Loss =          0.0000		PSNR = 35.46Epoch #269: Loss =       0.0042 		PSNR = 35.44	(Time: 56.061155)
+	Loss =          0.0000		PSNR = 35.44	Loss =          0.0000		PSNR = 35.39	Loss =          0.0000		PSNR = 35.44Epoch #270: Loss =       0.0042 		PSNR = 35.45	(Time: 55.943887)
+[Dataset preparation]: Loaded 4736 crops
+	Loss =          0.0000		PSNR = 35.41	Loss =          0.0000		PSNR = 35.41	Loss =          0.0000		PSNR = 35.42Epoch #271: Loss =       0.0043 		PSNR = 35.45	(Time: 55.669576)
+	Loss =          0.0000		PSNR = 35.50	Loss =          0.0000		PSNR = 35.50	Loss =          0.0000		PSNR = 35.50Epoch #272: Loss =       0.0043 		PSNR = 35.46	(Time: 56.040188)
+	Loss =          0.0000		PSNR = 35.47	Loss =          0.0000		PSNR = 35.43	Loss =          0.0000		PSNR = 35.45Epoch #273: Loss =       0.0043 		PSNR = 35.45	(Time: 56.343791)
+	Loss =          0.0000		PSNR = 35.39	Loss =          0.0000		PSNR = 35.40	Loss =          0.0000		PSNR = 35.43Epoch #274: Loss =       0.0043 		PSNR = 35.46	(Time: 56.211088)
+	Loss =          0.0000		PSNR = 35.42	Loss =          0.0000		PSNR = 35.45	Loss =          0.0000		PSNR = 35.44Epoch #275: Loss =       0.0043 		PSNR = 35.46	(Time: 56.384000)
+	Loss =          0.0000		PSNR = 35.49	Loss =          0.0000		PSNR = 35.53	Loss =          0.0000		PSNR = 35.51Epoch #276: Loss =       0.0043 		PSNR = 35.46	(Time: 55.841872)
+	Loss =          0.0000		PSNR = 35.52	Loss =          0.0000		PSNR = 35.47	Loss =          0.0000		PSNR = 35.45Epoch #277: Loss =       0.0043 		PSNR = 35.47	(Time: 56.084729)
+	Loss =          0.0000		PSNR = 35.42	Loss =          0.0000		PSNR = 35.52	Loss =          0.0000		PSNR = 35.50Epoch #278: Loss =       0.0043 		PSNR = 35.48	(Time: 55.989882)
+	Loss =          0.0000		PSNR = 35.52	Loss =          0.0000		PSNR = 35.54	Loss =          0.0000		PSNR = 35.49Epoch #279: Loss =       0.0043 		PSNR = 35.47	(Time: 56.032615)
+	Loss =          0.0000		PSNR = 35.27	Loss =          0.0000		PSNR = 35.43	Loss =          0.0000		PSNR = 35.51Epoch #280: Loss =       0.0043 		PSNR = 35.47	(Time: 55.961162)
+[Dataset preparation]: Loaded 4736 crops
+	Loss =          0.0000		PSNR = 35.30	Loss =          0.0000		PSNR = 35.42	Loss =          0.0000		PSNR = 35.39Epoch #281: Loss =       0.0042 		PSNR = 35.37	(Time: 55.669608)
+	Loss =          0.0000		PSNR = 35.31	Loss =          0.0000		PSNR = 35.30	Loss =          0.0000		PSNR = 35.39Epoch #282: Loss =       0.0042 		PSNR = 35.37	(Time: 56.260425)
+	Loss =          0.0000		PSNR = 35.50	Loss =          0.0000		PSNR = 35.45	Loss =          0.0000		PSNR = 35.36Epoch #283: Loss =       0.0042 		PSNR = 35.38	(Time: 56.276976)
+	Loss =          0.0000		PSNR = 35.42	Loss =          0.0000		PSNR = 35.36	Loss =          0.0000		PSNR = 35.35Epoch #284: Loss =       0.0042 		PSNR = 35.37	(Time: 56.090459)
+	Loss =          0.0000		PSNR = 35.41	Loss =          0.0000		PSNR = 35.36	Loss =          0.0000		PSNR = 35.35Epoch #285: Loss =       0.0042 		PSNR = 35.38	(Time: 55.992607)
+	Loss =          0.0000		PSNR = 35.44	Loss =          0.0000		PSNR = 35.40	Loss =          0.0000		PSNR = 35.33Epoch #286: Loss =       0.0042 		PSNR = 35.35	(Time: 55.979874)
+	Loss =          0.0000		PSNR = 35.55	Loss =          0.0000		PSNR = 35.40	Loss =          0.0000		PSNR = 35.41Epoch #287: Loss =       0.0042 		PSNR = 35.35	(Time: 56.022894)
+	Loss =          0.0000		PSNR = 35.54	Loss =          0.0000		PSNR = 35.41	Loss =          0.0000		PSNR = 35.32Epoch #288: Loss =       0.0042 		PSNR = 35.35	(Time: 56.152786)
+	Loss =          0.0000		PSNR = 35.39	Loss =          0.0000		PSNR = 35.39	Loss =          0.0000		PSNR = 35.36Epoch #289: Loss =       0.0042 		PSNR = 35.35	(Time: 56.113355)
+	Loss =          0.0000		PSNR = 35.36	Loss =          0.0000		PSNR = 35.36	Loss =          0.0000		PSNR = 35.34Epoch #290: Loss =       0.0042 		PSNR = 35.35	(Time: 55.929534)
+[Dataset preparation]: Loaded 4736 crops
+	Loss =          0.0000		PSNR = 35.36	Loss =          0.0000		PSNR = 35.46	Loss =          0.0000		PSNR = 35.38Epoch #291: Loss =       0.0042 		PSNR = 35.35	(Time: 55.806952)
+	Loss =          0.0000		PSNR = 35.36	Loss =          0.0000		PSNR = 35.37	Loss =          0.0000		PSNR = 35.35Epoch #292: Loss =       0.0042 		PSNR = 35.35	(Time: 56.290850)
+	Loss =          0.0000		PSNR = 35.42	Loss =          0.0000		PSNR = 35.38	Loss =          0.0000		PSNR = 35.34Epoch #293: Loss =       0.0042 		PSNR = 35.34	(Time: 56.150790)
+	Loss =          0.0000		PSNR = 35.35	Loss =          0.0000		PSNR = 35.35	Loss =          0.0000		PSNR = 35.32Epoch #294: Loss =       0.0042 		PSNR = 35.35	(Time: 55.928682)
+	Loss =          0.0000		PSNR = 35.39	Loss =          0.0000		PSNR = 35.38	Loss =          0.0000		PSNR = 35.39Epoch #295: Loss =       0.0042 		PSNR = 35.34	(Time: 55.974968)
+	Loss =          0.0000		PSNR = 35.24	Loss =          0.0000		PSNR = 35.37	Loss =          0.0000		PSNR = 35.31Epoch #296: Loss =       0.0042 		PSNR = 35.35	(Time: 55.710180)
+	Loss =          0.0000		PSNR = 35.35	Loss =          0.0000		PSNR = 35.28	Loss =          0.0000		PSNR = 35.35Epoch #297: Loss =       0.0042 		PSNR = 35.37	(Time: 55.808889)
+	Loss =          0.0000		PSNR = 35.40	Loss =          0.0000		PSNR = 35.49	Loss =          0.0000		PSNR = 35.36Epoch #298: Loss =       0.0042 		PSNR = 35.38	(Time: 56.027613)
+	Loss =          0.0000		PSNR = 35.19	Loss =          0.0000		PSNR = 35.32	Loss =          0.0000		PSNR = 35.32Epoch #299: Loss =       0.0042 		PSNR = 35.38	(Time: 55.891866)
+	Loss =          0.0000		PSNR = 35.39	Loss =          0.0000		PSNR = 35.35	Loss =          0.0000		PSNR = 35.34Epoch #300: Loss =       0.0042 		PSNR = 35.37	(Time: 55.884766)
+Training finished

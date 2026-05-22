@@ -1,0 +1,9 @@
+Preparing model
+Setting up [LPIPS] perceptual loss: trunk [vgg], v[0.1], spatial [off]
+Loading model from: /home/chen4848/.conda/envs/2025.06-py313/dl/lib/python3.12/site-packages/lpips/weights/v0.1/vgg.pth
+Creating dataset
+[Dataset preparation]: Loaded 4736 crops
+Training started
+	Loss =          0.0007		PSNR = 25.81	Loss =          0.0006		PSNR = 25.88	Loss =          0.0006		PSNR = 26.26	Loss =          0.0005		PSNR = 26.64	Loss =          0.0005		PSNR = 26.95	Loss =          0.0005		PSNR = 27.19	Loss =          0.0005		PSNR = 27.48	Loss =          0.0004		PSNR = 27.62	Loss =          0.0004		PSNR = 27.73	Loss =          0.0004		PSNR = 27.87	Loss =          0.0004		PSNR = 27.97	Loss =          0.0004		PSNR = 28.02	Loss =          0.0004		PSNR = 28.04	Loss =          0.0004		PSNR = 28.14Epoch #1: Loss =       0.0004 		PSNR = 28.21	(Time: 60.382035)
+	Loss =          0.0003		PSNR = 29.49	Loss =          0.0003		PSNR = 29.36	Loss =          0.0003		PSNR = 29.34	Loss =          0.0003		PSNR = 29.29	Loss =          0.0003		PSNR = 29.31	Loss =          0.0003		PSNR = 29.32	Loss =          0.0003		PSNR = 29.37	Loss =          0.0003		PSNR = 29.29	Loss =          0.0003		PSNR = 29.27	Loss =          0.0003		PSNR = 29.27	Loss =          0.0003		PSNR = 29.25	Loss =          0.0003		PSNR = 29.21	Loss =          0.0003		PSNR = 29.20	Loss =          0.0003		PSNR = 29.18Epoch #2: Loss =       0.0003 		PSNR = 29.17	(Time: 59.833109)
+	Loss =          0.0003		PSNR = 28.98	Loss =          0.0003		PSNR = 28.92	Loss =          0.0003		PSNR = 28.90	Loss =          0.0003		PSNR = 28.93	Loss =          0.0003		PSNR = 28.89

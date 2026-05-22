@@ -1,0 +1,12 @@
+wandb: [wandb.login()] Loaded credentials for https://api.wandb.ai from WANDB_API_KEY.
+wandb: Currently logged in as: ryanhana (ryanhana-wandb) to https://api.wandb.ai. Use `wandb login --relogin` to force relogin
+wandb: Tracking run with wandb version 0.27.0
+wandb: Run data is saved locally in /scratch/gilbreth/chen4848/projects/HDR-denoise/wandb/run-20260522_083224-vj3vsqg8
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run run_20260522_0832_MobileHDR_100_epochs
+wandb: ⭐️ View project at https://wandb.ai/ryanhana-wandb/hdr-dual-moe
+wandb: 🚀 View run at https://wandb.ai/ryanhana-wandb/hdr-dual-moe/runs/vj3vsqg8
+/home/chen4848/.conda/envs/2025.06-py313/dl/lib/python3.12/site-packages/torchvision/models/_utils.py:208: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
+  warnings.warn(
+/home/chen4848/.conda/envs/2025.06-py313/dl/lib/python3.12/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=VGG16_Weights.IMAGENET1K_V1`. You can also use `weights=VGG16_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings.warn(msg)

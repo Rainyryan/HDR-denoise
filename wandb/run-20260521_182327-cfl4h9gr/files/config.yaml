@@ -1,0 +1,100 @@
+_wandb:
+    value:
+        cli_version: 0.27.0
+        e:
+            vhnbcqpi7alyz9iolm60iem4dphtchfl:
+                codePath: train_A100_MoE_Teacher.py
+                codePathLocal: train_A100_MoE_Teacher.py
+                cpu_count: 64
+                cpu_count_logical: 128
+                cudaVersion: "13.1"
+                disk:
+                    /:
+                        total: "270299066368"
+                        used: "40071442432"
+                email: rc6150@gmail.com
+                executable: /home/chen4848/.conda/envs/2025.06-py313/dl/bin/python
+                git:
+                    commit: ea02d7a2f203eada0feb8a527382ba8c2325e153
+                    remote: git@github.com:Rainyryan/HDR-denoise.git
+                gpu: NVIDIA A30
+                gpu_count: 1
+                gpu_nvidia:
+                    - architecture: Ampere
+                      cudaCores: 3584
+                      memoryTotal: "25769803776"
+                      name: NVIDIA A30
+                      uuid: GPU-afb890f3-c905-b58e-f7ed-0ab1166ebc25
+                host: gilbreth-fe00.rcac.purdue.edu
+                memory:
+                    total: "540598132736"
+                os: Linux-5.14.0-611.16.1.el9_7.x86_64-x86_64-with-glibc2.34
+                program: /scratch/gilbreth/chen4848/projects/HDR-denoise/train_A100_MoE_Teacher.py
+                python: CPython 3.12.2
+                root: /scratch/gilbreth/chen4848/projects/HDR-denoise
+                slurm:
+                    mpi_type: pmix
+                startedAt: "2026-05-21T22:23:27.045497Z"
+                writerId: vhnbcqpi7alyz9iolm60iem4dphtchfl
+        m: []
+        python_version: 3.12.2
+        t:
+            "1":
+                - 1
+                - 41
+            "2":
+                - 1
+                - 41
+            "3":
+                - 13
+                - 16
+            "4": 3.12.2
+            "5": 0.27.0
+            "12": 0.27.0
+            "13": linux-x86_64
+batch_size:
+    value: 64
+dataset_path:
+    value: /scratch/gilbreth/chen4848/datasets/Mobile-HDR
+dim:
+    value: 32
+epochs:
+    value: 600
+expand_mode_epoch:
+    value: 999
+heads:
+    value:
+        - 1
+        - 2
+        - 4
+        - 8
+learning_rate:
+    value: 0.0004
+model_architecture:
+    value: Dual_Hybrid_Student_HDR
+nbits:
+    value: 20
+nbits_data:
+    value: 10
+num_blocks:
+    value:
+        - 4
+        - 4
+        - 4
+        - 4
+num_patches_per_image:
+    value: 64
+num_refinement_blocks:
+    value: 4
+optimizer:
+    value: Adam
+patch_size:
+    value: 128
+pretrained_path:
+    value: null
+read_noise:
+    value: 0
+save_folder:
+    value: models_MoE_Teacher_MobileHDR_20260521_1823/
+seed:
+    value: 21

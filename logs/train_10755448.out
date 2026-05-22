@@ -1,0 +1,610 @@
+Preparing dual model
+Compiling model graph via TorchInductor optimization...
+Setting up [LPIPS] perceptual loss: trunk [vgg], v[0.1], spatial [off]
+Loading model from: /home/chen4848/.conda/envs/2025.06-py313/dl/lib/python3.12/site-packages/lpips/weights/v0.1/vgg.pth
+Starting from scratch.
+Creating dataset
+Setting up [LPIPS] perceptual loss: trunk [vgg], v[0.1], spatial [off]
+Loading model from: /home/chen4848/.conda/envs/2025.06-py313/dl/lib/python3.12/site-packages/lpips/weights/v0.1/vgg.pth
+Training started
+Epoch #1: Loss =       0.6839 		PSNR = 17.59	(Time: 132.537122)
+Epoch #2: Loss =       0.6557 		PSNR = 17.63	(Time: 10.355548)
+Epoch #3: Loss =       0.6682 		PSNR = 17.66	(Time: 9.954476)
+Epoch #4: Loss =       0.6547 		PSNR = 17.72	(Time: 10.145090)
+Epoch #5: Loss =       0.6318 		PSNR = 17.79	(Time: 9.226365)
+Epoch #6: Loss =       0.6340 		PSNR = 17.82	(Time: 10.128685)
+Epoch #7: Loss =       0.6128 		PSNR = 17.69	(Time: 9.936970)
+Epoch #8: Loss =       0.6393 		PSNR = 17.61	(Time: 10.599086)
+Epoch #9: Loss =       0.6421 		PSNR = 17.49	(Time: 10.042476)
+Epoch #10: Loss =       0.5556 		PSNR = 17.88	(Time: 9.349612)
+Epoch #11: Loss =       0.5518 		PSNR = 18.01	(Time: 10.348724)
+Epoch #12: Loss =       0.5442 		PSNR = 18.06	(Time: 9.956280)
+Epoch #13: Loss =       0.5403 		PSNR = 18.08	(Time: 9.996830)
+Epoch #14: Loss =       0.5244 		PSNR = 18.11	(Time: 9.894665)
+Epoch #15: Loss =       0.5106 		PSNR = 18.17	(Time: 9.993995)
+Epoch #16: Loss =       0.5662 		PSNR = 18.15	(Time: 9.290790)
+Epoch #17: Loss =       0.5471 		PSNR = 18.19	(Time: 9.270619)
+Epoch #18: Loss =       0.5376 		PSNR = 18.25	(Time: 9.222543)
+Epoch #19: Loss =       0.5324 		PSNR = 18.28	(Time: 10.614156)
+Epoch #20: Loss =       0.5428 		PSNR = 18.32	(Time: 11.488392)
+Epoch #21: Loss =       0.5270 		PSNR = 18.37	(Time: 10.170080)
+Epoch #22: Loss =       0.5281 		PSNR = 18.37	(Time: 10.370372)
+Epoch #23: Loss =       0.4967 		PSNR = 18.41	(Time: 9.887265)
+Epoch #24: Loss =       0.5386 		PSNR = 18.44	(Time: 10.026927)
+Epoch #25: Loss =       0.5062 		PSNR = 18.50	(Time: 10.176522)
+Epoch #26: Loss =       0.5374 		PSNR = 18.47	(Time: 9.367548)
+Epoch #27: Loss =       0.5016 		PSNR = 18.52	(Time: 11.505116)
+Epoch #28: Loss =       0.5272 		PSNR = 18.57	(Time: 9.900255)
+Epoch #29: Loss =       0.5243 		PSNR = 18.58	(Time: 9.219276)
+Epoch #30: Loss =       0.5243 		PSNR = 18.62	(Time: 10.264307)
+Epoch #31: Loss =       0.5085 		PSNR = 18.66	(Time: 9.900786)
+Epoch #32: Loss =       0.5084 		PSNR = 18.67	(Time: 10.229598)
+Epoch #33: Loss =       0.4973 		PSNR = 18.70	(Time: 10.388232)
+Epoch #34: Loss =       0.5108 		PSNR = 18.76	(Time: 9.210552)
+Epoch #35: Loss =       0.4997 		PSNR = 18.77	(Time: 10.030639)
+Epoch #36: Loss =       0.5062 		PSNR = 18.79	(Time: 10.072829)
+Epoch #37: Loss =       0.4952 		PSNR = 18.86	(Time: 9.910777)
+Epoch #38: Loss =       0.4779 		PSNR = 18.90	(Time: 9.940429)
+Epoch #39: Loss =       0.5055 		PSNR = 18.92	(Time: 10.206899)
+Epoch #40: Loss =       0.4772 		PSNR = 18.98	(Time: 11.654911)
+Epoch #41: Loss =       0.5070 		PSNR = 19.01	(Time: 9.211211)
+Epoch #42: Loss =       0.4672 		PSNR = 19.03	(Time: 9.389379)
+Epoch #43: Loss =       0.5059 		PSNR = 19.10	(Time: 9.429096)
+Epoch #44: Loss =       0.4918 		PSNR = 19.12	(Time: 9.360903)
+Epoch #45: Loss =       0.4986 		PSNR = 19.12	(Time: 9.256911)
+Epoch #46: Loss =       0.4926 		PSNR = 19.18	(Time: 9.847549)
+Epoch #47: Loss =       0.5148 		PSNR = 19.19	(Time: 9.405525)
+Epoch #48: Loss =       0.5012 		PSNR = 19.21	(Time: 9.271759)
+Epoch #49: Loss =       0.4704 		PSNR = 19.27	(Time: 9.941736)
+Epoch #50: Loss =       0.5154 		PSNR = 19.29	(Time: 9.207425)
+Epoch #51: Loss =       0.5178 		PSNR = 19.32	(Time: 9.911436)
+Epoch #52: Loss =       0.5051 		PSNR = 19.38	(Time: 10.071706)
+Epoch #53: Loss =       0.5041 		PSNR = 19.43	(Time: 9.874867)
+Epoch #54: Loss =       0.4862 		PSNR = 19.47	(Time: 9.760051)
+Epoch #55: Loss =       0.4697 		PSNR = 19.57	(Time: 9.349037)
+Epoch #56: Loss =       0.4605 		PSNR = 19.61	(Time: 9.865393)
+Epoch #57: Loss =       0.4710 		PSNR = 19.57	(Time: 9.984358)
+Epoch #58: Loss =       0.4899 		PSNR = 19.56	(Time: 9.798547)
+Epoch #59: Loss =       0.4542 		PSNR = 19.60	(Time: 9.797965)
+Epoch #60: Loss =       0.4662 		PSNR = 19.60	(Time: 10.019561)
+Epoch #61: Loss =       0.4858 		PSNR = 19.62	(Time: 9.689357)
+Epoch #62: Loss =       0.4725 		PSNR = 19.64	(Time: 9.597568)
+Epoch #63: Loss =       0.4710 		PSNR = 19.67	(Time: 9.645942)
+Epoch #64: Loss =       0.4786 		PSNR = 19.72	(Time: 9.424403)
+Epoch #65: Loss =       0.4922 		PSNR = 19.75	(Time: 9.727834)
+Epoch #66: Loss =       0.4879 		PSNR = 19.78	(Time: 9.946358)
+Epoch #67: Loss =       0.4984 		PSNR = 19.80	(Time: 9.419204)
+Epoch #68: Loss =       0.4877 		PSNR = 19.85	(Time: 9.305709)
+Epoch #69: Loss =       0.4477 		PSNR = 19.86	(Time: 10.009445)
+Epoch #70: Loss =       0.4711 		PSNR = 19.91	(Time: 9.904602)
+Epoch #71: Loss =       0.4669 		PSNR = 19.95	(Time: 10.305563)
+Epoch #72: Loss =       0.4752 		PSNR = 19.95	(Time: 9.232159)
+Epoch #73: Loss =       0.5007 		PSNR = 19.96	(Time: 9.837738)
+Epoch #74: Loss =       0.4768 		PSNR = 20.00	(Time: 9.871114)
+Epoch #75: Loss =       0.4736 		PSNR = 20.02	(Time: 9.556262)
+Epoch #76: Loss =       0.4754 		PSNR = 20.08	(Time: 10.333843)
+Epoch #77: Loss =       0.5021 		PSNR = 20.10	(Time: 10.037993)
+Epoch #78: Loss =       0.4750 		PSNR = 20.16	(Time: 9.179819)
+Epoch #79: Loss =       0.4582 		PSNR = 20.21	(Time: 9.884862)
+Epoch #80: Loss =       0.4707 		PSNR = 20.24	(Time: 9.921078)
+Epoch #81: Loss =       0.4650 		PSNR = 20.23	(Time: 9.863445)
+Epoch #82: Loss =       0.4741 		PSNR = 20.27	(Time: 9.884014)
+Epoch #83: Loss =       0.4821 		PSNR = 20.32	(Time: 10.081604)
+Epoch #84: Loss =       0.4277 		PSNR = 20.39	(Time: 10.412281)
+Epoch #85: Loss =       0.4358 		PSNR = 20.39	(Time: 9.512688)
+Epoch #86: Loss =       0.4333 		PSNR = 20.48	(Time: 10.602581)
+Epoch #87: Loss =       0.4525 		PSNR = 20.47	(Time: 9.801792)
+Epoch #88: Loss =       0.4684 		PSNR = 20.54	(Time: 10.027572)
+Epoch #89: Loss =       0.4628 		PSNR = 20.55	(Time: 9.331334)
+Epoch #90: Loss =       0.4563 		PSNR = 20.61	(Time: 10.063859)
+Epoch #91: Loss =       0.4437 		PSNR = 20.62	(Time: 9.716079)
+Epoch #92: Loss =       0.4859 		PSNR = 20.64	(Time: 10.153754)
+Epoch #93: Loss =       0.4618 		PSNR = 20.67	(Time: 9.244351)
+Epoch #94: Loss =       0.4388 		PSNR = 20.73	(Time: 9.653418)
+Epoch #95: Loss =       0.4375 		PSNR = 20.77	(Time: 9.591573)
+Epoch #96: Loss =       0.4513 		PSNR = 20.82	(Time: 9.768997)
+Epoch #97: Loss =       0.4446 		PSNR = 20.87	(Time: 10.431863)
+Epoch #98: Loss =       0.4152 		PSNR = 20.88	(Time: 9.912687)
+Epoch #99: Loss =       0.4031 		PSNR = 20.91	(Time: 9.648087)
+Epoch #100: Loss =       0.4199 		PSNR = 20.97	(Time: 9.895839)
+Epoch #101: Loss =       0.4064 		PSNR = 21.01	(Time: 10.345782)
+Epoch #102: Loss =       0.3892 		PSNR = 21.04	(Time: 10.055679)
+Epoch #103: Loss =       0.4316 		PSNR = 21.11	(Time: 9.990568)
+Epoch #104: Loss =       0.4455 		PSNR = 21.12	(Time: 9.894612)
+Epoch #105: Loss =       0.3771 		PSNR = 21.23	(Time: 10.354681)
+Epoch #106: Loss =       0.4533 		PSNR = 21.18	(Time: 9.980769)
+Epoch #107: Loss =       0.3927 		PSNR = 21.29	(Time: 9.411475)
+Epoch #108: Loss =       0.3940 		PSNR = 21.30	(Time: 10.493840)
+Epoch #109: Loss =       0.3741 		PSNR = 21.38	(Time: 9.402707)
+Epoch #110: Loss =       0.4036 		PSNR = 21.44	(Time: 10.611552)
+Epoch #111: Loss =       0.4094 		PSNR = 21.39	(Time: 9.475892)
+Epoch #112: Loss =       0.4012 		PSNR = 21.54	(Time: 10.220445)
+Epoch #113: Loss =       0.3887 		PSNR = 21.54	(Time: 10.493964)
+Epoch #114: Loss =       0.3746 		PSNR = 21.55	(Time: 9.628344)
+Epoch #115: Loss =       0.3942 		PSNR = 21.67	(Time: 9.594589)
+Epoch #116: Loss =       0.3889 		PSNR = 21.67	(Time: 9.320005)
+Epoch #117: Loss =       0.3526 		PSNR = 21.75	(Time: 9.994332)
+Epoch #118: Loss =       0.3662 		PSNR = 21.78	(Time: 10.150790)
+Epoch #119: Loss =       0.3734 		PSNR = 21.77	(Time: 10.164146)
+Epoch #120: Loss =       0.3680 		PSNR = 21.81	(Time: 9.381458)
+Epoch #121: Loss =       0.3754 		PSNR = 21.97	(Time: 9.476980)
+Epoch #122: Loss =       0.3987 		PSNR = 21.94	(Time: 9.297081)
+Epoch #123: Loss =       0.3946 		PSNR = 22.00	(Time: 9.216224)
+Epoch #124: Loss =       0.3996 		PSNR = 21.99	(Time: 9.966783)
+Epoch #125: Loss =       0.3821 		PSNR = 22.12	(Time: 9.336207)
+Epoch #126: Loss =       0.4046 		PSNR = 22.10	(Time: 9.447507)
+Epoch #127: Loss =       0.3850 		PSNR = 22.17	(Time: 10.331691)
+Epoch #128: Loss =       0.3765 		PSNR = 22.25	(Time: 10.290816)
+Epoch #129: Loss =       0.3772 		PSNR = 22.26	(Time: 10.072090)
+Epoch #130: Loss =       0.3849 		PSNR = 22.23	(Time: 9.828240)
+Epoch #131: Loss =       0.3735 		PSNR = 22.37	(Time: 10.058378)
+Epoch #132: Loss =       0.4002 		PSNR = 22.41	(Time: 9.365549)
+Epoch #133: Loss =       0.3847 		PSNR = 22.43	(Time: 9.944209)
+Epoch #134: Loss =       0.3624 		PSNR = 22.54	(Time: 9.425627)
+Epoch #135: Loss =       0.3816 		PSNR = 22.52	(Time: 9.807944)
+Epoch #136: Loss =       0.3607 		PSNR = 22.62	(Time: 9.910998)
+Epoch #137: Loss =       0.3580 		PSNR = 22.79	(Time: 10.075607)
+Epoch #138: Loss =       0.3789 		PSNR = 22.65	(Time: 10.514836)
+Epoch #139: Loss =       0.3872 		PSNR = 22.79	(Time: 9.856991)
+Epoch #140: Loss =       0.3705 		PSNR = 22.79	(Time: 11.089665)
+Epoch #141: Loss =       0.3524 		PSNR = 22.81	(Time: 10.122729)
+Epoch #142: Loss =       0.3716 		PSNR = 22.88	(Time: 9.645097)
+Epoch #143: Loss =       0.3756 		PSNR = 23.01	(Time: 9.315984)
+Epoch #144: Loss =       0.3455 		PSNR = 23.03	(Time: 10.598193)
+Epoch #145: Loss =       0.3324 		PSNR = 23.09	(Time: 9.235381)
+Epoch #146: Loss =       0.3622 		PSNR = 23.03	(Time: 9.903244)
+Epoch #147: Loss =       0.3778 		PSNR = 23.13	(Time: 10.083960)
+Epoch #148: Loss =       0.3820 		PSNR = 23.23	(Time: 9.691491)
+Epoch #149: Loss =       0.3475 		PSNR = 23.38	(Time: 10.056783)
+Epoch #150: Loss =       0.3837 		PSNR = 23.21	(Time: 9.650176)
+Epoch #151: Loss =       0.3700 		PSNR = 23.27	(Time: 10.091678)
+Epoch #152: Loss =       0.4071 		PSNR = 23.27	(Time: 9.896533)
+Epoch #153: Loss =       0.3959 		PSNR = 23.28	(Time: 9.880529)
+Epoch #154: Loss =       0.4004 		PSNR = 23.47	(Time: 9.845184)
+Epoch #155: Loss =       0.4513 		PSNR = 23.46	(Time: 9.344103)
+Epoch #156: Loss =       0.4172 		PSNR = 23.57	(Time: 10.204517)
+Epoch #157: Loss =       0.4021 		PSNR = 23.70	(Time: 9.891224)
+Epoch #158: Loss =       0.4011 		PSNR = 23.67	(Time: 10.319971)
+Epoch #159: Loss =       0.4167 		PSNR = 23.63	(Time: 9.422384)
+Epoch #160: Loss =       0.3944 		PSNR = 23.65	(Time: 9.201293)
+Epoch #161: Loss =       0.4117 		PSNR = 23.86	(Time: 10.067384)
+Epoch #162: Loss =       0.3907 		PSNR = 23.91	(Time: 11.557728)
+Epoch #163: Loss =       0.3680 		PSNR = 23.96	(Time: 9.458324)
+Epoch #164: Loss =       0.3773 		PSNR = 23.89	(Time: 9.583153)
+Epoch #165: Loss =       0.3776 		PSNR = 23.95	(Time: 9.196112)
+Epoch #166: Loss =       0.3837 		PSNR = 24.06	(Time: 9.243650)
+Epoch #167: Loss =       0.3969 		PSNR = 24.12	(Time: 9.948299)
+Epoch #168: Loss =       0.3845 		PSNR = 24.22	(Time: 9.725662)
+Epoch #169: Loss =       0.3804 		PSNR = 24.31	(Time: 9.834585)
+Epoch #170: Loss =       0.3792 		PSNR = 24.37	(Time: 9.358948)
+Epoch #171: Loss =       0.3675 		PSNR = 24.44	(Time: 10.254678)
+Epoch #172: Loss =       0.3705 		PSNR = 24.40	(Time: 10.238955)
+Epoch #173: Loss =       0.3620 		PSNR = 24.39	(Time: 9.528649)
+Epoch #174: Loss =       0.3586 		PSNR = 24.41	(Time: 9.855634)
+Epoch #175: Loss =       0.3745 		PSNR = 24.66	(Time: 10.326968)
+Epoch #176: Loss =       0.3658 		PSNR = 24.69	(Time: 9.983337)
+Epoch #177: Loss =       0.3703 		PSNR = 24.69	(Time: 10.160944)
+Epoch #178: Loss =       0.3987 		PSNR = 24.73	(Time: 9.940359)
+Epoch #179: Loss =       0.4096 		PSNR = 24.91	(Time: 9.742889)
+Epoch #180: Loss =       0.3742 		PSNR = 24.95	(Time: 9.940941)
+Epoch #181: Loss =       0.3757 		PSNR = 24.80	(Time: 9.384964)
+Epoch #182: Loss =       0.3977 		PSNR = 24.86	(Time: 10.150400)
+Epoch #183: Loss =       0.4153 		PSNR = 24.92	(Time: 11.640204)
+Epoch #184: Loss =       0.3581 		PSNR = 25.14	(Time: 9.892703)
+Epoch #185: Loss =       0.3666 		PSNR = 25.24	(Time: 9.345848)
+Epoch #186: Loss =       0.4042 		PSNR = 25.08	(Time: 9.827561)
+Epoch #187: Loss =       0.4177 		PSNR = 25.26	(Time: 9.601155)
+Epoch #188: Loss =       0.3906 		PSNR = 25.33	(Time: 10.007899)
+Epoch #189: Loss =       0.3806 		PSNR = 25.34	(Time: 9.202321)
+Epoch #190: Loss =       0.3857 		PSNR = 25.55	(Time: 10.025521)
+Epoch #191: Loss =       0.3372 		PSNR = 25.62	(Time: 9.784506)
+Epoch #192: Loss =       0.3780 		PSNR = 25.51	(Time: 10.025383)
+Epoch #193: Loss =       0.3802 		PSNR = 25.74	(Time: 9.887563)
+Epoch #194: Loss =       0.3695 		PSNR = 25.76	(Time: 9.667468)
+Epoch #195: Loss =       0.3875 		PSNR = 25.86	(Time: 9.934258)
+Epoch #196: Loss =       0.3841 		PSNR = 25.76	(Time: 9.544910)
+Epoch #197: Loss =       0.3713 		PSNR = 26.13	(Time: 10.048346)
+Epoch #198: Loss =       0.3674 		PSNR = 26.04	(Time: 9.909952)
+Epoch #199: Loss =       0.3417 		PSNR = 26.14	(Time: 10.075610)
+Epoch #200: Loss =       0.3318 		PSNR = 26.35	(Time: 10.598847)
+Epoch #201: Loss =       0.3745 		PSNR = 26.08	(Time: 9.805042)
+Epoch #202: Loss =       0.3546 		PSNR = 26.10	(Time: 9.812839)
+Epoch #203: Loss =       0.3502 		PSNR = 26.49	(Time: 10.032235)
+Epoch #204: Loss =       0.3648 		PSNR = 26.45	(Time: 9.795998)
+Epoch #205: Loss =       0.3727 		PSNR = 26.52	(Time: 9.290249)
+Epoch #206: Loss =       0.3559 		PSNR = 26.56	(Time: 10.025454)
+Epoch #207: Loss =       0.3395 		PSNR = 26.81	(Time: 9.513554)
+Epoch #208: Loss =       0.3610 		PSNR = 26.58	(Time: 9.510858)
+Epoch #209: Loss =       0.3475 		PSNR = 27.05	(Time: 9.776453)
+Epoch #210: Loss =       0.3571 		PSNR = 26.89	(Time: 9.910676)
+Epoch #211: Loss =       0.3554 		PSNR = 27.04	(Time: 9.362372)
+Epoch #212: Loss =       0.3582 		PSNR = 27.13	(Time: 9.446620)
+Epoch #213: Loss =       0.3444 		PSNR = 27.40	(Time: 10.125958)
+Epoch #214: Loss =       0.3746 		PSNR = 27.42	(Time: 10.326290)
+Epoch #215: Loss =       0.3371 		PSNR = 27.37	(Time: 9.332074)
+Epoch #216: Loss =       0.3405 		PSNR = 27.50	(Time: 9.869124)
+Epoch #217: Loss =       0.3681 		PSNR = 27.42	(Time: 10.341606)
+Epoch #218: Loss =       0.3600 		PSNR = 27.62	(Time: 9.423289)
+Epoch #219: Loss =       0.3398 		PSNR = 27.83	(Time: 10.217035)
+Epoch #220: Loss =       0.3334 		PSNR = 27.81	(Time: 9.229457)
+Epoch #221: Loss =       0.3347 		PSNR = 27.79	(Time: 10.851170)
+Epoch #222: Loss =       0.3318 		PSNR = 27.91	(Time: 10.094322)
+Epoch #223: Loss =       0.3440 		PSNR = 27.85	(Time: 9.436261)
+Epoch #224: Loss =       0.3399 		PSNR = 28.09	(Time: 10.087467)
+Epoch #225: Loss =       0.3303 		PSNR = 28.30	(Time: 10.221084)
+Epoch #226: Loss =       0.3254 		PSNR = 28.58	(Time: 10.018343)
+Epoch #227: Loss =       0.2876 		PSNR = 28.77	(Time: 9.480759)
+Epoch #228: Loss =       0.3141 		PSNR = 28.92	(Time: 9.378998)
+Epoch #229: Loss =       0.3106 		PSNR = 29.07	(Time: 9.603810)
+Epoch #230: Loss =       0.3103 		PSNR = 28.79	(Time: 9.306843)
+Epoch #231: Loss =       0.2925 		PSNR = 29.49	(Time: 9.268926)
+Epoch #232: Loss =       0.3205 		PSNR = 29.39	(Time: 10.518238)
+Epoch #233: Loss =       0.3022 		PSNR = 29.39	(Time: 10.021982)
+Epoch #234: Loss =       0.3118 		PSNR = 29.63	(Time: 10.279728)
+Epoch #235: Loss =       0.2965 		PSNR = 29.46	(Time: 10.091481)
+Epoch #236: Loss =       0.3035 		PSNR = 29.75	(Time: 10.320241)
+Epoch #237: Loss =       0.2916 		PSNR = 30.01	(Time: 9.631945)
+Epoch #238: Loss =       0.2980 		PSNR = 29.93	(Time: 10.363079)
+Epoch #239: Loss =       0.2803 		PSNR = 30.17	(Time: 10.167825)
+Epoch #240: Loss =       0.2996 		PSNR = 30.17	(Time: 9.929951)
+Epoch #241: Loss =       0.2991 		PSNR = 30.35	(Time: 10.141824)
+Epoch #242: Loss =       0.2697 		PSNR = 30.82	(Time: 9.716685)
+Epoch #243: Loss =       0.2622 		PSNR = 30.97	(Time: 10.082820)
+Epoch #244: Loss =       0.2759 		PSNR = 31.40	(Time: 9.365938)
+Epoch #245: Loss =       0.2884 		PSNR = 31.06	(Time: 10.247040)
+Epoch #246: Loss =       0.2984 		PSNR = 31.42	(Time: 9.946102)
+Epoch #247: Loss =       0.2700 		PSNR = 31.59	(Time: 9.971020)
+Epoch #248: Loss =       0.2602 		PSNR = 32.03	(Time: 9.848761)
+Epoch #249: Loss =       0.2667 		PSNR = 32.03	(Time: 9.419239)
+Epoch #250: Loss =       0.2817 		PSNR = 32.27	(Time: 9.838370)
+Epoch #251: Loss =       0.2744 		PSNR = 32.43	(Time: 9.960769)
+Epoch #252: Loss =       0.2736 		PSNR = 32.72	(Time: 10.185282)
+Epoch #253: Loss =       0.2880 		PSNR = 32.51	(Time: 10.057255)
+Epoch #254: Loss =       0.2775 		PSNR = 33.17	(Time: 9.667913)
+Epoch #255: Loss =       0.2811 		PSNR = 33.54	(Time: 9.778884)
+Epoch #256: Loss =       0.2896 		PSNR = 33.44	(Time: 9.245871)
+Epoch #257: Loss =       0.2693 		PSNR = 33.93	(Time: 9.478901)
+Epoch #258: Loss =       0.2522 		PSNR = 34.89	(Time: 9.705795)
+Epoch #259: Loss =       0.2662 		PSNR = 34.93	(Time: 9.897741)
+Epoch #260: Loss =       0.2396 		PSNR = 35.41	(Time: 9.767315)
+Epoch #261: Loss =       0.2496 		PSNR = 35.42	(Time: 11.418265)
+Epoch #262: Loss =       0.2647 		PSNR = 35.91	(Time: 9.715703)
+Epoch #263: Loss =       0.2386 		PSNR = 36.78	(Time: 10.266356)
+Epoch #264: Loss =       0.2242 		PSNR = 37.17	(Time: 9.860907)
+Epoch #265: Loss =       0.2591 		PSNR = 37.14	(Time: 9.786439)
+Epoch #266: Loss =       0.2648 		PSNR = 37.38	(Time: 9.244744)
+Epoch #267: Loss =       0.2581 		PSNR = 35.98	(Time: 9.934419)
+Epoch #268: Loss =       0.2600 		PSNR = 35.66	(Time: 9.317704)
+Epoch #269: Loss =       0.3164 		PSNR = 34.74	(Time: 9.587085)
+Epoch #270: Loss =       0.3184 		PSNR = 35.07	(Time: 11.261309)
+Epoch #271: Loss =       0.3030 		PSNR = 34.91	(Time: 9.504929)
+Epoch #272: Loss =       0.3080 		PSNR = 35.14	(Time: 10.103137)
+Epoch #273: Loss =       0.3057 		PSNR = 35.27	(Time: 9.852983)
+Epoch #274: Loss =       0.2859 		PSNR = 35.17	(Time: 10.260923)
+Epoch #275: Loss =       0.2641 		PSNR = 35.18	(Time: 9.512702)
+Epoch #276: Loss =       0.2929 		PSNR = 35.41	(Time: 9.797564)
+Epoch #277: Loss =       0.2795 		PSNR = 35.61	(Time: 9.870100)
+Epoch #278: Loss =       0.2498 		PSNR = 35.87	(Time: 9.675748)
+Epoch #279: Loss =       0.2707 		PSNR = 35.98	(Time: 9.977808)
+Epoch #280: Loss =       0.2738 		PSNR = 35.95	(Time: 9.788273)
+Epoch #281: Loss =       0.2656 		PSNR = 36.24	(Time: 10.037071)
+Epoch #282: Loss =       0.2720 		PSNR = 36.21	(Time: 9.201550)
+Epoch #283: Loss =       0.3154 		PSNR = 35.89	(Time: 9.667437)
+Epoch #284: Loss =       0.3215 		PSNR = 35.51	(Time: 9.312671)
+Epoch #285: Loss =       0.2753 		PSNR = 34.48	(Time: 9.474338)
+Epoch #286: Loss =       0.2553 		PSNR = 36.62	(Time: 9.339985)
+Epoch #287: Loss =       0.2944 		PSNR = 36.60	(Time: 9.306238)
+Epoch #288: Loss =       0.2926 		PSNR = 36.97	(Time: 9.960646)
+Epoch #289: Loss =       0.2746 		PSNR = 37.22	(Time: 9.663828)
+Epoch #290: Loss =       0.2867 		PSNR = 37.28	(Time: 9.760861)
+Epoch #291: Loss =       0.3008 		PSNR = 37.01	(Time: 10.143515)
+Epoch #292: Loss =       0.2782 		PSNR = 37.73	(Time: 10.153381)
+Epoch #293: Loss =       0.2729 		PSNR = 37.88	(Time: 9.924195)
+Epoch #294: Loss =       0.2412 		PSNR = 38.37	(Time: 10.147394)
+Epoch #295: Loss =       0.2855 		PSNR = 38.29	(Time: 10.379712)
+Epoch #296: Loss =       0.2921 		PSNR = 38.45	(Time: 10.040034)
+Epoch #297: Loss =       0.2702 		PSNR = 38.70	(Time: 9.398670)
+Epoch #298: Loss =       0.2687 		PSNR = 38.78	(Time: 9.243863)
+Epoch #299: Loss =       0.2920 		PSNR = 38.96	(Time: 9.305751)
+Epoch #300: Loss =       0.2853 		PSNR = 39.24	(Time: 10.044493)
+Epoch #301: Loss =       0.2689 		PSNR = 39.60	(Time: 9.482147)
+Epoch #302: Loss =       0.2665 		PSNR = 39.71	(Time: 9.571677)
+Epoch #303: Loss =       0.2676 		PSNR = 40.04	(Time: 10.004218)
+Epoch #304: Loss =       0.2440 		PSNR = 40.25	(Time: 10.405321)
+Epoch #305: Loss =       0.2557 		PSNR = 40.39	(Time: 10.474844)
+Epoch #306: Loss =       0.2724 		PSNR = 40.59	(Time: 9.869882)
+Epoch #307: Loss =       0.2517 		PSNR = 40.97	(Time: 10.465257)
+Epoch #308: Loss =       0.2702 		PSNR = 41.26	(Time: 9.275237)
+Epoch #309: Loss =       0.2708 		PSNR = 41.70	(Time: 9.318068)
+Epoch #310: Loss =       0.2402 		PSNR = 41.96	(Time: 10.267657)
+Epoch #311: Loss =       0.2465 		PSNR = 42.15	(Time: 9.507402)
+Epoch #312: Loss =       0.2413 		PSNR = 42.37	(Time: 9.937878)
+Epoch #313: Loss =       0.2314 		PSNR = 42.83	(Time: 9.761001)
+Epoch #314: Loss =       0.2230 		PSNR = 43.20	(Time: 9.651444)
+Epoch #315: Loss =       0.2128 		PSNR = 43.06	(Time: 9.228304)
+Epoch #316: Loss =       0.2273 		PSNR = 43.31	(Time: 9.982498)
+Epoch #317: Loss =       0.2181 		PSNR = 43.28	(Time: 9.858897)
+Epoch #318: Loss =       0.2145 		PSNR = 43.30	(Time: 9.818578)
+Epoch #319: Loss =       0.2531 		PSNR = 43.81	(Time: 9.797530)
+Epoch #320: Loss =       0.2422 		PSNR = 43.89	(Time: 10.187451)
+Epoch #321: Loss =       0.2246 		PSNR = 44.07	(Time: 10.288450)
+Epoch #322: Loss =       0.2306 		PSNR = 43.74	(Time: 9.256202)
+Epoch #323: Loss =       0.2149 		PSNR = 43.52	(Time: 9.339114)
+Epoch #324: Loss =       0.2300 		PSNR = 42.89	(Time: 9.909385)
+Epoch #325: Loss =       0.2345 		PSNR = 42.52	(Time: 9.987509)
+Epoch #326: Loss =       0.2295 		PSNR = 42.31	(Time: 9.684860)
+Epoch #327: Loss =       0.2204 		PSNR = 42.24	(Time: 10.062196)
+Epoch #328: Loss =       0.2336 		PSNR = 42.13	(Time: 9.991498)
+Epoch #329: Loss =       0.2338 		PSNR = 42.16	(Time: 9.773885)
+Epoch #330: Loss =       0.2614 		PSNR = 42.07	(Time: 10.023618)
+Epoch #331: Loss =       0.2358 		PSNR = 42.12	(Time: 9.327405)
+Epoch #332: Loss =       0.2414 		PSNR = 42.41	(Time: 9.402066)
+Epoch #333: Loss =       0.2376 		PSNR = 42.40	(Time: 10.094873)
+Epoch #334: Loss =       0.2167 		PSNR = 42.70	(Time: 9.248399)
+Epoch #335: Loss =       0.2303 		PSNR = 42.36	(Time: 10.225666)
+Epoch #336: Loss =       0.2531 		PSNR = 42.99	(Time: 9.920900)
+Epoch #337: Loss =       0.2270 		PSNR = 42.82	(Time: 9.571041)
+Epoch #338: Loss =       0.2370 		PSNR = 42.82	(Time: 10.010691)
+Epoch #339: Loss =       0.2261 		PSNR = 42.81	(Time: 9.690719)
+Epoch #340: Loss =       0.2364 		PSNR = 42.18	(Time: 10.164594)
+Epoch #341: Loss =       0.2417 		PSNR = 41.40	(Time: 9.620542)
+Epoch #342: Loss =       0.2805 		PSNR = 41.19	(Time: 9.279468)
+Epoch #343: Loss =       0.2654 		PSNR = 41.03	(Time: 9.397467)
+Epoch #344: Loss =       0.2721 		PSNR = 40.71	(Time: 9.474330)
+Epoch #345: Loss =       0.2644 		PSNR = 40.69	(Time: 9.857332)
+Epoch #346: Loss =       0.2790 		PSNR = 40.78	(Time: 10.133053)
+Epoch #347: Loss =       0.2659 		PSNR = 40.46	(Time: 9.333225)
+Epoch #348: Loss =       0.2779 		PSNR = 40.69	(Time: 9.865043)
+Epoch #349: Loss =       0.2632 		PSNR = 40.66	(Time: 10.028895)
+Epoch #350: Loss =       0.2630 		PSNR = 41.02	(Time: 9.380259)
+Epoch #351: Loss =       0.2708 		PSNR = 40.77	(Time: 9.914529)
+Epoch #352: Loss =       0.2602 		PSNR = 40.92	(Time: 9.994779)
+Epoch #353: Loss =       0.2515 		PSNR = 41.14	(Time: 9.383004)
+Epoch #354: Loss =       0.2673 		PSNR = 41.03	(Time: 9.374732)
+Epoch #355: Loss =       0.2700 		PSNR = 41.06	(Time: 10.001240)
+Epoch #356: Loss =       0.2322 		PSNR = 40.82	(Time: 9.812314)
+Epoch #357: Loss =       0.2404 		PSNR = 41.31	(Time: 9.596310)
+Epoch #358: Loss =       0.2691 		PSNR = 41.42	(Time: 9.869672)
+Epoch #359: Loss =       0.2570 		PSNR = 41.41	(Time: 10.365455)
+Epoch #360: Loss =       0.2610 		PSNR = 41.45	(Time: 9.219068)
+Epoch #361: Loss =       0.2748 		PSNR = 41.56	(Time: 11.397283)
+Epoch #362: Loss =       0.2634 		PSNR = 41.77	(Time: 10.339138)
+Epoch #363: Loss =       0.2713 		PSNR = 41.77	(Time: 9.978713)
+Epoch #364: Loss =       0.2535 		PSNR = 42.16	(Time: 9.974265)
+Epoch #365: Loss =       0.2661 		PSNR = 41.99	(Time: 9.742050)
+Epoch #366: Loss =       0.2534 		PSNR = 42.47	(Time: 9.187681)
+Epoch #367: Loss =       0.2701 		PSNR = 42.38	(Time: 9.347297)
+Epoch #368: Loss =       0.2348 		PSNR = 42.29	(Time: 9.308787)
+Epoch #369: Loss =       0.2771 		PSNR = 42.82	(Time: 9.137353)
+Epoch #370: Loss =       0.2557 		PSNR = 42.34	(Time: 10.584788)
+Epoch #371: Loss =       0.2381 		PSNR = 42.56	(Time: 9.185786)
+Epoch #372: Loss =       0.2558 		PSNR = 42.37	(Time: 9.968630)
+Epoch #373: Loss =       0.2779 		PSNR = 42.39	(Time: 9.621111)
+Epoch #374: Loss =       0.2465 		PSNR = 42.65	(Time: 9.793257)
+Epoch #375: Loss =       0.2430 		PSNR = 42.64	(Time: 9.911782)
+Epoch #376: Loss =       0.2575 		PSNR = 42.96	(Time: 9.657821)
+Epoch #377: Loss =       0.2500 		PSNR = 42.73	(Time: 9.872827)
+Epoch #378: Loss =       0.2291 		PSNR = 42.99	(Time: 9.900937)
+Epoch #379: Loss =       0.2399 		PSNR = 43.16	(Time: 13.993351)
+Epoch #380: Loss =       0.2564 		PSNR = 43.28	(Time: 9.734503)
+Epoch #381: Loss =       0.2708 		PSNR = 43.40	(Time: 9.307947)
+Epoch #382: Loss =       0.2505 		PSNR = 43.68	(Time: 14.136222)
+Epoch #383: Loss =       0.2357 		PSNR = 43.76	(Time: 13.115302)
+Epoch #384: Loss =       0.2711 		PSNR = 44.02	(Time: 9.514433)
+Epoch #385: Loss =       0.2502 		PSNR = 44.25	(Time: 9.926285)
+Epoch #386: Loss =       0.2460 		PSNR = 44.59	(Time: 19.721945)
+Epoch #387: Loss =       0.2619 		PSNR = 44.53	(Time: 19.739074)
+Epoch #388: Loss =       0.2353 		PSNR = 45.03	(Time: 11.701381)
+Epoch #389: Loss =       0.2200 		PSNR = 45.63	(Time: 14.187620)
+Epoch #390: Loss =       0.2363 		PSNR = 45.54	(Time: 17.188541)
+Epoch #391: Loss =       0.2166 		PSNR = 45.63	(Time: 15.032241)
+Epoch #392: Loss =       0.2233 		PSNR = 46.35	(Time: 15.685563)
+Epoch #393: Loss =       0.2249 		PSNR = 46.38	(Time: 16.233914)
+Epoch #394: Loss =       0.2186 		PSNR = 46.90	(Time: 9.608958)
+Epoch #395: Loss =       0.1934 		PSNR = 46.46	(Time: 10.522095)
+Epoch #396: Loss =       0.2008 		PSNR = 46.40	(Time: 11.292481)
+Epoch #397: Loss =       0.1875 		PSNR = 45.88	(Time: 11.882884)
+Epoch #398: Loss =       0.2094 		PSNR = 45.93	(Time: 10.237662)
+Epoch #399: Loss =       0.2173 		PSNR = 45.77	(Time: 14.859183)
+Epoch #400: Loss =       0.1927 		PSNR = 46.11	(Time: 9.981902)
+Epoch #401: Loss =       0.2297 		PSNR = 46.07	(Time: 11.888323)
+Epoch #402: Loss =       0.2044 		PSNR = 45.84	(Time: 15.239121)
+Epoch #403: Loss =       0.1913 		PSNR = 46.21	(Time: 15.396759)
+Epoch #404: Loss =       0.1896 		PSNR = 45.77	(Time: 11.142415)
+Epoch #405: Loss =       0.1997 		PSNR = 46.41	(Time: 13.909207)
+Epoch #406: Loss =       0.1834 		PSNR = 46.38	(Time: 11.710755)
+Epoch #407: Loss =       0.1953 		PSNR = 46.61	(Time: 11.462018)
+Epoch #408: Loss =       0.1840 		PSNR = 46.31	(Time: 12.189123)
+Epoch #409: Loss =       0.2009 		PSNR = 46.56	(Time: 14.920633)
+Epoch #410: Loss =       0.2128 		PSNR = 46.81	(Time: 9.794424)
+Epoch #411: Loss =       0.1921 		PSNR = 47.23	(Time: 9.939994)
+Epoch #412: Loss =       0.2272 		PSNR = 45.65	(Time: 13.782734)
+Epoch #413: Loss =       0.2165 		PSNR = 45.07	(Time: 14.956202)
+Epoch #414: Loss =       0.2248 		PSNR = 44.89	(Time: 11.033883)
+Epoch #415: Loss =       0.2426 		PSNR = 44.32	(Time: 9.769314)
+Epoch #416: Loss =       0.2383 		PSNR = 43.96	(Time: 16.085528)
+Epoch #417: Loss =       0.2429 		PSNR = 43.58	(Time: 9.725071)
+Epoch #418: Loss =       0.2169 		PSNR = 43.79	(Time: 12.943608)
+Epoch #419: Loss =       0.2212 		PSNR = 43.74	(Time: 14.355460)
+Epoch #420: Loss =       0.2204 		PSNR = 43.75	(Time: 10.105269)
+Epoch #421: Loss =       0.2231 		PSNR = 43.81	(Time: 12.260494)
+Epoch #422: Loss =       0.2228 		PSNR = 43.85	(Time: 10.163485)
+Epoch #423: Loss =       0.2207 		PSNR = 44.22	(Time: 10.095652)
+Epoch #424: Loss =       0.2439 		PSNR = 44.30	(Time: 13.912195)
+Epoch #425: Loss =       0.2307 		PSNR = 43.93	(Time: 9.857290)
+Epoch #426: Loss =       0.2177 		PSNR = 44.34	(Time: 9.329395)
+Epoch #427: Loss =       0.2548 		PSNR = 44.59	(Time: 10.280660)
+Epoch #428: Loss =       0.2308 		PSNR = 44.39	(Time: 10.416458)
+Epoch #429: Loss =       0.2295 		PSNR = 44.51	(Time: 13.847252)
+Epoch #430: Loss =       0.2231 		PSNR = 43.60	(Time: 13.347313)
+Epoch #431: Loss =       0.2384 		PSNR = 42.93	(Time: 9.459363)
+Epoch #432: Loss =       0.2446 		PSNR = 41.95	(Time: 13.445659)
+Epoch #433: Loss =       0.2682 		PSNR = 41.81	(Time: 10.558317)
+Epoch #434: Loss =       0.2855 		PSNR = 41.59	(Time: 9.551770)
+Epoch #435: Loss =       0.2846 		PSNR = 41.15	(Time: 13.667916)
+Epoch #436: Loss =       0.2600 		PSNR = 41.31	(Time: 14.730207)
+Epoch #437: Loss =       0.2704 		PSNR = 41.15	(Time: 9.422215)
+Epoch #438: Loss =       0.2873 		PSNR = 41.08	(Time: 10.594397)
+Epoch #439: Loss =       0.2627 		PSNR = 41.19	(Time: 14.500286)
+Epoch #440: Loss =       0.2555 		PSNR = 41.19	(Time: 12.433413)
+Epoch #441: Loss =       0.2428 		PSNR = 41.49	(Time: 12.978388)
+Epoch #442: Loss =       0.2725 		PSNR = 41.11	(Time: 9.994648)
+Epoch #443: Loss =       0.2361 		PSNR = 41.48	(Time: 13.220881)
+Epoch #444: Loss =       0.2373 		PSNR = 41.38	(Time: 9.406986)
+Epoch #445: Loss =       0.2525 		PSNR = 41.51	(Time: 9.396904)
+Epoch #446: Loss =       0.2554 		PSNR = 41.22	(Time: 9.976330)
+Epoch #447: Loss =       0.2593 		PSNR = 41.52	(Time: 9.811172)
+Epoch #448: Loss =       0.2325 		PSNR = 41.51	(Time: 9.891638)
+Epoch #449: Loss =       0.2501 		PSNR = 41.58	(Time: 9.275024)
+Epoch #450: Loss =       0.2440 		PSNR = 41.81	(Time: 10.044636)
+Epoch #451: Loss =       0.2418 		PSNR = 42.03	(Time: 10.148718)
+Epoch #452: Loss =       0.2485 		PSNR = 41.86	(Time: 9.781879)
+Epoch #453: Loss =       0.2494 		PSNR = 41.82	(Time: 9.898976)
+Epoch #454: Loss =       0.2470 		PSNR = 42.01	(Time: 9.742925)
+Epoch #455: Loss =       0.2409 		PSNR = 41.90	(Time: 10.534735)
+Epoch #456: Loss =       0.2523 		PSNR = 42.23	(Time: 9.688117)
+Epoch #457: Loss =       0.2474 		PSNR = 42.10	(Time: 9.977036)
+Epoch #458: Loss =       0.2233 		PSNR = 42.41	(Time: 9.357779)
+Epoch #459: Loss =       0.2391 		PSNR = 42.54	(Time: 9.278132)
+Epoch #460: Loss =       0.2152 		PSNR = 42.50	(Time: 9.608851)
+Epoch #461: Loss =       0.2187 		PSNR = 42.59	(Time: 9.909052)
+Epoch #462: Loss =       0.2156 		PSNR = 42.79	(Time: 9.848266)
+Epoch #463: Loss =       0.2151 		PSNR = 43.02	(Time: 9.983487)
+Epoch #464: Loss =       0.2137 		PSNR = 43.10	(Time: 9.259953)
+Epoch #465: Loss =       0.2073 		PSNR = 42.97	(Time: 10.400313)
+Epoch #466: Loss =       0.1998 		PSNR = 43.04	(Time: 9.279116)
+Epoch #467: Loss =       0.2112 		PSNR = 43.47	(Time: 10.273279)
+Epoch #468: Loss =       0.2105 		PSNR = 43.42	(Time: 10.455080)
+Epoch #469: Loss =       0.2283 		PSNR = 43.56	(Time: 9.810366)
+Epoch #470: Loss =       0.2267 		PSNR = 44.01	(Time: 10.129681)
+Epoch #471: Loss =       0.2375 		PSNR = 44.24	(Time: 9.542673)
+Epoch #472: Loss =       0.2133 		PSNR = 43.89	(Time: 10.467390)
+Epoch #473: Loss =       0.2166 		PSNR = 44.27	(Time: 9.283425)
+Epoch #474: Loss =       0.2103 		PSNR = 44.27	(Time: 9.362575)
+Epoch #475: Loss =       0.2149 		PSNR = 44.56	(Time: 10.018134)
+Epoch #476: Loss =       0.2053 		PSNR = 44.41	(Time: 10.258589)
+Epoch #477: Loss =       0.2225 		PSNR = 44.87	(Time: 9.963831)
+Epoch #478: Loss =       0.2181 		PSNR = 45.08	(Time: 9.520373)
+Epoch #479: Loss =       0.2247 		PSNR = 44.92	(Time: 10.402524)
+Epoch #480: Loss =       0.2068 		PSNR = 45.30	(Time: 11.570695)
+Epoch #481: Loss =       0.2055 		PSNR = 45.16	(Time: 10.077491)
+Epoch #482: Loss =       0.1845 		PSNR = 45.20	(Time: 11.808087)
+Epoch #483: Loss =       0.2144 		PSNR = 45.67	(Time: 9.225814)
+Epoch #484: Loss =       0.1937 		PSNR = 45.58	(Time: 10.734884)
+Epoch #485: Loss =       0.1956 		PSNR = 45.69	(Time: 9.572438)
+Epoch #486: Loss =       0.1900 		PSNR = 45.97	(Time: 9.907558)
+Epoch #487: Loss =       0.2036 		PSNR = 46.10	(Time: 9.552642)
+Epoch #488: Loss =       0.1908 		PSNR = 46.18	(Time: 9.865897)
+Epoch #489: Loss =       0.1965 		PSNR = 46.93	(Time: 9.322272)
+Epoch #490: Loss =       0.1671 		PSNR = 47.03	(Time: 10.099101)
+Epoch #491: Loss =       0.1762 		PSNR = 47.05	(Time: 11.251764)
+Epoch #492: Loss =       0.1866 		PSNR = 47.24	(Time: 10.615410)
+Epoch #493: Loss =       0.2108 		PSNR = 47.61	(Time: 10.026175)
+Epoch #494: Loss =       0.2408 		PSNR = 47.81	(Time: 10.198801)
+Epoch #495: Loss =       0.2199 		PSNR = 48.19	(Time: 9.737068)
+Epoch #496: Loss =       0.2013 		PSNR = 48.00	(Time: 9.379379)
+Epoch #497: Loss =       0.1946 		PSNR = 47.47	(Time: 9.814779)
+Epoch #498: Loss =       0.1954 		PSNR = 47.25	(Time: 9.488027)
+Epoch #499: Loss =       0.1975 		PSNR = 47.05	(Time: 9.891731)
+Epoch #500: Loss =       0.1863 		PSNR = 46.71	(Time: 10.142978)
+Epoch #501: Loss =       0.2035 		PSNR = 46.73	(Time: 10.091167)
+Epoch #502: Loss =       0.1930 		PSNR = 46.49	(Time: 9.831814)
+Epoch #503: Loss =       0.1881 		PSNR = 46.18	(Time: 9.528090)
+Epoch #504: Loss =       0.2177 		PSNR = 46.36	(Time: 9.874344)
+Epoch #505: Loss =       0.2363 		PSNR = 46.26	(Time: 9.274114)
+Epoch #506: Loss =       0.2142 		PSNR = 46.43	(Time: 10.060715)
+Epoch #507: Loss =       0.2081 		PSNR = 46.58	(Time: 9.688965)
+Epoch #508: Loss =       0.2287 		PSNR = 46.56	(Time: 10.308712)
+Epoch #509: Loss =       0.2306 		PSNR = 46.00	(Time: 10.028339)
+Epoch #510: Loss =       0.2374 		PSNR = 45.97	(Time: 9.383832)
+Epoch #511: Loss =       0.2581 		PSNR = 45.14	(Time: 9.844404)
+Epoch #512: Loss =       0.2456 		PSNR = 45.37	(Time: 9.577712)
+Epoch #513: Loss =       0.2502 		PSNR = 45.16	(Time: 9.967020)
+Epoch #514: Loss =       0.2616 		PSNR = 45.49	(Time: 9.306723)
+Epoch #515: Loss =       0.2319 		PSNR = 45.73	(Time: 9.465561)
+Epoch #516: Loss =       0.2576 		PSNR = 45.37	(Time: 9.805318)
+Epoch #517: Loss =       0.2386 		PSNR = 45.49	(Time: 9.803127)
+Epoch #518: Loss =       0.2187 		PSNR = 45.20	(Time: 9.173681)
+Epoch #519: Loss =       0.2478 		PSNR = 44.70	(Time: 9.824985)
+Epoch #520: Loss =       0.2383 		PSNR = 45.29	(Time: 9.736772)
+Epoch #521: Loss =       0.2395 		PSNR = 45.33	(Time: 9.240434)
+Epoch #522: Loss =       0.2209 		PSNR = 45.77	(Time: 9.160588)
+Epoch #523: Loss =       0.2554 		PSNR = 45.71	(Time: 9.325737)
+Epoch #524: Loss =       0.2469 		PSNR = 45.67	(Time: 9.417043)
+Epoch #525: Loss =       0.2335 		PSNR = 45.92	(Time: 10.086274)
+Epoch #526: Loss =       0.2456 		PSNR = 46.25	(Time: 10.433996)
+Epoch #527: Loss =       0.2338 		PSNR = 46.09	(Time: 9.199122)
+Epoch #528: Loss =       0.2133 		PSNR = 45.66	(Time: 10.498840)
+Epoch #529: Loss =       0.2263 		PSNR = 46.15	(Time: 9.709095)
+Epoch #530: Loss =       0.2130 		PSNR = 46.49	(Time: 10.195311)
+Epoch #531: Loss =       0.2110 		PSNR = 46.08	(Time: 9.243194)
+Epoch #532: Loss =       0.2098 		PSNR = 46.11	(Time: 9.900768)
+Epoch #533: Loss =       0.2176 		PSNR = 46.29	(Time: 9.807550)
+Epoch #534: Loss =       0.2196 		PSNR = 46.08	(Time: 10.011658)
+Epoch #535: Loss =       0.2241 		PSNR = 45.90	(Time: 9.844080)
+Epoch #536: Loss =       0.2222 		PSNR = 46.41	(Time: 9.275207)
+Epoch #537: Loss =       0.2059 		PSNR = 46.28	(Time: 9.283791)
+Epoch #538: Loss =       0.2103 		PSNR = 46.65	(Time: 10.146408)
+Epoch #539: Loss =       0.2080 		PSNR = 46.32	(Time: 9.842214)
+Epoch #540: Loss =       0.2299 		PSNR = 46.16	(Time: 10.436015)
+Epoch #541: Loss =       0.2011 		PSNR = 46.76	(Time: 9.933221)
+Epoch #542: Loss =       0.2216 		PSNR = 46.76	(Time: 9.871847)
+Epoch #543: Loss =       0.2212 		PSNR = 46.43	(Time: 11.841527)
+Epoch #544: Loss =       0.2210 		PSNR = 46.72	(Time: 9.615340)
+Epoch #545: Loss =       0.2189 		PSNR = 47.10	(Time: 10.065108)
+Epoch #546: Loss =       0.2144 		PSNR = 47.02	(Time: 12.003436)
+Epoch #547: Loss =       0.2134 		PSNR = 46.74	(Time: 10.345856)
+Epoch #548: Loss =       0.2343 		PSNR = 46.47	(Time: 10.994562)
+Epoch #549: Loss =       0.2081 		PSNR = 46.27	(Time: 10.857089)
+Epoch #550: Loss =       0.1919 		PSNR = 47.26	(Time: 9.885244)
+Epoch #551: Loss =       0.1904 		PSNR = 46.39	(Time: 9.309080)
+Epoch #552: Loss =       0.1842 		PSNR = 47.03	(Time: 10.433476)
+Epoch #553: Loss =       0.2026 		PSNR = 46.85	(Time: 9.389026)
+Epoch #554: Loss =       0.1760 		PSNR = 47.12	(Time: 10.156783)
+Epoch #555: Loss =       0.2037 		PSNR = 46.43	(Time: 9.832588)
+Epoch #556: Loss =       0.1731 		PSNR = 47.09	(Time: 9.876270)
+Epoch #557: Loss =       0.2125 		PSNR = 47.17	(Time: 9.700536)
+Epoch #558: Loss =       0.1975 		PSNR = 47.90	(Time: 9.589275)
+Epoch #559: Loss =       0.1984 		PSNR = 47.22	(Time: 9.814666)
+Epoch #560: Loss =       0.1895 		PSNR = 46.72	(Time: 11.240647)
+Epoch #561: Loss =       0.2143 		PSNR = 47.80	(Time: 11.053138)
+Epoch #562: Loss =       0.1989 		PSNR = 47.54	(Time: 9.525660)
+Epoch #563: Loss =       0.1934 		PSNR = 47.10	(Time: 10.945595)
+Epoch #564: Loss =       0.1734 		PSNR = 47.35	(Time: 9.277272)
+Epoch #565: Loss =       0.2010 		PSNR = 47.03	(Time: 10.804036)
+Epoch #566: Loss =       0.2019 		PSNR = 47.19	(Time: 10.685197)
+Epoch #567: Loss =       0.1892 		PSNR = 47.05	(Time: 9.499485)
+Epoch #568: Loss =       0.1779 		PSNR = 47.24	(Time: 9.252240)
+Epoch #569: Loss =       0.1871 		PSNR = 47.79	(Time: 10.179365)
+Epoch #570: Loss =       0.1902 		PSNR = 47.46	(Time: 9.219672)
+Epoch #571: Loss =       0.2068 		PSNR = 47.30	(Time: 10.195690)
+Epoch #572: Loss =       0.2062 		PSNR = 48.13	(Time: 10.323463)
+Epoch #573: Loss =       0.2084 		PSNR = 47.83	(Time: 10.597363)
+Epoch #574: Loss =       0.1947 		PSNR = 47.71	(Time: 9.322852)
+Epoch #575: Loss =       0.1932 		PSNR = 47.30	(Time: 9.274667)
+Epoch #576: Loss =       0.1657 		PSNR = 47.31	(Time: 11.332689)
+Epoch #577: Loss =       0.1829 		PSNR = 46.99	(Time: 9.897437)
+Epoch #578: Loss =       0.1974 		PSNR = 47.09	(Time: 9.289575)
+Epoch #579: Loss =       0.1965 		PSNR = 47.41	(Time: 10.055374)
+Epoch #580: Loss =       0.1753 		PSNR = 47.52	(Time: 9.962983)
+Epoch #581: Loss =       0.1966 		PSNR = 47.32	(Time: 9.966072)
+Epoch #582: Loss =       0.1799 		PSNR = 47.71	(Time: 9.806313)
+Epoch #583: Loss =       0.1902 		PSNR = 47.98	(Time: 10.024911)
+Epoch #584: Loss =       0.1695 		PSNR = 47.69	(Time: 10.186872)
+Epoch #585: Loss =       0.1840 		PSNR = 47.90	(Time: 9.296716)
+Epoch #586: Loss =       0.1743 		PSNR = 47.61	(Time: 9.890187)
+Epoch #587: Loss =       0.1800 		PSNR = 48.30	(Time: 9.908130)
+Epoch #588: Loss =       0.1874 		PSNR = 47.53	(Time: 9.281999)
+Epoch #589: Loss =       0.1713 		PSNR = 47.93	(Time: 9.810116)
+Epoch #590: Loss =       0.1778 		PSNR = 48.21	(Time: 9.399914)
+Epoch #591: Loss =       0.1704 		PSNR = 47.87	(Time: 10.075723)
+Epoch #592: Loss =       0.1750 		PSNR = 47.91	(Time: 9.347326)
+Epoch #593: Loss =       0.1873 		PSNR = 47.68	(Time: 9.716417)
+Epoch #594: Loss =       0.1949 		PSNR = 47.76	(Time: 10.699862)
+Epoch #595: Loss =       0.1850 		PSNR = 48.55	(Time: 11.985933)
+Epoch #596: Loss =       0.1833 		PSNR = 48.21	(Time: 11.815318)
+Epoch #597: Loss =       0.1830 		PSNR = 48.20	(Time: 9.401196)
+Epoch #598: Loss =       0.1934 		PSNR = 47.35	(Time: 9.258491)
+Epoch #599: Loss =       0.2123 		PSNR = 46.52	(Time: 11.012056)
+Epoch #600: Loss =       0.2115 		PSNR = 46.84	(Time: 9.466194)
+Training finished

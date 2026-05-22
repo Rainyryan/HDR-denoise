@@ -1,0 +1,43 @@
+{
+  "os":  "Linux-5.14.0-611.16.1.el9_7.x86_64-x86_64-with-glibc2.34",
+  "python":  "CPython 3.9.25",
+  "startedAt":  "2026-05-21T10:00:05.698437Z",
+  "program":  "/scratch/gilbreth/chen4848/projects/HDR-denoise/train_A100_MoE_Teacher.py",
+  "codePath":  "train_A100_MoE_Teacher.py",
+  "codePathLocal":  "train_A100_MoE_Teacher.py",
+  "git":  {
+    "remote":  "git@github.com:Rainyryan/HDR-denoise.git",
+    "commit":  "ea02d7a2f203eada0feb8a527382ba8c2325e153"
+  },
+  "email":  "rc6150@gmail.com",
+  "root":  "/scratch/gilbreth/chen4848/projects/HDR-denoise",
+  "host":  "gilbreth-fe02.rcac.purdue.edu",
+  "executable":  "/usr/bin/python",
+  "cpu_count":  64,
+  "cpu_count_logical":  128,
+  "gpu":  "NVIDIA A30",
+  "gpu_count":  1,
+  "disk":  {
+    "/":  {
+      "total":  "270299049984",
+      "used":  "37675868160"
+    }
+  },
+  "memory":  {
+    "total":  "540598104064"
+  },
+  "gpu_nvidia":  [
+    {
+      "name":  "NVIDIA A30",
+      "memoryTotal":  "25769803776",
+      "cudaCores":  3584,
+      "architecture":  "Ampere",
+      "uuid":  "GPU-3cba64b5-8d25-6073-51a1-788eaec93f94"
+    }
+  ],
+  "cudaVersion":  "13.1",
+  "slurm":  {
+    "mpi_type":  "pmix"
+  },
+  "writerId":  "jqduxefs3h1wx5nllqqy8zf4wy7zz0y8"
+}

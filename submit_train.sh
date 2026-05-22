@@ -8,7 +8,7 @@
 #SBATCH --ntasks-per-node=1
 #SBATCH --gres=gpu:1
 #SBATCH --cpus-per-task=8      # <-- Increased from 4 to feed the bigger batches fast
-#SBATCH --mem=64G              # <-- Scaled up memory headroom for batch data expansion
+#SBATCH --mem=240G              # <-- Scaled up memory headroom for batch data expansion
 #SBATCH --time=6:00:00
 
 # 1. Ensure directory structures exist
@@ -19,7 +19,7 @@ export PYTHONUNBUFFERED=1
 
 # 3. Securely pass your Weights & Biases API credentials to the automated worker node
 # Replace the string below with the actual key from https://wandb.ai/authorize
-export WANDB_API_KEY="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"
+export WANDB_API_KEY="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"
 
 # 4. Set WANDB to online mode explicitly so it syncs up to the cloud dashboard
 export WANDB_MODE=online

@@ -1,0 +1,8 @@
+/home/chen4848/.conda/envs/2025.06-py313/dl/lib/python3.12/site-packages/torchvision/models/_utils.py:208: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
+  warnings.warn(
+/home/chen4848/.conda/envs/2025.06-py313/dl/lib/python3.12/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=VGG16_Weights.IMAGENET1K_V1`. You can also use `weights=VGG16_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings.warn(msg)
+/scratch/gilbreth/chen4848/projects/HDR-denoise/train_HDR.py:115: FutureWarning: `torch.cuda.amp.GradScaler(args...)` is deprecated. Please use `torch.amp.GradScaler('cuda', args...)` instead.
+  scaler = torch.cuda.amp.GradScaler()
+[ WARN:0@91.184] global loadsave.cpp:1089 imwrite_ Unsupported depth image for selected encoder is fallbacked to CV_8U.
+[2026-05-21T19:46:27.180] error: *** JOB 10755704 ON gilbreth-i001 CANCELLED AT 2026-05-21T19:46:27 DUE to SIGNAL Terminated ***

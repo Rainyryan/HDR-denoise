@@ -51,18 +51,20 @@ class HeavyExposhare(nn.Module):
 # ---------------------------------------------------------
 
 class TransUNet_Teacher_HDR(nn.Module):
-    def __init__(self, out_channels=3, dim=32, num_blocks=[4, 4, 4, 6], num_refinement_blocks=4, heads=[1, 2, 4, 8]):
+    def __init__(self, out_channels=4, dim=32, num_blocks=[4, 4, 4, 6], num_refinement_blocks=4, heads=[1, 2, 4, 8]):
         """
         dim=32, num_blocks=[4,4,4,6], and heads=[1,2,4,8] scales this model 
         to roughly ~19.5M parameters, acting as the heavy Teacher.
+        Expects (4, H, W) packed Bayer input (B, G1, G2, R channels).
         """
         super().__init__()
         self.dim = dim
 
         # ======== First Layer (Patch Embedding) ========
-        self.demosaic_unshuffle = nn.PixelUnshuffle(2)
-        # 3 channels * 4 (from unshuffle) = 12
-        self.patch_embed = nn.Conv2d(12, dim, kernel_size=3, stride=1, padding=1)
+        # Input is already packed (4, H, W) Bayer — no demosaic unshuffle needed.
+        # PixelUnshuffle(2) on 4-ch input -> 4*4 = 16 channels at H/2, W/2
+        self.bayer_unshuffle = nn.PixelUnshuffle(2)
+        self.patch_embed = nn.Conv2d(16, dim, kernel_size=3, stride=1, padding=1)
 
         # ======== CNN Encoder ========
         # Level 1: High Resolution
@@ -115,8 +117,9 @@ class TransUNet_Teacher_HDR(nn.Module):
 
     def forward(self, x, return_maps=False):
         # --- Encoder ---
-        x_shuffled = self.demosaic_unshuffle(x) 			
-        x_level1 = self.patch_embed(x_shuffled) 			
+        # x: (B, 4, H, W) packed Bayer -> (B, 16, H/2, W/2)
+        x_shuffled = self.bayer_unshuffle(x)
+        x_level1 = self.patch_embed(x_shuffled)
         
         x_level1 = self.encoder_level_1(x_level1)
         x_level1 = self.x_expo_1(x_level1) 				
@@ -151,7 +154,7 @@ class TransUNet_Teacher_HDR(nn.Module):
         w_level0_refined_map = w_level0
         
         w_out = self.reduce_chan_final(w_level0) + x 		
-        output = w_out.clamp(min=1/(2**20-1))
+        output = w_out.clamp(min=1/(2**20-1), max=1.0)
 
         if return_maps:
             return output, {

@@ -1,0 +1,67 @@
+Preparing dual model
+Compiling model graph via TorchInductor optimization...
+Setting up [LPIPS] perceptual loss: trunk [vgg], v[0.1], spatial [off]
+Loading model from: /home/chen4848/.conda/envs/2025.06-py313/dl/lib/python3.12/site-packages/lpips/weights/v0.1/vgg.pth
+Starting from scratch.
+Creating dataset
+Setting up [LPIPS] perceptual loss: trunk [vgg], v[0.1], spatial [off]
+Loading model from: /home/chen4848/.conda/envs/2025.06-py313/dl/lib/python3.12/site-packages/lpips/weights/v0.1/vgg.pth
+Training started
+Epoch #1: Loss =       0.6309 	17.645747502644856	(Time: 143.989982)
+Epoch #2: Loss =       0.5736 	17.399893442789715	(Time: 9.959311)
+Epoch #3: Loss =       0.5402 	17.986550013224285	(Time: 10.223190)
+Epoch #4: Loss =       0.5177 	18.165316899617512	(Time: 10.138439)
+Epoch #5: Loss =       0.4980 	18.28456751505534	(Time: 9.981187)
+Epoch #6: Loss =       0.4962 	18.39477602640788	(Time: 9.321530)
+Epoch #7: Loss =       0.5085 	18.477591196695965	(Time: 10.231124)
+Epoch #8: Loss =       0.5364 	17.2771094640096	(Time: 9.280365)
+Epoch #9: Loss =       0.5880 	14.129480997721354	(Time: 10.580710)
+Epoch #10: Loss =       0.4927 	16.715692202250164	(Time: 9.879323)
+Epoch #11: Loss =       0.4903 	18.863166173299152	(Time: 10.373895)
+Epoch #12: Loss =       0.4822 	18.9446226755778	(Time: 10.435264)
+Epoch #13: Loss =       0.4659 	19.040470123291016	(Time: 10.187942)
+Epoch #14: Loss =       0.8711 	-2.5817313194274902	(Time: 10.057626)
+Epoch #15: Loss =       1.5251 	-34.58307329813639	(Time: 10.309630)
+Epoch #16: Loss =       1.4402 	-27.79991054534912	(Time: 10.322948)
+Epoch #17: Loss =       0.8181 	0.10742584864298503	(Time: 9.310476)
+Epoch #18: Loss =       0.7762 	3.567994842926661	(Time: 9.974278)
+Epoch #19: Loss =       0.4862 	18.381054560343426	(Time: 10.278273)
+Epoch #20: Loss =       0.5121 	19.039849599202473	(Time: 9.482806)
+Epoch #21: Loss =       0.4882 	18.144955317179363	(Time: 10.004797)
+Epoch #22: Loss =       0.4977 	17.306285222371418	(Time: 9.924143)
+Epoch #23: Loss =       0.4555 	18.74379539489746	(Time: 9.372430)
+Epoch #24: Loss =       0.4714 	19.816123962402344	(Time: 10.492338)
+Epoch #25: Loss =       0.4473 	19.904316584269207	(Time: 9.739085)
+Epoch #26: Loss =       0.7068 	11.402723789215088	(Time: 9.967792)
+Epoch #27: Loss =       0.4138 	20.423114776611328	(Time: 10.526423)
+Epoch #28: Loss =       0.4225 	20.503705342610676	(Time: 9.882988)
+Epoch #29: Loss =       0.4365 	20.55360221862793	(Time: 10.101068)
+Epoch #30: Loss =       0.4113 	20.734024047851562	(Time: 9.993995)
+Epoch #31: Loss =       0.4058 	20.7751948038737	(Time: 9.340268)
+Epoch #32: Loss =       0.3833 	20.913479487101238	(Time: 9.326850)
+Epoch #33: Loss =       0.4041 	20.94637616475423	(Time: 10.181706)
+Epoch #34: Loss =       0.4218 	21.163036346435547	(Time: 9.866066)
+Epoch #35: Loss =       0.4414 	21.1124750773112	(Time: 9.314307)
+Epoch #36: Loss =       0.4377 	21.221054712931316	(Time: 10.508157)
+Epoch #37: Loss =       0.8422 	-4.952913284301758	(Time: 9.795456)
+Epoch #38: Loss =       0.9609 	-13.884913444519043	(Time: 9.393173)
+Epoch #39: Loss =       1.1474 	-23.336334228515625	(Time: 9.351513)
+Epoch #40: Loss =       0.9740 	-9.323171615600586	(Time: 9.811387)
+Epoch #41: Loss =       0.6707 	7.222929000854492	(Time: 9.975318)
+Epoch #42: Loss =       0.3985 	21.582713445027668	(Time: 10.201216)
+Epoch #43: Loss =       0.4564 	21.48010762532552	(Time: 10.335806)
+Epoch #44: Loss =       0.4740 	21.651844660441082	(Time: 9.791451)
+Epoch #45: Loss =       0.4790 	21.121466954549152	(Time: 10.029723)
+Epoch #46: Loss =       0.4593 	21.010764439900715	(Time: 9.411976)
+Epoch #47: Loss =       0.5301 	16.845447063446045	(Time: 9.405665)
+Epoch #48: Loss =       0.4543 	20.674112955729168	(Time: 9.552769)
+Epoch #49: Loss =       0.4271 	22.05950927734375	(Time: 9.588188)
+Epoch #50: Loss =       0.4486 	21.956613540649414	(Time: 9.575483)
+Epoch #51: Loss =       0.4468 	22.190295537312824	(Time: 9.335640)
+Epoch #52: Loss =       0.4669 	22.213841756184895	(Time: 9.846572)
+Epoch #53: Loss =       0.4390 	22.28419558207194	(Time: 10.084902)
+Epoch #54: Loss =       0.4581 	22.388561248779297	(Time: 9.678744)
+Epoch #55: Loss =       0.4226 	22.606678009033203	(Time: 9.846062)
+Epoch #56: Loss =       0.4141 	22.682471593221027	(Time: 10.414564)
+Epoch #57: Loss =       0.4915 	22.103883743286133	(Time: 10.428431)
+Epoch #58: Loss =       0.4317 	22.692050298055012	(Time: 10.157145)
