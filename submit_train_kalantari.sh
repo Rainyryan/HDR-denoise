@@ -19,8 +19,9 @@ export PYTHONUNBUFFERED=1
 
 # 3. Securely pass your Weights & Biases API credentials to the automated worker node
 # Replace the string below with the actual key from https://wandb.ai/authorize
-export WANDB_API_KEY="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"
-
+set -a
+source /home/chen4848/.env
+set +a
 # 4. Set WANDB to online mode explicitly so it syncs up to the cloud dashboard
 export WANDB_MODE=online
 

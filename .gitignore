@@ -185,3 +185,5 @@ cython_debug/
 
 
 submit_train.sh
+submit_train_kalantari2017.sh
+.env
