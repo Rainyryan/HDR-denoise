@@ -1,111 +1,220 @@
+"""
+HDR_Mobile_dataset.py — MobileHDR packed-Bayer dataset with synthetic noise
+============================================================================
+
+Tensors on disk: (4, H, W) float32 packed BGGR Bayer (channels B, G1, G2, R),
+unnormalised HDR values (see convert_npz_to_pt.py).
+
+Noise model (high noise — matches the proven recipe in HDR_dataset.py)
+──────────────────────────────────────────────────────────────────────
+Poisson-Gaussian in digital numbers (DN), signal in [0, pix_max]:
+
+    var[DN²] = shot_gain * signal[DN] + read_var,
+    shot_gain = 14, read_var ~ U(135, 160)
+
+At 10 bit this gives σ ≈ 120 DN (12% of full scale) in highlights and
+σ ≈ 12 DN in the blacks; on top of that the triangular low-light alpha
+(biased toward 0.1) scales the signal down, so dark scenes get severe
+relative noise. NOTE: the previous version normalised the signal to [0, 1]
+before multiplying by shot_gain, which silently capped the noise variance
+at ~14 DN² (~100x too weak).
+
+Efficiency
+──────────
+* `crop_size` (train): the random crop is taken BEFORE noise synthesis, so
+  noise is generated for crop_size² pixels instead of the full frame
+  (~12x less dataloader CPU for 512² crops from ~2K x 1.5K frames).
+* Tensors are loaded with mmap when available, so a crop only touches the
+  pages it needs after the first access.
+* Per-file min/max is cached so crops are normalised by the FULL image
+  range — crops keep their absolute brightness (a dark crop stays dark).
+
+Determinism
+───────────
+* File lists are sorted (glob order is filesystem-dependent).
+* split="test" draws noise from a per-index torch.Generator, so every run
+  benchmarks the exact same noisy inputs.
+"""
+
 import os
 import glob
+import random
+
 import torch
 from torch.utils.data import Dataset
 
-def add_photon_noise(image: torch.Tensor, nbits: int = 10, random_alpha: bool = True, do_expand: bool = False) -> tuple:
+
+def _rand(generator=None) -> float:
+    """Uniform [0,1) scalar, optionally from a dedicated generator."""
+    return torch.rand((), generator=generator).item()
+
+
+def add_photon_noise(image: torch.Tensor, nbits: int = 10,
+                     random_alpha: bool = True, do_expand: bool = False,
+                     shot_gain: float = 14.0,
+                     read_noise_range=(135.0, 160.0),
+                     norm_min=None, norm_max=None,
+                     generator: torch.Generator = None) -> tuple:
     """
-    Adds Poisson-Gaussian noise to a [4, H, W] packed Bayer float32 tensor.
-    Channel order: B, G1, G2, R.
-    Now includes Triangular low-light biasing and Expand Mode offsets.
+    Adds Poisson-Gaussian sensor noise to a [4, H, W] packed Bayer float32
+    tensor (channel order B, G1, G2, R). Returns (noisy, gt), both in [0, 1].
+
+    norm_min / norm_max: normalisation range. Pass the FULL image min/max
+    when `image` is a crop so the crop keeps its absolute brightness.
+    generator: optional torch.Generator for reproducible noise (test split).
     """
     pix_max = float(2 ** nbits - 1)
-    image = image.clone()
 
-    img_min = image.min()
-    img_max = image.max()
-    if (img_max - img_min) > 1e-6:
-        image = (image - img_min) / (img_max - img_min)
+    # Normalise to [0, 1] (by the full-image range when provided)
+    rmin = image.min() if norm_min is None else norm_min
+    rmax = image.max() if norm_max is None else norm_max
+    rng = float(rmax) - float(rmin)
+    if rng > 1e-6:
+        image = (image - rmin) / rng
+    else:
+        image = image - rmin            # constant image -> zeros
     image = image * pix_max
 
-    # 1. Restore the Triangular Distribution (Biased towards extreme low-light)
+    # 1. Triangular low-light alpha, biased towards extreme low light:
+    #    |u1 - u2| has density 2(1-z) on [0,1] -> alpha peaks at 0.1.
     if random_alpha:
-        # PyTorch doesn't have a native triangular distribution, 
-        # but we can approximate it by combining two uniform tensors
-        u1 = torch.rand(1).item()
-        u2 = torch.rand(1).item()
-        # Roughly mimics your old (1, 2, 8) curve scaled to [0.1, 1.0]
-        alpha = 0.1 + 0.9 * abs(u1 - u2) 
+        alpha = 0.1 + 0.9 * abs(_rand(generator) - _rand(generator))
     else:
         alpha = 1.0
-
     clean = image * alpha
-    gt = image * alpha
 
-    # 2. Restore Expand Mode (Extreme Highlights)
-    if do_expand and torch.rand(1).item() < 0.3:
-        # Adds 5-bit to 11-bit global offset to 30% of data
-        offset = 2 ** (torch.rand(1).item() * 6.0 + 5.0)
-        gt = gt + offset
-        clean = clean + offset
+    # 2. Expand mode: 5- to 11-bit global offset on 30% of samples
+    #    (extreme highlights / saturation handling).
+    if do_expand and _rand(generator) < 0.3:
+        clean = clean + 2.0 ** (_rand(generator) * 6.0 + 5.0)
 
-    # 3. Sensor noise model (Var = 14 * Signal + Read Noise)
-    iso = torch.empty(1).uniform_(100, 6400).item()
-    shot_noise = clean / pix_max          
-    read_noise = (iso / 1600) * 0.01      
-    noise_sigma = torch.sqrt(shot_noise * 14.0 + read_noise * pix_max)
-    
-    noisy = clean + noise_sigma * torch.randn_like(clean)
+    # 3. Poisson-Gaussian noise in DN:  var = shot_gain * signal + read_var
+    clean = clean.clamp(min=0.0)
+    read_var = read_noise_range[0] + \
+        (read_noise_range[1] - read_noise_range[0]) * _rand(generator)
+    noise_sigma = torch.sqrt(shot_gain * clean + read_var)
+    noisy = clean + noise_sigma * torch.randn(clean.shape, generator=generator,
+                                              dtype=clean.dtype)
 
-    noisy = torch.clamp(torch.round(noisy), 0.0, pix_max) / pix_max
-    gt = torch.clamp(gt, 0.0, pix_max) / pix_max
-
+    # ADC: quantise + clip the noisy frame; GT is clipped only.
+    noisy = torch.round(noisy).clamp_(0.0, pix_max) / pix_max
+    gt = clean.clamp(0.0, pix_max) / pix_max
     return noisy, gt
 
 
 class MobileHDRDataset(Dataset):
-    # Added num_patch to the inputs (default 64)
-    def __init__(self, base_dir: str, split: str = "train", transform=None, nbits: int = 10, random_alpha: bool = True, num_patch: int = 16):
+    def __init__(self, base_dir: str, split: str = "train", transform=None,
+                 nbits: int = 10, random_alpha: bool = True,
+                 num_patch: int = 16, crop_size: int = None,
+                 do_expand: bool = False, shot_gain: float = 14.0,
+                 read_noise_range=(135.0, 160.0), test_noise_seed: int = 2025):
+        """
+        crop_size: if set (train only), a random crop_size² crop is taken
+            BEFORE noise synthesis and `transform` only needs to handle
+            flips/transpose. If None, noise is added to the full frame and
+            `transform` may crop (legacy behaviour).
+        num_patch: virtual repeats per image per epoch (train only).
+        """
         self.base_dir = base_dir
         self.split = split
         self.transform = transform
         self.nbits = nbits
         self.random_alpha = random_alpha
-        self.do_expand = False
-        self.num_patch = num_patch # Store the multiplier
+        self.num_patch = num_patch
+        self.crop_size = crop_size
+        self.do_expand = do_expand
+        self.shot_gain = shot_gain
+        self.read_noise_range = tuple(read_noise_range)
+        self.test_noise_seed = test_noise_seed
 
         if self.split == "train":
             self.tensor_dir = os.path.join(base_dir, "train", "tensors")
-            self.file_list = glob.glob(os.path.join(self.tensor_dir, "**", "*.pt"), recursive=True)
+            self.file_list = sorted(glob.glob(
+                os.path.join(self.tensor_dir, "**", "*.pt"), recursive=True))
         elif self.split == "test":
             self.tensor_dir = os.path.join(base_dir, "test", "tensors", "with_gt")
-            self.file_list = glob.glob(os.path.join(self.tensor_dir, "*.pt"))
+            self.file_list = sorted(glob.glob(
+                os.path.join(self.tensor_dir, "*.pt")))
+        else:
+            raise ValueError(f"Unknown split '{split}' (use train | test)")
 
         if len(self.file_list) == 0:
             raise RuntimeError(f"No .pt tensors found in {self.tensor_dir}.")
 
+        # Per-file (min, max) of the FULL image, filled lazily per worker.
+        self._range_cache = {}
+
     def __len__(self) -> int:
-        # THE TRICK: Multiply the length for training so an epoch is the correct size!
+        # Virtual epoch: each image is visited num_patch times with fresh
+        # crops/noise. Testing stays 1-to-1.
         if self.split == "train":
             return len(self.file_list) * self.num_patch
-        return len(self.file_list) # Testing should just be 1-to-1
+        return len(self.file_list)
 
+    # Kept as no-ops: crops and noise are regenerated on every __getitem__.
     def regen_crops(self):
         pass
 
     def regen_noise(self):
         pass
 
+    def _load_clean(self, path: str) -> torch.Tensor:
+        try:
+            # mmap: a crop only reads the pages it touches (torch >= 2.1)
+            return torch.load(path, weights_only=True, mmap=True)
+        except (TypeError, RuntimeError):
+            return torch.load(path, weights_only=True)
+
+    def _image_range(self, path: str, tensor: torch.Tensor):
+        if path not in self._range_cache:
+            self._range_cache[path] = (tensor.min().item(), tensor.max().item())
+        return self._range_cache[path]
+
     def __getitem__(self, idx: int) -> dict:
-        # Use modulo arithmetic to wrap the virtual index back to the real file list
         actual_idx = idx % len(self.file_list)
         tensor_path = self.file_list[actual_idx]
 
-        clean_hdr = torch.load(tensor_path, weights_only=True)
-
+        clean_hdr = self._load_clean(tensor_path)
         assert clean_hdr.dim() == 3 and clean_hdr.shape[0] == 4, \
-            f"Expected [4, H, W] Bayer tensor, got {clean_hdr.shape} in {tensor_path}"
+            f"Expected [4, H, W] Bayer tensor, got {tuple(clean_hdr.shape)} in {tensor_path}"
+
+        rmin, rmax = self._image_range(tensor_path, clean_hdr)
+        is_train = self.split == "train"
+
+        # Crop BEFORE noise synthesis (train): any (top, left) is valid for
+        # the packed representation since every packed pixel is a full BGGR
+        # cell — the channel-position correspondence is preserved.
+        if is_train and self.crop_size is not None:
+            cs = self.crop_size
+            _, h, w = clean_hdr.shape
+            if h < cs or w < cs:
+                raise RuntimeError(
+                    f"Image {tensor_path} ({h}x{w}) smaller than crop_size={cs}")
+            top = random.randint(0, h - cs)
+            left = random.randint(0, w - cs)
+            clean_hdr = clean_hdr[:, top:top + cs, left:left + cs]
+
+        # Deterministic noise per test index -> reproducible benchmarks.
+        gen = None
+        if not is_train:
+            gen = torch.Generator()
+            gen.manual_seed(self.test_noise_seed + actual_idx)
 
         noisy_hdr, gt_hdr = add_photon_noise(
             clean_hdr,
             nbits=self.nbits,
-            random_alpha=self.random_alpha if self.split == "train" else False,
-            do_expand=self.do_expand
+            random_alpha=self.random_alpha if is_train else False,
+            do_expand=self.do_expand if is_train else False,
+            shot_gain=self.shot_gain,
+            read_noise_range=self.read_noise_range,
+            norm_min=rmin, norm_max=rmax,
+            generator=gen,
         )
 
         if self.transform:
             noisy_hdr, gt_hdr = self.transform(noisy_hdr, gt_hdr)
 
+        # 'xm' kept for backward compatibility with older training scripts.
         return {
             'x': noisy_hdr,
             'xm': noisy_hdr,

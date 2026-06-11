@@ -1,16 +1,33 @@
 """
-train_two_phase.py — Two-phase HDR Teacher training on MobileHDR dataset
-=========================================================================
+train_A100_MoE_two_phase.py — Two-phase HDR MoE training on MobileHDR
+=====================================================================
 
 Phase 1 — Patch training  (200 epochs, 512×512 crops, batch 8)
     The model learns all noise statistics quickly with diverse patch combinations.
     Larger effective batch size → stable gradients → can use higher LR.
     Bottleneck Restormer sees 64×64 = 4096 tokens — enough global context.
+    The random crop is taken inside the dataset BEFORE noise synthesis
+    (≈12× less dataloader CPU than noising the full frame and cropping after).
 
-Phase 2 — Full-res fine-tune  (30 epochs, 2040×1528, batch 1)
+Phase 2 — Full-res fine-tune  (30 epochs, full frames, batch 1)
     Closes the train/test distribution gap: patch statistics ≠ full-image
     statistics (boundary effects, global exposure, structured noise).
     Very small LR — adapt, don't relearn.
+
+Model modes (MODE flag)
+───────────────────────
+  "moe"    MoEDenoiser — ONE shared trunk + K lightweight expert heads with
+           a learned per-pixel gate conditioned on (noisy input, SNR map).
+           Experts specialise on different noise levels. ~half the params
+           and FLOPs of "dual" while supporting K ≥ 2 experts.
+  "dual"   Legacy DualSNRDenoiser — two full teachers blended by the SNR map.
+  "single" One teacher, no routing (ablation).
+
+All modes share one forward signature:
+    blended, expert_outs, gates = model(x, snr_map)
+and one loss:
+    L = L1-µ(blended) + γ·LPIPS + aux·Σ_k gate_k-weighted L1-µ(expert_k)
+        + bal·load-balance                       (balance: moe only)
 
 Usage
 ─────
@@ -37,18 +54,18 @@ V-flip independently already cover the 4 dimension-preserving symmetries.
 """
 
 import os
+import math
 import time
 import lpips
 from datetime import datetime
 
 import torch
-import torch.nn as nn
 import torchvision.transforms.functional as TF
 import torch.nn.functional as F
 import random
 import wandb
 
-from HDR_model_hybrid_Teacher import TransUNet_Teacher_HDR as HDR_model
+from HDR_model_hybrid_Teacher import build_denoiser, estimate_local_snr_map
 from HDR_Mobile_dataset import MobileHDRDataset
 
 os.environ["WANDB_CACHE_DIR"] = "/scratch/gilbreth/chen4848/wandb_cache"
@@ -57,58 +74,14 @@ os.environ["WANDB_DIR"]       = "/scratch/gilbreth/chen4848/projects/HDR-denoise
 
 
 ##########################################################################
-## Model wrappers
-##########################################################################
-
-class DualSNRDenoiser(nn.Module):
-    """
-    Two independent expert denoisers blended by a pixel-wise SNR map.
-    Low-SNR expert specialises in high-noise (shadow) regions;
-    high-SNR expert in low-noise (highlight) regions.
-    The soft blend is: out = (1 - snr) * out_low + snr * out_high.
-    """
-    def __init__(self, **kwargs):
-        super().__init__()
-        self.denoiser_low_snr  = HDR_model(**kwargs)
-        self.denoiser_high_snr = HDR_model(**kwargs)
-
-    def forward(self, x, snr_map):
-        """
-        x:       [B, 4, H, W] packed Bayer, values in [0, 1]
-        snr_map: [B, 1, H, W] normalised SNR in [0, 1]
-        Returns: (blended, out_low, out_high)
-        """
-        out_low  = self.denoiser_low_snr(x)
-        out_high = self.denoiser_high_snr(x)
-        blended  = (1.0 - snr_map) * out_low + snr_map * out_high
-        return blended, out_low, out_high
-
-
-class SingleDenoiser(nn.Module):
-    """
-    Baseline: one denoiser, no SNR routing.
-    Returns the same 3-tuple as DualSNRDenoiser so the training loop
-    requires zero changes.  aux_weight is set to 0 for this mode so
-    the auxiliary losses have no effect.
-    """
-    def __init__(self, **kwargs):
-        super().__init__()
-        self.denoiser = HDR_model(**kwargs)
-
-    def forward(self, x, snr_map):
-        out = self.denoiser(x)
-        return out, out, out
-
-
-##########################################################################
 ## Logging utilities
 ##########################################################################
 
-def print_running_loss(running_loss, running_psnr_mu, batch_sz, i, print_every=20):
+def print_running_loss(running_loss, running_psnr_mu, i, print_every=20):
     if i % print_every == (print_every - 1):
         psnr_str = "  PSNR-µ = %.2f" % (running_psnr_mu / (i + 1)) if running_psnr_mu else ""
         print("\r  step %5d  loss = %10.4f%s" % (
-            i + 1, running_loss / (batch_sz * (i + 1)), psnr_str), end="")
+            i + 1, running_loss / (i + 1), psnr_str), end="")
 
 def print_epoch_loss(epoch_num, avg_loss, avg_psnr_mu, avg_psnr, phase, time_spent=None):
     ts  = "?" if time_spent is None else "%.1fs" % time_spent
@@ -137,8 +110,7 @@ def hdr_tonemap(x, mu=5000):
     Maps [0, 1] linear HDR → [0, 1] perceptually-uniform space.
     mu=5000 is the HDR imaging literature standard (Kalantari SIGGRAPH 2017).
     """
-    mu_t = torch.tensor(mu, device=x.device, dtype=x.dtype)
-    return torch.log1p(mu_t * x) / torch.log1p(mu_t)
+    return torch.log1p(mu * x) / math.log1p(mu)
 
 
 def batch_psnr_gpu(img, gt, data_range=1.0):
@@ -151,26 +123,16 @@ def batch_psnr_gpu(img, gt, data_range=1.0):
         return p.mean().item()
 
 
-def estimate_local_snr_map(x, window_size=5, eps=1e-5):
+def collate_xy(batch):
     """
-    Estimates a per-pixel SNR map from a noisy image batch.
-    Returns [B, 1, H, W] normalised to [0, 1] per image.
-    Used to route pixels between the two experts in DualSNRDenoiser.
+    Phase 1 collate: stacks only the tensors the loop uses. The dataset
+    also returns a duplicate 'xm' alias (kept for older scripts) — stacking
+    and pinning it would waste CPU and host memory every batch.
     """
-    unbatched = x.dim() == 3
-    if unbatched:
-        x = x.unsqueeze(0)
-    pad           = window_size // 2
-    local_mean    = F.avg_pool2d(x, window_size, stride=1, padding=pad)
-    local_sq_mean = F.avg_pool2d(x ** 2, window_size, stride=1, padding=pad)
-    local_var     = torch.clamp(local_sq_mean - local_mean ** 2, min=0.0)
-    local_std     = torch.sqrt(local_var + eps)
-    spatial_snr   = (local_mean / local_std).mean(dim=1, keepdim=True)
-    batch_max     = spatial_snr.amax(dim=(2, 3), keepdim=True)
-    snr_norm      = spatial_snr / (batch_max + eps)
-    if unbatched:
-        snr_norm = snr_norm.squeeze(0)
-    return snr_norm
+    return {
+        "x": torch.stack([s["x"] for s in batch]),
+        "y": torch.stack([s["y"] for s in batch]),
+    }
 
 
 def collate_pad_to_max(batch):
@@ -189,9 +151,8 @@ def collate_pad_to_max(batch):
         return F.pad(t, (0, max_w - w, 0, max_h - h), mode="reflect")
 
     return {
-        "x":      torch.stack([pad(s["x"])  for s in batch]),
-        "xm":     torch.stack([pad(s["xm"]) for s in batch]),
-        "y":      torch.stack([pad(s["y"])  for s in batch]),
+        "x":      torch.stack([pad(s["x"]) for s in batch]),
+        "y":      torch.stack([pad(s["y"]) for s in batch]),
         "orig_h": torch.tensor([s["x"].shape[1] for s in batch]),
         "orig_w": torch.tensor([s["x"].shape[2] for s in batch]),
     }
@@ -218,65 +179,29 @@ def build_scheduler(optimizer, warmup_epochs, total_epochs, eta_min=1e-6):
 ## Augmentation transforms
 ##########################################################################
 
-def make_patch_transform(patch_size: int):
+def make_d4_transform(allow_transpose: bool):
     """
-    Phase 1 transform: random 512×512 crop + full D4 augmentation.
+    Random D4 augmentation with BGGR channel permutations (see module
+    docstring). The random crop is done inside the dataset (crop_size),
+    so this only handles flips / transpose.
 
-    D4 group (8 symmetries) via three independent 50/50 coin flips:
-      H-flip × V-flip × Transpose  →  2³ = 8 equally-likely outcomes.
-
-    Channel permutations maintain BGGR packed-Bayer correspondence:
-      H-flip    → [1, 0, 3, 2]   (B↔G1, G2↔R)
-      V-flip    → [2, 3, 0, 1]   (B↔G2, G1↔R)
-      Transpose → [0, 2, 1, 3]   (G1↔G2, B and R unchanged)
-    Transpose is valid here because patches are square (patch_size × patch_size).
+      H-flip    → permute [1, 0, 3, 2]   (B↔G1, G2↔R)
+      V-flip    → permute [2, 3, 0, 1]   (B↔G2, G1↔R)
+      Transpose → permute [0, 2, 1, 3]   (G1↔G2)  — square patches only,
+                  so Phase 2 (non-square full frames) sets allow_transpose=False.
     """
     def transform(noisy, clean):
-        _, h, w = noisy.shape
-        # ── Random crop ──────────────────────────────────────────────
-        top  = random.randint(0, h - patch_size)
-        left = random.randint(0, w - patch_size)
-        noisy = noisy[:, top:top+patch_size, left:left+patch_size]
-        clean = clean[:, top:top+patch_size, left:left+patch_size]
-
-        # ── H-flip: even col ↔ odd col  →  B↔G1, G2↔R ───────────────
         if random.random() > 0.5:
             noisy = TF.hflip(noisy)[[1, 0, 3, 2]]
             clean = TF.hflip(clean)[[1, 0, 3, 2]]
 
-        # ── V-flip: even row ↔ odd row  →  B↔G2, G1↔R ───────────────
         if random.random() > 0.5:
             noisy = TF.vflip(noisy)[[2, 3, 0, 1]]
             clean = TF.vflip(clean)[[2, 3, 0, 1]]
 
-        # ── Transpose: (r,c)→(c,r)  →  G1↔G2 (valid for square patches)
-        if random.random() > 0.5:
+        if allow_transpose and random.random() > 0.5:
             noisy = noisy.permute(0, 2, 1)[[0, 2, 1, 3]].contiguous()
             clean = clean.permute(0, 2, 1)[[0, 2, 1, 3]].contiguous()
-
-        return noisy, clean
-    return transform
-
-
-def make_fullres_transform():
-    """
-    Phase 2 transform: no crop, dimension-preserving D4 subset only.
-
-    Full-res images are 2040×1528 (non-square), so Transpose is skipped.
-    H-flip and V-flip applied independently give all 4 dimension-preserving
-    symmetries with equal probability (25% each):
-      identity | H-flip | V-flip | 180° (= H+V)
-    """
-    def transform(noisy, clean):
-        # ── H-flip ────────────────────────────────────────────────────
-        if random.random() > 0.5:
-            noisy = TF.hflip(noisy)[[1, 0, 3, 2]]
-            clean = TF.hflip(clean)[[1, 0, 3, 2]]
-
-        # ── V-flip ────────────────────────────────────────────────────
-        if random.random() > 0.5:
-            noisy = TF.vflip(noisy)[[2, 3, 0, 1]]
-            clean = TF.vflip(clean)[[2, 3, 0, 1]]
 
         return noisy, clean
     return transform
@@ -310,19 +235,22 @@ if __name__ == "__main__":
     # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     #  TOP-LEVEL FLAGS  — the only lines you change between runs
     # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-    PHASE    = 1        # 1 = patch training  |  2 = full-res fine-tune
-    USE_DUAL = True     # True = DualSNRDenoiser  |  False = SingleDenoiser (ablation)
+    PHASE       = 1        # 1 = patch training  |  2 = full-res fine-tune
+    MODE        = "moe"    # "moe" | "dual" | "single"
+    NUM_EXPERTS = 3        # MoE only: experts across noise levels
+    USE_COMPILE = False    # torch.compile the model (A100 speedup; needs
+                           # stable torch+inductor on the cluster)
 
     # Required for Phase 2: path to the best Phase 1 checkpoint.
     # Phase 2 loads this if no Phase 2 checkpoint exists yet.
     PHASE1_CHECKPOINT = (
-        "models_p1_dual_Teacher_MobileHDR_YYYYMMDD_HHMM/phase1_best.pth"
+        "models_p1_moe_Teacher_MobileHDR_YYYYMMDD_HHMM/phase1_best.pth"
     )
     # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
     # ── Paths ─────────────────────────────────────────────────────────
     timestamp_str    = datetime.now().strftime("%Y%m%d_%H%M")
-    mode_tag         = "dual" if USE_DUAL else "single"
+    mode_tag         = MODE
     save_folder      = (f"models_p{PHASE}_{mode_tag}_Teacher_"
                         f"MobileHDR_{timestamp_str}/")
     dataset_dir      = "/scratch/gilbreth/chen4848/datasets/Mobile-HDR"
@@ -340,7 +268,6 @@ if __name__ == "__main__":
         # Bottleneck Restormer sees 64×64 = 4096 tokens — sufficient for
         # global noise statistics without processing the entire 49K-token
         # full-resolution feature map.
-        # batch_sz=8 keeps peak VRAM ≈ 12 GB on A100-80 GB.
         PATCH_SIZE     = 512
         batch_sz       = 8
         num_patch      = 16    # 16 virtual repeats per image per epoch
@@ -349,14 +276,13 @@ if __name__ == "__main__":
         num_epochs     = 200
         eta_min        = 1e-6
         gamma          = 0.1   # moderate perceptual weight
-        aux_weight     = 0.5 if USE_DUAL else 0.0
         grad_clip      = 1.0
         rollback_mult  = 3.0   # tighter than Phase 2; batch 8 has low variance
         LPIPS_CROP     = 256   # sub-crop from 512×512 patch for LPIPS
 
     else:
         # ── Full-resolution fine-tune ─────────────────────────────────
-        # batch_sz=1 is the limit for 4080×3056 on A100-80 GB.
+        # batch_sz=1 is the limit for full frames on A100-80 GB.
         # Very small LR: the model is already trained — just adapt the
         # boundary/global-context statistics to full-resolution inputs.
         PATCH_SIZE     = None  # full resolution
@@ -367,13 +293,15 @@ if __name__ == "__main__":
         num_epochs     = 30
         eta_min        = 1e-7
         gamma          = 0.05  # near-zero perceptual; focus on pixel fidelity
-        aux_weight     = 0.5 if USE_DUAL else 0.0
         grad_clip      = 0.5   # tighter clip for fine-tune stability
         rollback_mult  = 5.0
         LPIPS_CROP     = 256
 
-    # Shared
-    mu          = 5000   # µ-law tonemapping constant (HDR literature standard)
+    # Shared loss weights
+    mu             = 5000   # µ-law tonemapping constant (HDR literature standard)
+    aux_weight     = 0.5  if MODE in ("moe", "dual") else 0.0
+    balance_weight = 0.01 if MODE == "moe" else 0.0   # anti expert-collapse
+
     start_epoch = 0
     best_psnr_mu = 0.0
     last_epoch_psnr_mu, last_epoch_loss = 0.0, 1e6
@@ -393,7 +321,7 @@ if __name__ == "__main__":
         config={
             "phase":            PHASE,
             "mode":             mode_tag,
-            "use_dual":         USE_DUAL,
+            "num_experts":      NUM_EXPERTS,
             "patch_size":       PATCH_SIZE,
             "batch_size":       batch_sz,
             "num_patch":        num_patch,
@@ -404,34 +332,34 @@ if __name__ == "__main__":
             "mu":               mu,
             "gamma":            gamma,
             "aux_weight":       aux_weight,
+            "balance_weight":   balance_weight,
             "grad_clip":        grad_clip,
             "rollback_mult":    rollback_mult,
             "lpips_crop":       LPIPS_CROP,
             "seed":             seed,
             "save_folder":      save_folder,
+            "compile":          USE_COMPILE,
             **model_kwargs,
         },
     )
 
     # ── Model ─────────────────────────────────────────────────────────
     print(f"\nPreparing model  [phase={PHASE}  mode={mode_tag}]")
-    model = (DualSNRDenoiser(**model_kwargs) if USE_DUAL
-             else SingleDenoiser(**model_kwargs)).to(device)
+    model = build_denoiser(MODE, num_experts=NUM_EXPERTS, **model_kwargs).to(device)
+    K = model.num_experts
+    n_params = sum(p.numel() for p in model.parameters()) / 1e6
+    print(f"  mode={mode_tag}  experts={K}  params={n_params:.2f}M")
 
     loss_lpips = lpips.LPIPS(net="vgg").to(device)
     loss_lpips.eval()
     for p in loss_lpips.parameters():
         p.requires_grad_(False)
 
-    scaler = (torch.amp.GradScaler("cuda")
-              if hasattr(torch.amp, "GradScaler")
-              else torch.cuda.amp.GradScaler())
-
     # ── Logging ───────────────────────────────────────────────────────
     logfile = save_folder + f"log_p{PHASE}_{timestamp_str}.txt"
     write_log(logfile, (
         f"{'='*60}\n"
-        f"  HDR Teacher — Phase {PHASE}  [{mode_tag.upper()}]\n"
+        f"  HDR Teacher — Phase {PHASE}  [{mode_tag.upper()}  K={K}]\n"
         f"{'='*60}\n"
         f"Timestamp  : {timestamp_str}\n"
         f"Dataset    : {dataset_dir}\n"
@@ -441,14 +369,20 @@ if __name__ == "__main__":
         f"LR         : {lr}  warmup={warmup_epochs}ep  "
         f"cosine→{eta_min}  total={num_epochs}ep\n"
         f"mu (tonemap): {mu}\n"
-        f"Loss weights: gamma={gamma}  aux={aux_weight}\n"
+        f"Loss weights: gamma={gamma}  aux={aux_weight}  balance={balance_weight}\n"
         f"Grad clip  : {grad_clip}   rollback×{rollback_mult}\n"
-        f"Model      : {model_kwargs}\n"
+        f"Model      : {model_kwargs}  params={n_params:.2f}M\n"
         f"{'='*60}\n\n"
     ), newfile=True)
 
     # ── Optimizer + scheduler ─────────────────────────────────────────
-    optimizer = torch.optim.Adam(model.parameters(), lr=lr, betas=(0.9, 0.999))
+    # fused Adam: single multi-tensor CUDA kernel per step (A100 speedup)
+    try:
+        optimizer = torch.optim.Adam(model.parameters(), lr=lr,
+                                     betas=(0.9, 0.999),
+                                     fused=torch.cuda.is_available())
+    except (TypeError, RuntimeError):
+        optimizer = torch.optim.Adam(model.parameters(), lr=lr, betas=(0.9, 0.999))
     scheduler = build_scheduler(optimizer, warmup_epochs, num_epochs, eta_min)
 
     # ── Checkpoint resume ─────────────────────────────────────────────
@@ -493,16 +427,26 @@ if __name__ == "__main__":
     else:
         print("Starting Phase 1 from scratch.")
 
+    # Compile AFTER any checkpoint load so weights map onto the raw module.
+    if USE_COMPILE and hasattr(torch, "compile"):
+        model = torch.compile(model)
+        print("  Model compiled with TorchInductor.")
+
     model.train()
 
     # ── Dataset ───────────────────────────────────────────────────────
     print("Creating dataset...")
 
     if PHASE == 1:
-        transform  = make_patch_transform(PATCH_SIZE)
-        collate_fn = None          # all patches are PATCH_SIZE×PATCH_SIZE → default collate
+        # Square patches: full 8-way D4. Crop happens inside the dataset
+        # (before noise synthesis) — the transform only flips/transposes.
+        transform  = make_d4_transform(allow_transpose=True)
+        crop_size  = PATCH_SIZE
+        collate_fn = collate_xy    # uniform patch size, skip duplicate 'xm'
     else:
-        transform  = make_fullres_transform()
+        # Non-square full frames: 4 dimension-preserving symmetries only.
+        transform  = make_d4_transform(allow_transpose=False)
+        crop_size  = None
         collate_fn = collate_pad_to_max
 
     dataset = MobileHDRDataset(
@@ -510,6 +454,7 @@ if __name__ == "__main__":
         split="train",
         transform=transform,
         num_patch=num_patch,
+        crop_size=crop_size,
     )
     dataloader = torch.utils.data.DataLoader(
         dataset,
@@ -527,6 +472,8 @@ if __name__ == "__main__":
     print(f"  {len(dataset)} virtual samples  →  {n_batches} batches/epoch")
 
     # ── Training loop ─────────────────────────────────────────────────
+    # NOTE: autocast uses bfloat16 (same exponent range as fp32), so no
+    # GradScaler is needed — plain backward + clip + step.
     print(f"\nPhase {PHASE} training started  ({num_epochs} epochs)\n")
     training_t0 = time.time()
 
@@ -539,13 +486,14 @@ if __name__ == "__main__":
             running_loss    = 0.0
             running_psnr    = 0.0
             running_psnr_mu = 0.0
+            comp_sums = {"l1_mu": 0.0, "percep": 0.0, "aux": 0.0, "balance": 0.0}
+            usage_sum = torch.zeros(K, device=device)
             t1 = time.time()
 
             for i, sample in enumerate(dataloader):
-                x  = sample["x"].to(device, non_blocking=True)   # noisy
-                y  = sample["y"].to(device, non_blocking=True)   # clean GT
-                xm = sample["xm"].to(device, non_blocking=True)  # noisy (same as x)
-                B, _, H, W = xm.shape
+                x = sample["x"].to(device, non_blocking=True)   # noisy
+                y = sample["y"].to(device, non_blocking=True)   # clean GT
+                B, C, H, W = x.shape
 
                 # Build valid_mask: 1 on real pixels, 0 on reflect-padding.
                 # Phase 1 patches are never padded → mask is all ones.
@@ -563,39 +511,49 @@ if __name__ == "__main__":
                     valid_mask = torch.ones(B, 1, H, W, device=device)
 
                 with torch.no_grad():
-                    snr_map = estimate_local_snr_map(xm, window_size=5)
+                    snr_map = estimate_local_snr_map(x, window_size=5)
 
                 optimizer.zero_grad(set_to_none=True)
 
                 # ── Forward + losses ─────────────────────────────────
                 with torch.amp.autocast(device_type="cuda", dtype=torch.bfloat16):
 
-                    # 1. Forward pass
-                    y_pred, y_low_snr, y_high_snr = model(xm, snr_map)
+                    # 1. Forward pass (unified across moe/dual/single)
+                    #    expert_outs: [B, K, C, H, W]   gates: [B, K, H, W]
+                    y_pred, expert_outs, gates = model(x, snr_map)
 
                     # 2. Main L1-µ loss on valid pixels
-                    tm_pred = hdr_tonemap(y_pred, mu=mu)
-                    tm_gt   = hdr_tonemap(y,      mu=mu)
-                    l1_map      = torch.abs(tm_pred - tm_gt)
-                    loss_l1_mu  = ((l1_map * valid_mask).sum()
-                                   / (valid_mask.sum() * y_pred.shape[1] + 1e-6))
+                    tm_pred  = hdr_tonemap(y_pred, mu=mu)
+                    tm_gt    = hdr_tonemap(y,      mu=mu)
+                    valid_px = valid_mask.sum()
+                    loss_l1_mu = (((tm_pred - tm_gt).abs() * valid_mask).sum()
+                                  / (valid_px * C + 1e-6))
 
-                    # 3. Auxiliary expert losses (dual mode only; zero-weighted for single)
-                    # Encourages low-SNR expert to specialise on noisy pixels and
-                    # high-SNR expert on clean pixels, rather than both converging
-                    # to the same solution as the blended output.
-                    snr_low   = (snr_map < 0.5).float()  * valid_mask
-                    snr_high  = (snr_map >= 0.5).float() * valid_mask
-                    loss_aux_low  = ((snr_low.expand_as(y_pred) *
-                                     torch.abs(hdr_tonemap(y_low_snr,  mu=mu) - tm_gt)).sum()
-                                    / (snr_low.sum()  * y_pred.shape[1] + 1e-6))
-                    loss_aux_high = ((snr_high.expand_as(y_pred) *
-                                     torch.abs(hdr_tonemap(y_high_snr, mu=mu) - tm_gt)).sum()
-                                    / (snr_high.sum() * y_pred.shape[1] + 1e-6))
+                    # 3. Auxiliary per-expert losses: each expert's error is
+                    # weighted by its own (detached) gate, so experts
+                    # specialise on the pixels routed to them instead of all
+                    # converging to the blended solution.
+                    if aux_weight > 0:
+                        tm_experts = hdr_tonemap(expert_outs, mu=mu)
+                        err = (tm_experts - tm_gt.unsqueeze(1)).abs()
+                        w   = gates.detach().unsqueeze(2) * valid_mask.unsqueeze(1)
+                        loss_aux = ((w * err).sum(dim=(0, 2, 3, 4))
+                                    / (w.sum(dim=(0, 2, 3, 4)) * C + 1e-6)).sum()
+                    else:
+                        loss_aux = x.new_zeros(())
 
-                # 4. Perceptual loss on a 256×256 random crop.
+                    # 4. Load balancing (moe only): K·Σ(mean gate)² is 1 when
+                    # usage is uniform and grows toward K on collapse.
+                    gate_usage = ((gates * valid_mask).sum(dim=(0, 2, 3))
+                                  / valid_px.clamp(min=1.0))
+                    if balance_weight > 0:
+                        loss_balance = K * (gate_usage ** 2).sum() - 1.0
+                    else:
+                        loss_balance = x.new_zeros(())
+
+                # 5. Perceptual loss on a 256×256 random crop.
                 # Always run outside autocast so LPIPS VGG stays in float32.
-                # Channel order: R=ch3, G=ch1, B=ch0  (corrected BGGR→RGB mapping).
+                # Channel order: R=ch3, G=ch1, B=ch0  (BGGR→RGB mapping).
                 min_h  = int(orig_h.min().item())
                 min_w  = int(orig_w.min().item())
                 crop_h = min(LPIPS_CROP, min_h)
@@ -614,50 +572,59 @@ if __name__ == "__main__":
                 loss_perceptual = loss_lpips(_lpips_crop(y_pred),
                                              _lpips_crop(y)).mean()
 
-                # 5. Total weighted loss
+                # 6. Total weighted loss
                 ttl_loss = (loss_l1_mu
-                            + gamma      * loss_perceptual
-                            + aux_weight * (loss_aux_low + loss_aux_high))
+                            + gamma          * loss_perceptual
+                            + aux_weight     * loss_aux
+                            + balance_weight * loss_balance)
 
-                # ── Backward ─────────────────────────────────────────
-                scaler.scale(ttl_loss).backward()
-                scaler.unscale_(optimizer)
+                # ── Backward (bf16 autocast → no GradScaler needed) ──
+                ttl_loss.backward()
                 torch.nn.utils.clip_grad_norm_(model.parameters(), grad_clip)
-                scaler.step(optimizer)
-                scaler.update()
+                optimizer.step()
 
                 # ── Running stats ────────────────────────────────────
                 running_loss += ttl_loss.item()
+                comp_sums["l1_mu"]   += loss_l1_mu.item()
+                comp_sums["percep"]  += loss_perceptual.item()
+                comp_sums["aux"]     += loss_aux.item()
+                comp_sums["balance"] += loss_balance.item()
+                usage_sum += gate_usage.detach().float()
                 with torch.no_grad():
-                    running_psnr    += batch_psnr_gpu(y_pred, y)
+                    y_pred_c = y_pred.detach().float().clamp(0, 1)
+                    running_psnr    += batch_psnr_gpu(y_pred_c, y)
                     running_psnr_mu += batch_psnr_gpu(
-                        hdr_tonemap(y_pred.float(), mu=mu),
-                        hdr_tonemap(y.float(),      mu=mu))
+                        hdr_tonemap(y_pred_c,  mu=mu),
+                        hdr_tonemap(y.float(), mu=mu))
 
-                print_running_loss(running_loss, running_psnr_mu, batch_sz, i)
+                print_running_loss(running_loss, running_psnr_mu, i)
 
             # ── Epoch stats ───────────────────────────────────────────
             t2             = time.time()
             epoch_loss     = running_loss    / n_batches
             epoch_psnr     = running_psnr    / n_batches
             epoch_psnr_mu  = running_psnr_mu / n_batches
+            epoch_usage    = (usage_sum / n_batches).tolist()
             epoch_msg = print_epoch_loss(epoch + 1, epoch_loss,
                                          epoch_psnr_mu, epoch_psnr,
                                          PHASE, t2 - t1)
             write_log(logfile, epoch_msg, end="")
 
-            wandb.log({
+            log_dict = {
                 "epoch":               epoch + 1,
                 "phase":               PHASE,
                 "train/loss":          epoch_loss,
                 "train/psnr_linear":   epoch_psnr,
                 "train/psnr_mu":       epoch_psnr_mu,
                 "train/lr":            optimizer.param_groups[0]["lr"],
-                "train/loss_l1_mu":    loss_l1_mu.item(),
-                "train/loss_percep":   loss_perceptual.item(),
-                "train/loss_aux_low":  loss_aux_low.item(),
-                "train/loss_aux_high": loss_aux_high.item(),
-            })
+                "train/loss_l1_mu":    comp_sums["l1_mu"]   / n_batches,
+                "train/loss_percep":   comp_sums["percep"]  / n_batches,
+                "train/loss_aux":      comp_sums["aux"]     / n_batches,
+                "train/loss_balance":  comp_sums["balance"] / n_batches,
+            }
+            for k_idx, usage_k in enumerate(epoch_usage):
+                log_dict[f"train/gate_usage_{k_idx}"] = usage_k
+            wandb.log(log_dict)
 
             # ── Rollback check ────────────────────────────────────────
             # If the loss spikes by more than rollback_mult × last epoch's
@@ -672,7 +639,10 @@ if __name__ == "__main__":
                 if last_path and os.path.exists(last_path):
                     ckpt = torch.load(last_path, map_location=device,
                                       weights_only=False)
-                    model.load_state_dict(ckpt["model_state_dict"])
+                    state = {k.replace("_orig_mod.", ""): v
+                             for k, v in ckpt["model_state_dict"].items()}
+                    (model._orig_mod if hasattr(model, "_orig_mod")
+                     else model).load_state_dict(state)
                     optimizer.load_state_dict(ckpt["optimizer_state_dict"])
             else:
                 last_epoch_psnr_mu = epoch_psnr_mu
@@ -684,10 +654,14 @@ if __name__ == "__main__":
         scheduler.step()
 
         # ── Save checkpoints ──────────────────────────────────────────
+        # model_kwargs / mode / num_experts are stored so the test script
+        # can rebuild the exact architecture without manual sync.
         save_dict = {
             "epoch":                epoch + 1,
             "phase":                PHASE,
             "mode":                 mode_tag,
+            "num_experts":          K,
+            "model_kwargs":         model_kwargs,
             "model_state_dict":     model.state_dict(),
             "optimizer_state_dict": optimizer.state_dict(),
             "scheduler_state_dict": scheduler.state_dict(),
@@ -699,18 +673,17 @@ if __name__ == "__main__":
 
         if epoch_psnr_mu > best_psnr_mu:
             best_psnr_mu = epoch_psnr_mu
+            save_dict["best_psnr_mu"] = best_psnr_mu
             torch.save(save_dict, best_save_path)
             print(f"  ★ New best PSNR-µ: {best_psnr_mu:.2f} dB  → {best_save_path}")
 
     # ── Done ──────────────────────────────────────────────────────────
     total = time.time() - training_t0
-    
-    
-    
-    msg   = f"\nPhase {PHASE} finished in {total/3600:.2f} h  |  best PSNR-µ = {best_psnr_mu:.2f} dB"
+    msg   = (f"\nPhase {PHASE} finished in {total/3600:.2f} h  |  "
+             f"best PSNR-µ = {best_psnr_mu:.2f} dB")
     write_log(logfile, msg)
     print(msg)
-    
+
     artifact = wandb.Artifact(f"hdr_p{PHASE}_{mode_tag}_final", type="model")
     artifact.add_file(best_save_path)
     wandb.log_artifact(artifact, aliases=["best"])
@@ -718,6 +691,5 @@ if __name__ == "__main__":
     wandb.finish()
 
     if PHASE == 1:
-        print(f"\nNext step → set  PHASE = 2  and  PHASE1_CHECKPOINT = \"{best_save_path}\"")
-
-    wandb.finish()
+        print(f"\nNext step → set  PHASE = 2  and  "
+              f"PHASE1_CHECKPOINT = \"{best_save_path}\"")
